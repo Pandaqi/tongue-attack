@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Setting" format=3 uid="uid://c2a7td38hea0d"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_w6aee"]
+
+[resource]
+script = ExtResource("1_w6aee")
+key = "shapes_enabled"
+label = "Shapes"
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

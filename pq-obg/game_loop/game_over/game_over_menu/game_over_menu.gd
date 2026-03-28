@@ -1,6 +1,7 @@
 extends Control
 class_name GameOverMenu
 
+@export var sub_container : VBoxContainer
 @export var label_header : Label
 @export var label_explanation : Label
 @export var forward_btn : Button
@@ -10,6 +11,7 @@ class_name GameOverMenu
 func _ready():
 	overlay.modulate.a = Global.config_system.ui_overlay_alpha
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	sub_container.custom_minimum_size.x = Global.config_system.pause_menu_width
 	set_visible(false)
 
 func activate(data:GameOverDataSystem):

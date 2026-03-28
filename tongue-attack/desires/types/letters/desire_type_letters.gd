@@ -22,8 +22,6 @@ static var word_library : Array[String] = [
 	"fast", "slow", "clean", "dirty", "new", "old", "soft", "loud"
 ]
 
-# @TODO: Actually add the individual letter audio
-
 static func get_random_type() -> Type:
 	return get_all_types().pick_random()
 

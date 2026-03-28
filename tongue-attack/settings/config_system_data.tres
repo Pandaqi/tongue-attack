@@ -13,12 +13,19 @@
 [ext_resource type="Resource" uid="uid://rof0eke27qbk" path="res://pq-obg/settings/default/theme/tab_theme.tres" id="10_wtk8d"]
 [ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="11_wb8cy"]
 [ext_resource type="Script" uid="uid://b8gcpdtp867fe" path="res://pq-obg/tutorial/tutorial_stage.gd" id="12_pddpq"]
+[ext_resource type="Resource" uid="uid://cublgidv5ltfp" path="res://tongue-attack/settings/tab_game.tres" id="12_pifwl"]
 
 [resource]
 script = ExtResource("7_2mlfu")
 game_id = "tongue-attack"
 game_version = "1.2.4"
 game_scene = "tongue-attack/main/main.tscn"
+settings = Array[ExtResource("8_vnqxd")]([ExtResource("9_weu0k"), ExtResource("10_wtk8d"), ExtResource("12_pifwl")])
 font_body_regular = ExtResource("3_lx2qc")
+font_body_italic = ExtResource("3_lx2qc")
+font_body_bold = ExtResource("3_lx2qc")
+font_body_bold_italic = ExtResource("3_lx2qc")
 font_heading = ExtResource("3_lx2qc")
+font_special = ExtResource("3_lx2qc")
+color_main = Color(0.10980392, 0.7294118, 0, 1)
 metadata/_custom_type_script = "uid://dui163ptds6sq"

@@ -2,14 +2,24 @@ extends Node2D
 class_name ModuleTongue
 
 @export var debug := false
-@export var can_stick_to_collectibles := false
-@export var gets_stuck_at_max_extension := false
+var can_stick_to_collectibles := Global.config.tongue_can_stick_to_collectibles
+var gets_stuck_at_max_extension := Global.config.tongue_stuck_at_max_extension
 
-@export var tongue_tip : Area2D
- # @NOTE: never make the end 0 as then damping will never make it reach start/end pos
+@export var tongue_tip : Node2D
+@export var tongue_tip_area : Area2D
+@export var tongue_tip_area_offset := 64.0
+@export var tongue_tip_col_shape : CollisionShape2D
+
+# @NOTE: never make the end 0 as then damping will never make it reach start/end pos
+# @TODO: Config??
 @export var speed_bounds := Vector2(2000.0, 300.0)
 @export var direction := Vector2.RIGHT
 @export var offset := Vector2(41.0, -66.0)
+
+@export var progress_unstuck_container : Node2D
+@export var progress_unstuck_bar : TextureProgressBar
+
+@export var module_collect : ModuleCollect
 
 var max_distance := 0.0
 var start_pos := Vector2.ZERO
@@ -30,7 +40,8 @@ signal tongue_changed(p1:Vector2, p2:Vector2)
 
 func _ready() -> void:
 	set_state(State.IDLE)
-	tongue_tip.body_entered.connect(_on_body_entered)
+	tongue_tip_area.body_entered.connect(_on_body_entered)
+	tongue_tip_area.area_entered.connect(_on_area_entered)
 
 func set_facing_direction(dir:Vector2) -> void:
 	direction = dir
@@ -59,6 +70,7 @@ func get_speed() -> float:
 
 func change_position(pos:Vector2) -> void:
 	tongue_tip.set_position(pos)
+	tongue_tip_area.set_position(pos + direction * tongue_tip_area_offset)
 	tongue_changed.emit(to_global(start_pos), to_global(pos))
 
 func reset_to_start() -> void:
@@ -74,6 +86,12 @@ func calculate_max_distance() -> void:
 		offset_from_edge = total_map_width - offset_from_edge
 	
 	max_distance = total_map_width - 2*absf(offset_from_edge)
+
+func get_tip_area_position() -> Vector2:
+	return tongue_tip_area.get_position()
+
+func get_tip_position() -> Vector2:
+	return tongue_tip.get_position()
 
 func move(dt:float) -> void:
 	if not is_moving(): return
@@ -102,7 +120,16 @@ func _on_body_entered(body:Node) -> void:
 	if state != State.EXTENDING: return
 	if not (body is Collectible): return
 	if not can_stick_to_collectibles: return
+	# if this is something we want to collect, then no, we can't get stuck to it
+	# that just ends up being annoying
+	if module_collect.get_collection_result(body): return
 	get_stuck(body)
+
+func _on_area_entered(area:Area2D) -> void:
+	if state != State.EXTENDING: return
+	if not (area.get_parent() is ModuleTongue): return
+	if not Global.config.tongue_can_stick_to_other_tongue: return
+	get_stuck()
 
 func _input(ev:InputEvent) -> void:
 	if not debug: return
@@ -113,7 +140,23 @@ func _input(ev:InputEvent) -> void:
 	if ev.is_action_released("ui_cancel"):
 		get_unstuck()
 
+func _on_input_quick_pressed() -> void:
+	toggle()
+
+func _on_input_held(time_held:float) -> void:
+	if state != State.STUCK: return
+	
+	var time_needed := Global.config.time_needed_to_get_unstuck
+	var factor := time_held / time_needed
+	progress_unstuck_container.show()
+	progress_unstuck_container.set_position(get_tip_area_position())
+	progress_unstuck_bar.value = factor
+	if factor >= 1.0:
+		get_unstuck()
+
 func get_stuck(body:Collectible = null) -> void:
+	if state == State.STUCK: return
+	
 	object_stuck_to = body
 	if object_stuck_to: body.freeze()
 	set_state(State.STUCK)
@@ -129,9 +172,11 @@ func set_state(s:State) -> void:
 	if state == s: return
 	
 	state = s
+	progress_unstuck_container.hide()
+	tongue_tip_col_shape.set_deferred("disabled", (s != State.EXTENDING))
+
 	state_changed.emit(s)
 
-# @TODO: Special situation to get "unstuck" or flip again _while_ retracting?
 func toggle() -> void:
 	var new_state := state
 	
@@ -139,5 +184,7 @@ func toggle() -> void:
 		new_state = State.EXTENDING
 	if state == State.EXTENDING:
 		new_state = State.RETRACTING
+	if state == State.RETRACTING and Global.config.tongue_allow_extend_while_retracting:
+		new_state = State.EXTENDING
 	
 	set_state(new_state)

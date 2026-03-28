@@ -31,7 +31,7 @@ class_name ConfigSystemData
 
 @export_subgroup("Fonts")
 @export var use_system_fonts := false
-@export var font_size : int = 16
+@export var font_size : int = 32
 @export var font_body_regular : FontFile
 @export var font_body_italic : FontFile
 @export var font_body_bold : FontFile
@@ -52,7 +52,7 @@ class_name ConfigSystemData
 @export var color_shadow := Color(0.0, 0.0, 0.0, 0.4)
 
 @export_subgroup("Shadows")
-@export var shadow_offset := Vector2(0,4)
+@export var shadow_offset := Vector2(0,6)
 @export var shadow_size_normal := 0.0
 @export var shadow_size_focus := 0.0
 @export var shadow_size_hover := 0.0
@@ -60,9 +60,9 @@ class_name ConfigSystemData
 
 @export_subgroup("Borders")
 @export var border_radius := 12
-@export var border_margin := 4
-@export var border_margin_panel := 10
-@export var border_width := 2
+@export var border_margin := 12
+@export var border_margin_panel := 16
+@export var border_width := 4
 @export var border_color_normal := Color.TRANSPARENT
 @export var border_color_focus := Color.TRANSPARENT
 @export var border_color_hover := Color.TRANSPARENT
@@ -70,14 +70,14 @@ class_name ConfigSystemData
 
 @export_subgroup("Labels")
 @export var label_color := Color.BLACK
-@export var label_font_size : int = 16
+@export var label_font_size : int = 32
 
 @export_subgroup("Buttons")
-@export var button_font_size : int = 32
+@export var button_font_size : int = 42
 
 @export_subgroup("Margins")
-@export var container_margin_default := 16
-@export var container_separation_default := 8
+@export var container_margin_default := 32
+@export var container_separation_default := 20
 
 @export_group("Input")
 @export_subgroup("Players")
@@ -95,7 +95,7 @@ class_name ConfigSystemData
 @export var input_allow_left_mouse_button := false
 
 @export_subgroup("Touch")
-@export var touch_area_size := Vector2(128.0, 128.0)
+@export var touch_area_size := Vector2(192.0, 192.0)
 @export var touch_area_alpha := 0.4
 
 @export_subgroup("Login & Logout")
@@ -152,14 +152,19 @@ class_name ConfigSystemData
 
 @export_group("UI")
 @export var tutorial_anchor := ScreenAnchorTool.Anchor.CENTER
-@export var pause_menu_anchor := ScreenAnchorTool.Anchor.BOTTOM
+@export var settings_panel_size := Vector2(1100.0, 700.0)
 @export var ui_overlay_alpha := 0.25
+
+@export_subgroup("Pause & GameOver Menu")
+@export var pause_menu_width := 512.0
+@export var pause_menu_anchor := ScreenAnchorTool.Anchor.BOTTOM
 
 @export_subgroup("Button Instructions")
 @export var button_instructions_anchor := ScreenAnchorTool.Anchor.TOP
-@export var button_instructions_icon_size : int = 24
-@export var button_instructions_font_size : int = 14
+@export var button_instructions_icon_size : int = 42
+@export var button_instructions_font_size : int = 19
 @export var button_instructions_panel := false
+@export var button_instruction_width := 192.0
 
 @export_subgroup("Button Visualizer")
 @export var button_visualizer_scene := preload("res://pq-obg/ui/button_visualizer/button_visualizer.tscn")

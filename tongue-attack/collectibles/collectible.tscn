@@ -3,14 +3,20 @@
 [ext_resource type="Script" uid="uid://cyrd5yos4nllm" path="res://tongue-attack/collectibles/collectible.gd" id="1_1mqwc"]
 [ext_resource type="Script" uid="uid://buopv25mdegj2" path="res://tongue-attack/tools/squasher_stretcher.gd" id="3_5qyw4"]
 [ext_resource type="PackedScene" uid="uid://b6lndpa28flit" path="res://tongue-attack/desires/desire_visualizer.tscn" id="3_q6btd"]
+[ext_resource type="Texture2D" uid="uid://cpeydq7f7krf0" path="res://tongue-attack/collectibles/block-stone.png" id="4_5qyw4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dwf6n"]
 radius = 35.128338
 
-[node name="Collectible" type="CharacterBody2D" unique_id=1381176248 node_paths=PackedStringArray("visualizer")]
+[node name="Collectible" type="CharacterBody2D" unique_id=1381176248 node_paths=PackedStringArray("sprite_stone", "visualizer", "col_shape", "squasher_stretcher", "timer_move_pattern")]
+collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_1mqwc")
+sprite_stone = NodePath("SpriteStone")
 visualizer = NodePath("DesireVisualizer")
+col_shape = NodePath("CollisionShape2D")
+squasher_stretcher = NodePath("SquasherStretcher")
+timer_move_pattern = NodePath("TimerMovePattern")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2135049634]
 shape = SubResource("CircleShape2D_dwf6n")
@@ -22,3 +28,8 @@ size = 96.0
 [node name="SquasherStretcher" type="Node2D" parent="." unique_id=477320272 node_paths=PackedStringArray("node")]
 script = ExtResource("3_5qyw4")
 node = NodePath("..")
+
+[node name="SpriteStone" type="Sprite2D" parent="." unique_id=1847826527]
+texture = ExtResource("4_5qyw4")
+
+[node name="TimerMovePattern" type="Timer" parent="." unique_id=103713001]

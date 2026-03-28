@@ -10,7 +10,6 @@ enum Type
 	BEE,
 	FIREFLY,
 	LOTUS,
-	STONE
 }
 
 static var type_to_frame : Dictionary[Type, int] = {
@@ -21,7 +20,6 @@ static var type_to_frame : Dictionary[Type, int] = {
 	Type.BEE: 6,
 	Type.FIREFLY: 8,
 	Type.LOTUS: 10,
-	Type.STONE: 11
 }
 
 static var types_with_animation := [Type.BUTTERFLY, Type.BEE, Type.FIREFLY]
@@ -35,7 +33,6 @@ static var type_to_audio : Dictionary[Type, String] = {
 	Type.BEE: "bee",
 	Type.FIREFLY: "firefly",
 	Type.LOTUS: "lily",
-	Type.STONE: "stone"
 }
 
 static func get_random_type() -> Type:

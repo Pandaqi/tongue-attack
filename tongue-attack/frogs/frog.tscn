@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dl4sswc3b420v"]
 
 [ext_resource type="Script" uid="uid://bqpvvjypclbw6" path="res://tongue-attack/frogs/frog.gd" id="1_txcmq"]
+[ext_resource type="Script" uid="uid://cbh8pskekcq4r" path="res://pq-obg/input/module_input.gd" id="2_2khx3"]
 [ext_resource type="Script" uid="uid://dg5k38hspgcjh" path="res://tongue-attack/frogs/module_tongue_visuals.gd" id="2_450eg"]
 [ext_resource type="Script" uid="uid://coj1t2jtsyi1s" path="res://tongue-attack/frogs/module_collect.gd" id="4_4nyue"]
 [ext_resource type="Texture2D" uid="uid://dn41p7alep7wg" path="res://tongue-attack/frogs/frog-spritesheet.png" id="4_fvq8w"]
@@ -12,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://yeyjqx3axvsj" path="res://tongue-attack/frogs/tongue-middle-texture.png" id="6_3o6e8"]
 [ext_resource type="Script" uid="uid://3lf727yjr2e6" path="res://tongue-attack/frogs/module_desires.gd" id="6_450eg"]
 [ext_resource type="PackedScene" uid="uid://b6lndpa28flit" path="res://tongue-attack/desires/desire_visualizer.tscn" id="7_2817n"]
+[ext_resource type="Texture2D" uid="uid://bonmvrulaqwqd" path="res://icon.svg" id="12_vfh8f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i0if5"]
 shader = ExtResource("5_3o6e8")
@@ -19,18 +21,25 @@ shader = ExtResource("5_3o6e8")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nt2bq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rxutr"]
+radius = 12.0
 
-[node name="Frog" type="Node2D" unique_id=916843078 node_paths=PackedStringArray("module_collect", "module_tongue", "module_tongue_visuals", "module_desires", "module_visuals")]
+[node name="Frog" type="Node2D" unique_id=916843078 node_paths=PackedStringArray("module_collect", "module_tongue", "module_tongue_visuals", "module_desires", "module_visuals", "module_input")]
 script = ExtResource("1_txcmq")
 module_collect = NodePath("ModuleCollect")
 module_tongue = NodePath("ModuleTongue")
 module_tongue_visuals = NodePath("ModuleTongueVisuals")
 module_desires = NodePath("ModuleDesires")
 module_visuals = NodePath("ModuleVisuals")
+module_input = NodePath("ModuleInput")
 
-[node name="ModuleVisuals" type="Node2D" parent="." unique_id=243660828 node_paths=PackedStringArray("sprite")]
+[node name="ModuleInput" type="Node" parent="." unique_id=1545906135]
+script = ExtResource("2_2khx3")
+metadata/_custom_type_script = "uid://cbh8pskekcq4r"
+
+[node name="ModuleVisuals" type="Node2D" parent="." unique_id=243660828 node_paths=PackedStringArray("sprite", "squasher_stretcher")]
 script = ExtResource("4_xdhee")
 sprite = NodePath("Sprite2D")
+squasher_stretcher = NodePath("SquasherStretcher")
 
 [node name="Sprite2D" type="Sprite2D" parent="ModuleVisuals" unique_id=404382223]
 position = Vector2(0, -51)
@@ -83,6 +92,7 @@ frame = 2
 script = ExtResource("4_4nyue")
 area = NodePath("Area2D")
 col_shape = NodePath("Area2D/CollisionShape2D")
+thickness = 32.0
 module_desires = NodePath("../ModuleDesires")
 
 [node name="Area2D" type="Area2D" parent="ModuleCollect" unique_id=1187116116]
@@ -90,15 +100,35 @@ module_desires = NodePath("../ModuleDesires")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ModuleCollect/Area2D" unique_id=1682473645]
 shape = SubResource("RectangleShape2D_nt2bq")
 
-[node name="ModuleTongue" type="Node2D" parent="." unique_id=1659786197 node_paths=PackedStringArray("tongue_tip")]
+[node name="ModuleTongue" type="Node2D" parent="." unique_id=1659786197 node_paths=PackedStringArray("tongue_tip", "tongue_tip_area", "tongue_tip_col_shape", "progress_unstuck_container", "progress_unstuck_bar", "module_collect")]
 script = ExtResource("5_fvq8w")
-debug = true
-tongue_tip = NodePath("AreaTongueTip")
+tongue_tip = NodePath("TongueTip")
+tongue_tip_area = NodePath("AreaTongueTip")
+tongue_tip_col_shape = NodePath("AreaTongueTip/CollisionShape2D")
+progress_unstuck_container = NodePath("ProgressUnstuckContainer")
+progress_unstuck_bar = NodePath("ProgressUnstuckContainer/TextureProgressBar")
+module_collect = NodePath("../ModuleCollect")
+
+[node name="TongueTip" type="Node2D" parent="ModuleTongue" unique_id=231763694]
 
 [node name="AreaTongueTip" type="Area2D" parent="ModuleTongue" unique_id=1406102065]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ModuleTongue/AreaTongueTip" unique_id=1647342726]
+position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_rxutr")
+
+[node name="ProgressUnstuckContainer" type="Node2D" parent="ModuleTongue" unique_id=2130147943]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="ModuleTongue/ProgressUnstuckContainer" unique_id=656502064]
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+max_value = 1.0
+step = 0.05
+fill_mode = 4
+texture_progress = ExtResource("12_vfh8f")
+tint_progress = Color(1, 0, 1, 1)
 
 [node name="ModuleDesires" type="Node2D" parent="." unique_id=820199802]
 script = ExtResource("6_450eg")

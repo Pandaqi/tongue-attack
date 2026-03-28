@@ -30,7 +30,6 @@ static var type_to_color : Dictionary[Type, Color] = {
 	Type.WHITE: Color.WHITE,
 }
 
-# @TODO: Actually add this audio
 static var type_to_audio : Dictionary[Type, String] = {
 	Type.RED: "red",
 	Type.GREEN: "green",

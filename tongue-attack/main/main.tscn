@@ -24,7 +24,6 @@
 [ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="20_2d2qx"]
 [ext_resource type="Resource" uid="uid://corrbsxwq1fvv" path="res://tongue-attack/main/game_over_data.tres" id="20_gy4br"]
 [ext_resource type="PackedScene" uid="uid://nk31em7vq05f" path="res://pq-obg/ui/button_instructions/button_instructions.tscn" id="22_bkdw6"]
-[ext_resource type="PackedScene" uid="uid://bm52gxys3unnf" path="res://pq-obg/game_loop/game_over/game_over_menu/game_over_menu.tscn" id="23_bkdw6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wkasx"]
 shader = ExtResource("5_w6bci")
@@ -41,6 +40,7 @@ shader_parameter/offset = 0.0
 [node name="Main" type="Node2D" unique_id=496180010]
 
 [node name="State" parent="." unique_id=1145839826 instance=ExtResource("1_v60l5")]
+game_over_data = ExtResource("20_gy4br")
 
 [node name="Map" type="Node2D" parent="." unique_id=1435184435 node_paths=PackedStringArray("leaf_positions_container")]
 script = ExtResource("8_21rsn")
@@ -97,21 +97,22 @@ position = Vector2(63, 952)
 [node name="Frogs" type="Node2D" parent="." unique_id=2085306291 node_paths=PackedStringArray("desires", "map", "progression")]
 script = ExtResource("1_a4rk2")
 frog_scene = ExtResource("2_nt2bq")
+num_debug_players = 0
 desires = NodePath("../Desires")
 map = NodePath("../Map")
 progression = NodePath("../Progression")
 
-[node name="PlayerSpawner" parent="." unique_id=940017025 instance=ExtResource("10_vhrtn")]
+[node name="PlayerSpawner" parent="." unique_id=940017025 node_paths=PackedStringArray("player_creation_node") instance=ExtResource("10_vhrtn")]
+player_creation_node = NodePath("../Frogs")
 
-[node name="SpawnerCollectibles" type="Node2D" parent="." unique_id=1354625474 node_paths=PackedStringArray("timer", "desires", "frogs", "progression")]
+[node name="SpawnerCollectibles" type="Node2D" parent="." unique_id=1354625474 node_paths=PackedStringArray("timer", "desires", "frogs", "progression", "state")]
 script = ExtResource("6_bdbmt")
 collectible_scene = ExtResource("7_dwf6n")
-distance_from_edges = null
-distance_from_top = null
 timer = NodePath("Timer")
 desires = NodePath("../Desires")
 frogs = NodePath("../Frogs")
 progression = NodePath("../Progression")
+state = NodePath("../State")
 
 [node name="Timer" type="Timer" parent="SpawnerCollectibles" unique_id=1302423465]
 one_shot = true
@@ -120,10 +121,9 @@ one_shot = true
 script = ExtResource("5_fdo5l")
 desire_types = Array[ExtResource("6_dwf6n")]([ExtResource("7_a4rk2"), ExtResource("13_iw2sv"), ExtResource("14_5ewix"), ExtResource("16_wkasx"), ExtResource("17_0hk8q")])
 
-[node name="Progression" type="Node2D" parent="." unique_id=1312876816 node_paths=PackedStringArray("game_over_menu")]
+[node name="Progression" type="Node2D" parent="." unique_id=1312876816 node_paths=PackedStringArray("state")]
 script = ExtResource("18_1ejfv")
-game_over_menu = NodePath("../UI/GameOverMenu")
-game_over_data = ExtResource("20_gy4br")
+state = NodePath("../State")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=871161378 node_paths=PackedStringArray("progression", "lives_label", "score_label")]
 script = ExtResource("19_3yws6")
@@ -175,7 +175,5 @@ theme_override_constants/shadow_offset_y = 4
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 32
 text = "Lalala"
-
-[node name="GameOverMenu" parent="UI" unique_id=721452580 instance=ExtResource("23_bkdw6")]
 
 [node name="ButtonInstructions" parent="." unique_id=13185939 instance=ExtResource("22_bkdw6")]

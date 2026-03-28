@@ -18,13 +18,12 @@ static var type_to_number : Dictionary[Type, int] = {
 	Type.SIX: 6
 }
 
-# @TODO: Actually add this audio
 static var type_to_audio : Dictionary[Type, String] = {
-	Type.TWO: "two",
-	Type.THREE: "three",
-	Type.FOUR: "four",
-	Type.FIVE: "five",
-	Type.SIX: "six",
+	Type.TWO: "2",
+	Type.THREE: "3",
+	Type.FOUR: "4",
+	Type.FIVE: "5",
+	Type.SIX: "6",
 }
 
 static func get_random_type() -> Type:

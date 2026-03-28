@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bm52gxys3unnf"]
+[gd_scene format=3 uid="uid://bm52gxys3unnf"]
 
 [ext_resource type="Script" uid="uid://b25ccsfw7vw2c" path="res://pq-obg/game_loop/game_over/game_over_menu/game_over_menu.gd" id="1_ravx0"]
 [ext_resource type="PackedScene" uid="uid://dgfewhemw8ofh" path="res://pq-obg/game_loop/pause/pause_overlay.tscn" id="3_6j8hq"]
@@ -42,7 +42,7 @@ _data = {
 &"go_fade": SubResource("Animation_xng78")
 }
 
-[node name="GameOverMenu" type="Control" unique_id=721452580 node_paths=PackedStringArray("label_header", "label_explanation", "forward_btn", "anim_player", "overlay")]
+[node name="GameOverMenu" type="Control" unique_id=721452580 node_paths=PackedStringArray("sub_container", "label_header", "label_explanation", "forward_btn", "anim_player", "overlay")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,6 +53,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_ravx0")
+sub_container = NodePath("CenterContainer/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer")
 label_header = NodePath("CenterContainer/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Heading")
 label_explanation = NodePath("CenterContainer/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Explanation")
 forward_btn = NodePath("CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Forward")
@@ -126,9 +127,7 @@ theme = ExtResource("4_1sfma")
 icon = ExtResource("7_ln71r")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=363274505]
-libraries = {
-&"": SubResource("AnimationLibrary_kelc7")
-}
+libraries/ = SubResource("AnimationLibrary_kelc7")
 
 [connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Backward" to="." method="_on_backward_pressed"]
 [connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Forward" to="." method="_on_forward_pressed"]

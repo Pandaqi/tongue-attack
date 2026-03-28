@@ -1,12 +1,11 @@
 extends Node2D
 class_name Progression
 
+@export var state : StateSystem
+
 var time_start := 0.0
 var lives := 0
 var score := 0
-
-@export var game_over_menu : GameOverMenu
-@export var game_over_data : GameOverDataSystem
 
 signal lives_changed(l:int)
 signal lives_depleted()
@@ -35,7 +34,7 @@ func change_lives(dl:int) -> void:
 		lives_depleted.emit()
 
 func _on_lives_depleted() -> void:
-	game_over_menu.activate(game_over_data)
+	state.goto_game_over()
 
 func change_score(ds:float) -> void:
 	score = clampi(roundi(score + ds), 0, 9999)

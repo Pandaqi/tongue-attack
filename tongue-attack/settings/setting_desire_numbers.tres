@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Setting" format=3 uid="uid://di4jdwrk1tqcn"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_m327v"]
+
+[resource]
+script = ExtResource("1_m327v")
+key = "numbers_enabled"
+label = "Numbers"
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

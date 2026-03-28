@@ -38,9 +38,12 @@ func spawn_debug_players() -> void:
 
 func spawn_multiple(num:int) -> void:
 	for i in range(num):
-		spawn(i)
+		spawn()
 
-func spawn(player_num:int) -> void:
+func _on_player_spawn_requested(_btn:InputButton) -> PlayerSystem:
+	return spawn()
+
+func spawn() -> Frog:
 	var f : Frog = frog_scene.instantiate()
 	var num_desires := randi_range(num_desires_bounds.x, num_desires_bounds.y)
 	f.module_desires.set_all(desires.get_next_desires(num_desires))
@@ -50,6 +53,7 @@ func spawn(player_num:int) -> void:
 	f.lives_lost.connect(_on_frog_lives_lost)
 	frogs.append(f)
 	add_child(f)
+	return f
 
 func _on_frog_scored(s:float) -> void:
 	progression.change_score(s)

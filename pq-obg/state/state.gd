@@ -1,4 +1,4 @@
-class_name OBGState extends CanvasLayer
+class_name StateSystem extends CanvasLayer
 
 enum GameState
 {
@@ -12,12 +12,19 @@ enum GameState
 
 @export var start_game_immediately := false
 
+@export var game_over_goes_to_new_scene := false
+@export var game_over_data : GameOverDataSystem
+@export var game_over_menu : GameOverMenu
+
 @export var pause_menu : PauseMenu
 @export var tutorial : Tutorial
 @export var touch_areas : Control
 
 var paused := false
 var state := GameState.PREGAME
+
+signal game_started()
+signal game_finished()
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -57,7 +64,15 @@ func set_paused(val:bool) -> void:
 	Global.pause_mode_change.emit()
 
 func change_state(new_state:GameState) -> void:
+	if state == new_state: return
+	
 	state = new_state
+	
+	if new_state == GameState.GAME:
+		game_started.emit()
+	
+	if new_state == GameState.POSTGAME:
+		game_finished.emit()
 
 func _on_objective_registered() -> void:
 	var num_players := player_data.count()
@@ -70,7 +85,12 @@ func _on_objective_registered() -> void:
 
 func goto_game_over() -> void:
 	change_state(GameState.POSTGAME)
-	get_tree().change_scene_to_file("res://pq-obg/game_loop/game_over/game_over.tscn")
+	
+	if game_over_goes_to_new_scene:
+		get_tree().change_scene_to_file("res://pq-obg/game_loop/game_over/game_over.tscn")
+		return
+	
+	game_over_menu.activate(game_over_data)
 
 func goto_main_menu() -> void:
 	get_tree().change_scene_to_file("res://pq-obg/game_loop/menu/menu.tscn")

@@ -2,6 +2,7 @@ extends Control
 class_name PauseMenu
 
 @export var pause_menu_container : Control
+@export var pause_menu_sub_container : VBoxContainer
 @export var overlay : Control
 @export var heading : Label
 
@@ -15,6 +16,7 @@ signal restart_pressed()
 
 func _ready() -> void:
 	overlay.modulate.a = Global.config_system.ui_overlay_alpha
+	pause_menu_sub_container.custom_minimum_size.x = Global.config_system.pause_menu_width
 	
 	# read the right icons for basic UI stuff
 	set_icons()

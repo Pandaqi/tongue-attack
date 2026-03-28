@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bws1bg4b1iswl"]
+[gd_scene format=3 uid="uid://bws1bg4b1iswl"]
 
 [ext_resource type="Script" uid="uid://cmkrmd41epeas" path="res://pq-obg/ui/button_instructions/button_instruction.gd" id="1_snp4d"]
 [ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="2_2hhwb"]
@@ -23,16 +23,16 @@ size_flags_vertical = 4
 alignment = 1
 
 [node name="LabelLogin" type="Label" parent="HBoxContainer" unique_id=705547295]
-custom_minimum_size = Vector2(128, 32)
+custom_minimum_size = Vector2(256, 64)
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("2_2hhwb")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.40784314)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 1
-theme_override_constants/outline_size = 4
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 8
 text = "BUTTON_NEW_PLAYER"
 horizontal_alignment = 1
 vertical_alignment = 1

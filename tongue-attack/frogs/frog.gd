@@ -1,4 +1,4 @@
-extends Node2D
+extends PlayerSystem
 class_name Frog
 
 @export var module_collect : ModuleCollect
@@ -12,9 +12,12 @@ var offset_on_leaf := Vector2(64.0, 32.0)
 
 signal scored(val:float)
 signal lives_lost(val:int)
-signal killed(f:Frog)
 
 func _ready() -> void:
+	module_input.quick_pressed.connect(module_tongue._on_input_quick_pressed)
+	module_input.held.connect(module_tongue._on_input_held)
+	module_input.visualizers_refreshed.connect(_on_visualizers_refreshed)
+	
 	module_tongue.tongue_changed.connect(module_collect.update_area)
 	module_tongue.state_changed.connect(module_visuals.update_state)
 	module_collect.collected.connect(module_desires._on_collected)
@@ -35,6 +38,10 @@ func place_on_leaf(lf:Leaf) -> void:
 	var facing_dir := Vector2.LEFT if leaf.on_right else Vector2.RIGHT
 	set_facing_direction(facing_dir)
 	set_position(leaf.global_position + Vector2(facing_dir.x, 1) * offset_on_leaf)
+
+func _on_visualizers_refreshed() -> void:
+	var vis := module_input.get_button_visualizer()
+	vis.set_position(global_position + Vector2.UP * 128.0)
 
 func set_facing_direction(dir:Vector2) -> void:
 	module_tongue.set_facing_direction(dir)

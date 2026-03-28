@@ -30,7 +30,10 @@ func refresh_size() -> void:
 	var icon_size : float = Global.config_system.button_instructions_icon_size
 	button_container.refresh_size(Vector2.ONE * icon_size)
 	label.custom_minimum_size.y = icon_size
+	label.custom_minimum_size.x = Global.config_system.button_instruction_width
 	label.add_theme_font_size_override("font_size", Global.config_system.button_instructions_font_size)
+	
+	
 
 func set_type(tp:Type) -> void:
 	if tp == Type.LOGIN:

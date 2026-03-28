@@ -23,6 +23,8 @@ signal held(time_held:float)
 signal hold_started()
 signal hold_ended()
 
+signal visualizers_refreshed()
+
 signal removal_warning_started()
 signal removal_warning_ended()
 
@@ -91,9 +93,17 @@ func clear_button_visualizers() -> void:
 		bv.queue_free()
 	button_visualizers = []
 
+func count_visualizers() -> int:
+	return button_visualizers.size()
+
+func get_button_visualizer() -> ButtonVisualizer:
+	if count_visualizers() <= 0: return null
+	return button_visualizers[0]
+
 func add_button_visualizer() -> ButtonVisualizer:
 	var vis := create_button_visualizer()
 	button_visualizers.append(vis)
+	visualizers_refreshed.emit()
 	return vis
 
 func create_button_visualizer() -> ButtonVisualizer:
@@ -107,6 +117,8 @@ func create_button_visualizer() -> ButtonVisualizer:
 	return node
 
 func _unhandled_input(ev:InputEvent) -> void:
+	if not button: return
+	
 	var key := button.get_input_map_key()
 	if key == "": return
 	

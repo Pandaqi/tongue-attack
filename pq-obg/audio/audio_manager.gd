@@ -14,7 +14,7 @@ static func get_pitch_shift_semitones():
 static func pitch_shift(node) -> void:
 	node.pitch_scale = get_pitch_shift_semitones()
 
-static func play_shifted(node) -> void:
+static func play_audio_nice(node) -> void:
 	pitch_shift(node)
 	node.play()
 

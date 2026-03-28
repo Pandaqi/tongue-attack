@@ -8,6 +8,8 @@ var counter := 0.0
 @export var max_rot := 0.03*PI
 @export var randomization := 0.5
 
+var paused := false
+
 func _ready() -> void:
 	max_offset.x *= get_randomization_factor()
 	max_offset.y *= get_randomization_factor()
@@ -18,7 +20,12 @@ func _ready() -> void:
 func get_randomization_factor() -> float:
 	return randf_range(1.0 - randomization, 1.0 + randomization)
 
+func set_paused(val:bool) -> void:
+	paused = val
+
 func _physics_process(dt: float) -> void:
+	if paused: return
+	
 	counter += dt
 	
 	node.rotation = sin(counter * speed.x) * max_rot

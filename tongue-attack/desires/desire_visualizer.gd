@@ -12,6 +12,7 @@ class_name DesireVisualizer
 @export var size := 32.0
 var base_sprite_size := 256.0
 
+var desire : Desire
 var tween_active : Tween
 
 func flip_horizontally(fh := false) -> void:
@@ -27,6 +28,8 @@ func set_size(s:float) -> void:
 	background.set_scale(new_scale)
 
 func set_data(d:Desire) -> void:
+	desire = d
+	
 	background.set_visible(not final)
 	sprite.hide()
 	label.hide()
@@ -41,8 +44,8 @@ func set_text(txt:String) -> void:
 func play_anim(anim_name:String) -> void:
 	anim_player.play(anim_name)
 
-func narrate(d:Desire) -> void:
-	audio_narrate.stream = d.narrate()
+func narrate() -> void:
+	audio_narrate.stream = desire.narrate()
 	audio_narrate.play()
 
 func is_final() -> bool:

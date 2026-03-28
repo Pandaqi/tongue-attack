@@ -170,7 +170,7 @@ func refresh():
 	#
 	th.set_font("font", "Button", cfg.font_heading)
 	if cfg.use_system_fonts: th.set_font("font", "Button", system_font)
-	th.set_font_size("font_size", "Button",cfg.button_font_size)
+	th.set_font_size("font_size", "Button", cfg.button_font_size)
 	th.set_stylebox("focus", "Button", sb_focus)
 	th.set_stylebox("hover", "Button", sb_hover)
 	th.set_stylebox("pressed", "Button", sb_hover)

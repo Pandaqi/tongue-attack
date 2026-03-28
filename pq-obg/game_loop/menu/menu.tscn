@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgdjav32fnyi8"]
+[gd_scene format=3 uid="uid://cgdjav32fnyi8"]
 
 [ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="1_axedv"]
 [ext_resource type="Script" uid="uid://pv457xnnplpy" path="res://pq-obg/game_loop/menu/main_menu.gd" id="1_g206a"]
@@ -95,7 +95,7 @@ theme = ExtResource("1_axedv")
 layout_mode = 2
 
 [node name="TabContainer" type="TabContainer" parent="Settings/CenterContainer/VBoxContainer" unique_id=1374158172]
-custom_minimum_size = Vector2(720, 425)
+custom_minimum_size = Vector2(1100, 700)
 layout_mode = 2
 tab_alignment = 1
 
@@ -105,15 +105,13 @@ alignment = 1
 
 [node name="Reset" type="Button" parent="Settings/CenterContainer/VBoxContainer/HBoxContainer" unique_id=23072603]
 layout_mode = 2
-theme_override_constants/icon_max_width = 24
-theme_override_font_sizes/font_size = 12
+theme_override_constants/icon_max_width = 32
 text = "SETTINGS_RESET_ALL"
 icon = ExtResource("9_clq6r")
 
 [node name="Close" type="Button" parent="Settings/CenterContainer/VBoxContainer/HBoxContainer" unique_id=1488494993]
 layout_mode = 2
-theme_override_constants/icon_max_width = 24
-theme_override_font_sizes/font_size = 12
+theme_override_constants/icon_max_width = 32
 text = "SETTINGS_CLOSE"
 icon = ExtResource("6_p2nwr")
 

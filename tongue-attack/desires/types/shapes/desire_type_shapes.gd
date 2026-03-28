@@ -13,7 +13,6 @@ enum Type
 	ELLIPSE,
 }
 
-# @TODO: Actually add this audio
 static var type_to_audio : Dictionary[Type, String] = {
 	Type.TRIANGLE: "triangle",
 	Type.SQUARE: "square",

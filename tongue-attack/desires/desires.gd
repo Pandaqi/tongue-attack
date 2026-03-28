@@ -14,9 +14,7 @@ func has_none_available() -> bool:
 	return desires_available.size() <= 0
 
 func is_desire_type_enabled(key:String) -> bool:
-	# @TODO: read from Global.config_custom
-	# return Global.config_custom[key + "_enabled"] == true
-	return true
+	return Global.config[key + "_enabled"] == true
 
 func generate_all_possible() -> void:
 	var arr : Array[Desire] = []
@@ -27,7 +25,12 @@ func generate_all_possible() -> void:
 	desires_available = arr
 	desires_available.shuffle()
 
+func get_random_not_in_play() -> Desire:
+	if desires_available.size() <= 0: return null
+	return desires_available.pick_random()
+
 func get_random_in_play() -> Desire:
+	if desires_in_play.size() <= 0: return null
 	return desires_in_play.pick_random()
 
 func get_next_desire() -> Desire:

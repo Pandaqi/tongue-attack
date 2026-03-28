@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SettingGroup" format=3 uid="uid://bu87t3p8hutff"]
+
+[ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_5iht3"]
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="2_d7q2n"]
+[ext_resource type="Resource" uid="uid://c73bdiew4lc6j" path="res://tongue-attack/settings/setting_desire_colors.tres" id="3_npj1d"]
+[ext_resource type="Resource" uid="uid://didh614kuhl3o" path="res://tongue-attack/settings/setting_desire_icons.tres" id="4_gecxt"]
+[ext_resource type="Resource" uid="uid://cbgpuolrbgrth" path="res://tongue-attack/settings/setting_desire_letters.tres" id="5_g1l6s"]
+[ext_resource type="Resource" uid="uid://di4jdwrk1tqcn" path="res://tongue-attack/settings/setting_desire_numbers.tres" id="6_8u6xo"]
+[ext_resource type="Resource" uid="uid://c2a7td38hea0d" path="res://tongue-attack/settings/setting_desire_shapes.tres" id="7_naay0"]
+
+[resource]
+script = ExtResource("1_5iht3")
+settings = Array[ExtResource("2_d7q2n")]([ExtResource("3_npj1d"), ExtResource("4_gecxt"), ExtResource("5_g1l6s"), ExtResource("6_8u6xo"), ExtResource("7_naay0")])
+label = "Properties To Match"
+metadata/_custom_type_script = "uid://c7uqyg8sqnc02"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3mew7u5cevle"]
+[gd_scene format=3 uid="uid://c3mew7u5cevle"]
 
 [ext_resource type="Script" uid="uid://c51fddt4uf8oa" path="res://pq-obg/state/state.gd" id="1_t3kc4"]
 [ext_resource type="Resource" uid="uid://bhlcvxr17vu2o" path="res://pq-obg/state/state_data.tres" id="2_pnxkm"]
@@ -6,13 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://ddcriby0xa2bw" path="res://pq-obg/game_loop/pause/pause_menu.tscn" id="4_mwql8"]
 [ext_resource type="Script" uid="uid://0cruceeytcjc" path="res://pq-obg/tutorial/tutorial.gd" id="5_ttvql"]
 [ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="7_q42ym"]
+[ext_resource type="PackedScene" uid="uid://bm52gxys3unnf" path="res://pq-obg/game_loop/game_over/game_over_menu/game_over_menu.tscn" id="8_q42ym"]
 [ext_resource type="Script" uid="uid://cua7u6fes6yxk" path="res://pq-obg/ui/touch/touch_areas.gd" id="8_ttvql"]
 
-[node name="State" type="CanvasLayer" unique_id=1145839826 node_paths=PackedStringArray("pause_menu", "tutorial", "touch_areas")]
+[node name="State" type="CanvasLayer" unique_id=1145839826 node_paths=PackedStringArray("game_over_menu", "pause_menu", "tutorial", "touch_areas")]
 layer = 8
 script = ExtResource("1_t3kc4")
 state_data = ExtResource("2_pnxkm")
 player_data = ExtResource("3_q42ym")
+game_over_menu = NodePath("GameOverMenu")
 pause_menu = NodePath("PauseMenu")
 tutorial = NodePath("Tutorial")
 touch_areas = NodePath("TouchAreas")
@@ -60,3 +62,5 @@ mouse_filter = 2
 theme = ExtResource("7_q42ym")
 script = ExtResource("8_ttvql")
 area_container = NodePath(".")
+
+[node name="GameOverMenu" parent="." unique_id=721452580 instance=ExtResource("8_q42ym")]

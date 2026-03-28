@@ -1,11 +1,17 @@
 extends Node
 class_name PlayerSpawner 
 
+@export var player_creation_node : Node
+@export var player_creation_function := "_on_player_spawn_requested"
+
 @export var player_scene : PackedScene
 @export var player_data : PlayerData = preload("res://pq-obg/players/player_data.tres")
 
 @export var container : Node
 @export var clear_input_on_reload := false
+
+signal player_add_requested(btn:InputButton)
+signal player_remove_requested(btn:InputButton)
 
 func _enter_tree() -> void:
 	player_data.reset(Global.config_system.player_colors)
@@ -32,8 +38,21 @@ func _on_button_removed(btn:InputButton) -> void:
 	remove_player(btn)
 
 func place_player(btn:InputButton) -> void:
-	var p : PlayerSystem = player_scene.instantiate()
-	container.add_child(p)
+	player_add_requested.emit(btn)
+	
+	var p : PlayerSystem
+	
+	if player_scene:
+		p = player_scene.instantiate()
+		container.add_child(p)
+	
+	if player_creation_node:
+		p = player_creation_node.call(player_creation_function, btn)
+	
+	if not p:
+		print("PlayerSpawner | Error | No valid player object created.")
+		return
+	
 	player_data.add_player(p)
 	p.module_input.activate(btn)
 	
@@ -43,6 +62,8 @@ func place_player(btn:InputButton) -> void:
 	p.revived.emit()
 
 func remove_player(btn:InputButton) -> void:
+	player_remove_requested.emit(btn)
+	
 	var connected_player := get_player_with_button(btn)
 	if not connected_player: return
 	

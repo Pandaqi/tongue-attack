@@ -31,6 +31,10 @@ window/stretch/mode="canvas_items"
 
 theme/custom="uid://ba2lixeo4d30y"
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [internationalization]
 
 locale/translations=PackedStringArray("res://pq-obg/localization/obg.de.translation", "res://pq-obg/localization/obg.en.translation", "res://pq-obg/localization/obg.es.translation", "res://pq-obg/localization/obg.fr.translation", "res://pq-obg/localization/obg.it.translation", "res://pq-obg/localization/obg.nl.translation", "res://pq-obg/localization/obg.pt.translation")

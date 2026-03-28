@@ -11,6 +11,7 @@ var all_tabs : Array[SettingTab] = []
 signal active_changed(ac:bool)
 
 func _ready() -> void:
+	tab_container.custom_minimum_size = Global.config_system.settings_panel_size
 	collect_all_tabs()
 	set_icons()
 	initialize()
@@ -19,7 +20,9 @@ func _ready() -> void:
 
 func set_icons() -> void:
 	reset_btn.icon = Global.config_system.icon_reset
+	reset_btn.add_theme_constant_override("icon_max_width", Global.config_system.button_font_size)
 	close_btn.icon = Global.config_system.icon_quit
+	close_btn.add_theme_constant_override("icon_max_width", Global.config_system.button_font_size)
 
 func collect_all_tabs() -> void:
 	all_tabs = Global.config_system.settings
