@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://db1tb57262rm"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_735gh"]
+
+[resource]
+script = ExtResource("1_735gh")
+type = 1
+key = "button_visualizer_scale"
+label = "ST_BUTTON_VIS_SCALE"
+min_value = 0.25
+max_value = 4.0
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

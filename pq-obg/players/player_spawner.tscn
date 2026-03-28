@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bh45dk7j8ubl3"]
+
+[ext_resource type="Script" uid="uid://dt8klrrk4jcu1" path="res://pq-obg/players/player_spawner.gd" id="1_qqm07"]
+[ext_resource type="Resource" uid="uid://cqn477x4eqflj" path="res://pq-obg/players/player_data.tres" id="3_0jblm"]
+
+[node name="PlayerSpawner" type="Node2D" unique_id=940017025]
+script = ExtResource("1_qqm07")
+player_data = ExtResource("3_0jblm")
+metadata/_custom_type_script = "uid://dt8klrrk4jcu1"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SettingGroup" load_steps=8 format=3 uid="uid://bdrdo66qjsbvo"]
+
+[ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_efp2k"]
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="2_1b2uv"]
+[ext_resource type="Resource" uid="uid://cmrh6o00tnkc0" path="res://pq-obg/settings/default/setting_input_login.tres" id="3_nosfe"]
+[ext_resource type="Resource" uid="uid://bcrgaibeillhj" path="res://pq-obg/settings/default/setting_input_logout.tres" id="4_i03kv"]
+[ext_resource type="Resource" uid="uid://bxcveb0tftmin" path="res://pq-obg/settings/default/setting_input_logout_hold.tres" id="5_0771t"]
+[ext_resource type="Resource" uid="uid://h6y454w2ion7" path="res://pq-obg/settings/default/setting_input_max_players.tres" id="6_ul11y"]
+[ext_resource type="Resource" uid="uid://dvc83itcoq02j" path="res://pq-obg/settings/default/setting_input_click_instructions.tres" id="7_8r1s3"]
+
+[resource]
+script = ExtResource("1_efp2k")
+settings = Array[ExtResource("2_1b2uv")]([ExtResource("3_nosfe"), ExtResource("4_i03kv"), ExtResource("5_0771t"), ExtResource("6_ul11y"), ExtResource("7_8r1s3")])
+label = "ST_GROUP_LOGIN_OUT"

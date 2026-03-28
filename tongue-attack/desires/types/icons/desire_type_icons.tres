@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DesireTypeIcons" format=3 uid="uid://c0xgmmy8qfoke"]
+
+[ext_resource type="Script" uid="uid://ci0x2poq164oy" path="res://tongue-attack/desires/types/icons/desire_type_icons.gd" id="1_up4vr"]
+
+[resource]
+script = ExtResource("1_up4vr")
+key = "icons"
+metadata/_custom_type_script = "uid://ci0x2poq164oy"

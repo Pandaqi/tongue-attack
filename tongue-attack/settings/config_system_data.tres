@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ConfigSystemData" format=3 uid="uid://wgr72ivhhbm2"]
+
+[ext_resource type="AudioStream" uid="uid://cfe2jylsp4enn" path="res://pq-obg/audio/sfx/ui_click.mp3" id="1_v2gpx"]
+[ext_resource type="PackedScene" uid="uid://bfclclol7g0ea" path="res://pq-obg/ui/button_visualizer/button_visualizer.tscn" id="2_lx2qc"]
+[ext_resource type="FontFile" uid="uid://c05kog6grk4c" path="res://tongue-attack/ui/fonts/LilitaOne-Regular.ttf" id="3_lx2qc"]
+[ext_resource type="Texture2D" uid="uid://cikhqhc0hfaxm" path="res://pq-obg/ui/textures/icon_play.tres" id="3_pifwl"]
+[ext_resource type="Texture2D" uid="uid://b3xoiwk76ch5f" path="res://pq-obg/ui/textures/icon_quit.tres" id="4_cmnra"]
+[ext_resource type="Texture2D" uid="uid://cbue28i4wsoti" path="res://pq-obg/ui/textures/icon_reset.tres" id="5_1uml1"]
+[ext_resource type="Texture2D" uid="uid://bex3uoa5xtsv8" path="res://pq-obg/ui/textures/icon_settings.tres" id="6_0llaj"]
+[ext_resource type="Script" uid="uid://dui163ptds6sq" path="res://pq-obg/settings/config_system_data.gd" id="7_2mlfu"]
+[ext_resource type="Script" uid="uid://bk8734ulnri1t" path="res://pq-obg/settings/setting_tab.gd" id="8_vnqxd"]
+[ext_resource type="Resource" uid="uid://bkdl045h6lnih" path="res://pq-obg/settings/default/tab_core.tres" id="9_weu0k"]
+[ext_resource type="Resource" uid="uid://rof0eke27qbk" path="res://pq-obg/settings/default/theme/tab_theme.tres" id="10_wtk8d"]
+[ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="11_wb8cy"]
+[ext_resource type="Script" uid="uid://b8gcpdtp867fe" path="res://pq-obg/tutorial/tutorial_stage.gd" id="12_pddpq"]
+
+[resource]
+script = ExtResource("7_2mlfu")
+game_id = "tongue-attack"
+game_version = "1.2.4"
+game_scene = "tongue-attack/main/main.tscn"
+font_body_regular = ExtResource("3_lx2qc")
+font_heading = ExtResource("3_lx2qc")
+metadata/_custom_type_script = "uid://dui163ptds6sq"

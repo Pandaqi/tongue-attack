@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0p851l7262y7"]
+
+[ext_resource type="Script" uid="uid://bsfvggkgn1nh3" path="res://pq-obg/ui/touch/input_touch_area.gd" id="1_kr5yn"]
+[ext_resource type="Texture2D" uid="uid://calsi077dmbrd" path="res://pq-obg/ui/textures/button_touch_bg.tres" id="2_0hsrc"]
+[ext_resource type="Texture2D" uid="uid://wlqd7x0q7t2k" path="res://pq-obg/ui/textures/button_touch_content.tres" id="3_sc3l5"]
+
+[node name="InputTouchArea" type="MarginContainer" unique_id=2030268404 node_paths=PackedStringArray("container_sprites", "container", "label")]
+offset_right = 64.0
+offset_bottom = 64.0
+script = ExtResource("1_kr5yn")
+container_sprites = NodePath("Container/ContainerSprites")
+container = NodePath("Container")
+label = NodePath("Container/ContainerSprites/Label")
+
+[node name="Container" type="Control" parent="." unique_id=1887704397]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="ContainerSprites" type="Node2D" parent="Container" unique_id=692574000]
+
+[node name="Background" type="Sprite2D" parent="Container/ContainerSprites" unique_id=1313222365]
+texture = ExtResource("2_0hsrc")
+
+[node name="Content" type="Sprite2D" parent="Container/ContainerSprites" unique_id=494614231]
+position = Vector2(-12, -12)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_sc3l5")
+
+[node name="Label" type="Label" parent="Container/ContainerSprites" unique_id=1954889015]
+offset_left = -146.0
+offset_top = 16.0
+offset_bottom = 191.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 128
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1

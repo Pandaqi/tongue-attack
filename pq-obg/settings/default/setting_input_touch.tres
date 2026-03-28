@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://bna2qywx0kmqv"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_kv1tj"]
+
+[resource]
+script = ExtResource("1_kv1tj")
+type_display = 4
+key = "input_allow_touch"
+label = "ST_ALLOW_TOUCH"
+section = "shared"
+default = "true"
+needs_input_refresh = true

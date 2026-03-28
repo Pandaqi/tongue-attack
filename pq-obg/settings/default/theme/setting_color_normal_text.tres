@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://cfnqgjs7niq63"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_tkmqm"]
+
+[resource]
+script = ExtResource("1_tkmqm")
+type = 4
+key = "color_normal_text"
+label = "ST_COLOR_NORMAL_TEXT"
+needs_theme_refresh = true
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

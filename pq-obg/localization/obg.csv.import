@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c1e1d5xy7ycei"
+
+[deps]
+
+files=["res://pq-obg/localization/obg.en.translation", "res://pq-obg/localization/obg.nl.translation", "res://pq-obg/localization/obg.es.translation", "res://pq-obg/localization/obg.fr.translation", "res://pq-obg/localization/obg.de.translation", "res://pq-obg/localization/obg.pt.translation", "res://pq-obg/localization/obg.it.translation"]
+
+source_file="res://pq-obg/localization/obg.csv"
+dest_files=["res://pq-obg/localization/obg.en.translation", "res://pq-obg/localization/obg.nl.translation", "res://pq-obg/localization/obg.es.translation", "res://pq-obg/localization/obg.fr.translation", "res://pq-obg/localization/obg.de.translation", "res://pq-obg/localization/obg.pt.translation", "res://pq-obg/localization/obg.it.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

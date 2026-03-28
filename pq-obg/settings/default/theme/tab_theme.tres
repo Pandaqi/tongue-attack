@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SettingTab" load_steps=7 format=3 uid="uid://rof0eke27qbk"]
+
+[ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_677k2"]
+[ext_resource type="Resource" uid="uid://dc72261ejf8my" path="res://pq-obg/settings/default/theme/group_colors.tres" id="2_efjx1"]
+[ext_resource type="Script" uid="uid://bk8734ulnri1t" path="res://pq-obg/settings/setting_tab.gd" id="2_h44bb"]
+[ext_resource type="Resource" uid="uid://cq1kgepf18ulr" path="res://pq-obg/settings/default/group_video.tres" id="2_j07ew"]
+[ext_resource type="Resource" uid="uid://dhplkvf2bdtyn" path="res://pq-obg/settings/default/theme/group_ui.tres" id="3_q2gn4"]
+[ext_resource type="Resource" uid="uid://vtn233mmemtr" path="res://pq-obg/settings/default/theme/group_fonts.tres" id="4_q2gn4"]
+
+[resource]
+script = ExtResource("2_h44bb")
+groups = Array[ExtResource("1_677k2")]([ExtResource("2_j07ew"), ExtResource("3_q2gn4"), ExtResource("4_q2gn4"), ExtResource("2_efjx1")])
+label = "ST_TAB_THEME"
+metadata/_custom_type_script = "uid://bk8734ulnri1t"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://cwxiet7cnu60p"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_01wok"]
+
+[resource]
+script = ExtResource("1_01wok")
+type = 2
+type_display = 1
+type_unit = 4
+key = "button_instructions_font_size"
+label = "ST_BUTTON_INSTRUC_SIZE_FONT"
+min_value = 8.0
+max_value = 32.0
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

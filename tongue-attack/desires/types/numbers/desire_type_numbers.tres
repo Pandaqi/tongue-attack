@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DesireTypeNumbers" format=3 uid="uid://procykfff0d0"]
+
+[ext_resource type="Script" uid="uid://bgqbn0gk1nabm" path="res://tongue-attack/desires/types/numbers/desire_type_numbers.gd" id="1_worfi"]
+
+[resource]
+script = ExtResource("1_worfi")
+key = "numbers"
+metadata/_custom_type_script = "uid://bgqbn0gk1nabm"

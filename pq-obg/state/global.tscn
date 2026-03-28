@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cjblsc7fxuoqg"]
+
+[ext_resource type="Script" uid="uid://1lblipea6y8g" path="res://pq-obg/state/global.gd" id="1_iowkg"]
+[ext_resource type="Resource" uid="uid://dijald8hsant" path="res://tongue-attack/settings/config_data.tres" id="2_lrbvn"]
+[ext_resource type="Resource" uid="uid://wgr72ivhhbm2" path="res://tongue-attack/settings/config_system_data.tres" id="3_u367a"]
+
+[node name="Global" type="Node" unique_id=1281461060]
+script = ExtResource("1_iowkg")
+config = ExtResource("2_lrbvn")
+config_system = ExtResource("3_u367a")

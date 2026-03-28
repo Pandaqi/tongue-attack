@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SettingGroup" load_steps=6 format=3 uid="uid://vtn233mmemtr"]
+
+[ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_8qdek"]
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="2_57sby"]
+[ext_resource type="Resource" uid="uid://cr1m8cxkoljb4" path="res://pq-obg/settings/default/theme/setting_fonts_use_system.tres" id="3_8ctoq"]
+[ext_resource type="Resource" uid="uid://l88sfm3a08nk" path="res://pq-obg/settings/default/theme/setting_font_size_label.tres" id="4_76k1j"]
+[ext_resource type="Resource" uid="uid://drpx658axoo7d" path="res://pq-obg/settings/default/theme/setting_font_size_button.tres" id="5_qvdum"]
+
+[resource]
+script = ExtResource("1_8qdek")
+settings = Array[ExtResource("2_57sby")]([ExtResource("3_8ctoq"), ExtResource("4_76k1j"), ExtResource("5_qvdum")])
+label = "ST_GROUP_FONTS"
+metadata/_custom_type_script = "uid://c7uqyg8sqnc02"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://881slsuta4nd"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_2kl7o"]
+
+[resource]
+script = ExtResource("1_2kl7o")
+type = 1
+type_display = 3
+type_unit = 1
+key = "volume_ui"
+label = "ST_VOLUME_UI"
+tooltip = "ST_VOLUME_UI_TT"
+callback = "Global.audio.change_volume_of_bus(\"UI\", linear_to_db(v))"
+min_value = 0.0
+max_value = 1.0

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SettingGroup" load_steps=4 format=3 uid="uid://cq1kgepf18ulr"]
+
+[ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_cwan6"]
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="2_lqj2p"]
+[ext_resource type="Resource" uid="uid://2msjjorp4gi7" path="res://pq-obg/settings/default/setting_fullscreen.tres" id="3_asdyo"]
+
+[resource]
+script = ExtResource("1_cwan6")
+settings = Array[ExtResource("2_lqj2p")]([ExtResource("3_asdyo")])
+label = "ST_GROUP_VIDEO"

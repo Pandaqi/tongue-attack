@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://8oid5t8gjeat"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_al6gg"]
+
+[resource]
+script = ExtResource("1_al6gg")
+type = 1
+type_unit = 2
+key = "tutorial_delay_remove"
+label = "ST_TUT_DELAY_REMOVE"
+min_value = 0.0
+max_value = 50.0

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bg8kg3w7d2yxv"]
+
+[ext_resource type="Script" uid="uid://cyrd5yos4nllm" path="res://tongue-attack/collectibles/collectible.gd" id="1_1mqwc"]
+[ext_resource type="Script" uid="uid://buopv25mdegj2" path="res://tongue-attack/tools/squasher_stretcher.gd" id="3_5qyw4"]
+[ext_resource type="PackedScene" uid="uid://b6lndpa28flit" path="res://tongue-attack/desires/desire_visualizer.tscn" id="3_q6btd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dwf6n"]
+radius = 35.128338
+
+[node name="Collectible" type="CharacterBody2D" unique_id=1381176248 node_paths=PackedStringArray("visualizer")]
+motion_mode = 1
+script = ExtResource("1_1mqwc")
+visualizer = NodePath("DesireVisualizer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2135049634]
+shape = SubResource("CircleShape2D_dwf6n")
+
+[node name="DesireVisualizer" parent="." unique_id=1886909275 instance=ExtResource("3_q6btd")]
+final = true
+size = 96.0
+
+[node name="SquasherStretcher" type="Node2D" parent="." unique_id=477320272 node_paths=PackedStringArray("node")]
+script = ExtResource("3_5qyw4")
+node = NodePath("..")

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DesireTypeLetters" format=3 uid="uid://4wd7qi6i72p5"]
+
+[ext_resource type="Script" uid="uid://dpn6um7k2fiap" path="res://tongue-attack/desires/types/letters/desire_type_letters.gd" id="1_2qdwb"]
+
+[resource]
+script = ExtResource("1_2qdwb")
+key = "letters"
+metadata/_custom_type_script = "uid://dpn6um7k2fiap"

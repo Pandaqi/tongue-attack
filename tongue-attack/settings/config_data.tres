@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ConfigData" format=3 uid="uid://dijald8hsant"]
+
+[ext_resource type="Script" uid="uid://d2q0rv1r45tsh" path="res://tongue-attack/settings/config_data.gd" id="1_dsqd2"]
+
+[resource]
+script = ExtResource("1_dsqd2")
+metadata/_custom_type_script = "uid://d2q0rv1r45tsh"

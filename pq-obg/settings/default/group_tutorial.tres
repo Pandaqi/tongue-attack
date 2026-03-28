@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SettingGroup" load_steps=8 format=3 uid="uid://37j7qn76ufvv"]
+
+[ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_x7dsr"]
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="2_qr5ne"]
+[ext_resource type="Resource" uid="uid://bpnt4x03u3k8n" path="res://pq-obg/settings/default/setting_tutorial_delay.tres" id="3_4b0x7"]
+[ext_resource type="Resource" uid="uid://cjnfnh4ucu6ii" path="res://pq-obg/settings/default/setting_tutorial_enabled.tres" id="3_i73lk"]
+[ext_resource type="Resource" uid="uid://bce1ttm4utk0v" path="res://pq-obg/settings/default/setting_tutorial_scale.tres" id="4_lr77m"]
+[ext_resource type="Resource" uid="uid://8oid5t8gjeat" path="res://pq-obg/settings/default/setting_tutorial_delay_remove.tres" id="6_2vx5b"]
+[ext_resource type="Resource" uid="uid://b2fbr0mmbnwc3" path="res://pq-obg/settings/default/setting_tutorial_font_size.tres" id="6_qbna2"]
+
+[resource]
+script = ExtResource("1_x7dsr")
+settings = Array[ExtResource("2_qr5ne")]([ExtResource("3_i73lk"), ExtResource("4_lr77m"), ExtResource("3_4b0x7"), ExtResource("6_2vx5b"), ExtResource("6_qbna2")])
+label = "ST_GROUP_TUTORIAL"

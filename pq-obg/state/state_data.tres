@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="StateData" load_steps=2 format=3 uid="uid://bhlcvxr17vu2o"]
+
+[ext_resource type="Script" uid="uid://b0dk7j1ap5cri" path="res://pq-obg/state/state_data.gd" id="1_vm3fh"]
+
+[resource]
+script = ExtResource("1_vm3fh")

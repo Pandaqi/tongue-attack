@@ -1,0 +1,124 @@
+[gd_scene load_steps=9 format=3 uid="uid://cgdjav32fnyi8"]
+
+[ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="1_axedv"]
+[ext_resource type="Script" uid="uid://pv457xnnplpy" path="res://pq-obg/game_loop/menu/main_menu.gd" id="1_g206a"]
+[ext_resource type="PackedScene" uid="uid://cg8edv702g8dd" path="res://pq-obg/ui/bg/bg.tscn" id="1_klxda"]
+[ext_resource type="Texture2D" uid="uid://cikhqhc0hfaxm" path="res://pq-obg/ui/textures/icon_play.tres" id="3_408xl"]
+[ext_resource type="Script" uid="uid://cm54dthffyvp5" path="res://pq-obg/settings/settings.gd" id="3_qagmd"]
+[ext_resource type="Texture2D" uid="uid://bex3uoa5xtsv8" path="res://pq-obg/ui/textures/icon_settings.tres" id="4_cqcj2"]
+[ext_resource type="Texture2D" uid="uid://b3xoiwk76ch5f" path="res://pq-obg/ui/textures/icon_quit.tres" id="6_p2nwr"]
+[ext_resource type="Texture2D" uid="uid://cbue28i4wsoti" path="res://pq-obg/ui/textures/icon_reset.tres" id="9_clq6r"]
+
+[node name="Menu" type="Node2D" unique_id=1659929561]
+
+[node name="BG" parent="." unique_id=1882044302 instance=ExtResource("1_klxda")]
+
+[node name="Main" type="CanvasLayer" parent="." unique_id=638506886 node_paths=PackedStringArray("settings", "play_btn", "settings_btn", "quit_btn", "label_credits")]
+script = ExtResource("1_g206a")
+settings = NodePath("../Settings")
+play_btn = NodePath("Control/CenterContainer/VBoxContainer/Play")
+settings_btn = NodePath("Control/CenterContainer/VBoxContainer/Settings")
+quit_btn = NodePath("Control/CenterContainer/VBoxContainer/Quit")
+label_credits = NodePath("MarginContainer/LabelCredits")
+
+[node name="Control" type="Control" parent="Main" unique_id=1841443822]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_axedv")
+
+[node name="CenterContainer" type="CenterContainer" parent="Main/Control" unique_id=1458506608]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/Control/CenterContainer" unique_id=1378582599]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="Main/Control/CenterContainer/VBoxContainer" unique_id=1395823207]
+layout_mode = 2
+text = "MENU_PLAY"
+icon = ExtResource("3_408xl")
+
+[node name="Settings" type="Button" parent="Main/Control/CenterContainer/VBoxContainer" unique_id=14190210]
+layout_mode = 2
+text = "MENU_SETTINGS"
+icon = ExtResource("4_cqcj2")
+
+[node name="Quit" type="Button" parent="Main/Control/CenterContainer/VBoxContainer" unique_id=1795067842]
+layout_mode = 2
+text = "MENU_QUIT"
+icon = ExtResource("6_p2nwr")
+
+[node name="MarginContainer" type="MarginContainer" parent="Main" unique_id=1727733209]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -94.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("1_axedv")
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="LabelCredits" type="Label" parent="Main/MarginContainer" unique_id=89014253]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Lalalalalal"
+
+[node name="Settings" type="CanvasLayer" parent="." unique_id=1838816528 node_paths=PackedStringArray("reset_btn", "close_btn")]
+script = ExtResource("3_qagmd")
+reset_btn = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Reset")
+close_btn = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Close")
+
+[node name="CenterContainer" type="CenterContainer" parent="Settings" unique_id=2130010837]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_axedv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/CenterContainer" unique_id=789800477]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="Settings/CenterContainer/VBoxContainer" unique_id=1374158172]
+custom_minimum_size = Vector2(720, 425)
+layout_mode = 2
+tab_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/CenterContainer/VBoxContainer" unique_id=1778515291]
+layout_mode = 2
+alignment = 1
+
+[node name="Reset" type="Button" parent="Settings/CenterContainer/VBoxContainer/HBoxContainer" unique_id=23072603]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+theme_override_font_sizes/font_size = 12
+text = "SETTINGS_RESET_ALL"
+icon = ExtResource("9_clq6r")
+
+[node name="Close" type="Button" parent="Settings/CenterContainer/VBoxContainer/HBoxContainer" unique_id=1488494993]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+theme_override_font_sizes/font_size = 12
+text = "SETTINGS_CLOSE"
+icon = ExtResource("6_p2nwr")
+
+[connection signal="pressed" from="Main/Control/CenterContainer/VBoxContainer/Play" to="Main" method="_on_play_pressed"]
+[connection signal="pressed" from="Main/Control/CenterContainer/VBoxContainer/Settings" to="Main" method="_on_settings_pressed"]
+[connection signal="pressed" from="Main/Control/CenterContainer/VBoxContainer/Quit" to="Main" method="_on_quit_pressed"]
+[connection signal="pressed" from="Settings/CenterContainer/VBoxContainer/HBoxContainer/Reset" to="Settings" method="_on_reset_pressed"]
+[connection signal="pressed" from="Settings/CenterContainer/VBoxContainer/HBoxContainer/Close" to="Settings" method="_on_close_pressed"]

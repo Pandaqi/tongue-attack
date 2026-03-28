@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://dvc83itcoq02j"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_ry1ly"]
+
+[resource]
+script = ExtResource("1_ry1ly")
+key = "allow_login_by_clicking_instruction"
+label = "ST_INPUT_LOGIN_CLICK"

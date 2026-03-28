@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://cjnfnh4ucu6ii"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_esqlf"]
+
+[resource]
+script = ExtResource("1_esqlf")
+key = "tutorial_enabled"
+label = "ST_TUT_ENABLED"

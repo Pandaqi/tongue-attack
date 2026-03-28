@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dch28bffyv2mx"]
+
+[ext_resource type="Texture2D" uid="uid://df4nshcux4r4m" path="res://pq_obg/ui/ui_shared.webp" id="1_6bnmt"]
+
+[node name="SpriteUI" type="Sprite2D"]
+texture = ExtResource("1_6bnmt")
+hframes = 8
+vframes = 4

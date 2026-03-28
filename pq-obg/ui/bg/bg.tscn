@@ -1,0 +1,99 @@
+[gd_scene load_steps=5 format=3 uid="uid://cg8edv702g8dd"]
+
+[ext_resource type="Script" uid="uid://b8i53c11hwwcx" path="res://pq-obg/ui/bg/generic_bg.gd" id="1_nqx8i"]
+
+[sub_resource type="Animation" id="Animation_qagg6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ImageContainer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ImageContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wr4af"]
+resource_name = "bg_slow_zoom"
+length = 40.0
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ImageContainer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 20.034714),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1.05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ImageContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 20.072302),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.89411765)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ggut3"]
+_data = {
+&"RESET": SubResource("Animation_qagg6"),
+&"bg_slow_zoom": SubResource("Animation_wr4af")
+}
+
+[node name="BG" type="CanvasLayer" unique_id=1882044302 node_paths=PackedStringArray("color_rect", "bg_image_container", "bg_image")]
+script = ExtResource("1_nqx8i")
+color_rect = NodePath("Control/ColorRect")
+bg_image_container = NodePath("ImageContainer")
+bg_image = NodePath("ImageContainer/Sprite2D")
+
+[node name="Control" type="Control" parent="." unique_id=678923491]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=2142724998]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.423529, 0.788235, 1, 1)
+
+[node name="ImageContainer" type="Node2D" parent="." unique_id=1236696478]
+
+[node name="Sprite2D" type="Sprite2D" parent="ImageContainer" unique_id=236736566]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1820799006]
+libraries = {
+&"": SubResource("AnimationLibrary_ggut3")
+}
+autoplay = &"bg_slow_zoom"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SettingTab" load_steps=8 format=3 uid="uid://bkdl045h6lnih"]
+
+[ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_p71rd"]
+[ext_resource type="Resource" uid="uid://bb1hxo5sv7x6u" path="res://pq-obg/settings/default/group_audio.tres" id="2_oiumh"]
+[ext_resource type="Resource" uid="uid://d13m0u2b3omqi" path="res://pq-obg/settings/default/group_main.tres" id="2_pv5ys"]
+[ext_resource type="Script" uid="uid://bk8734ulnri1t" path="res://pq-obg/settings/setting_tab.gd" id="2_xjtdf"]
+[ext_resource type="Resource" uid="uid://dr4bth2jfmbam" path="res://pq-obg/settings/default/group_buttons.tres" id="4_05gon"]
+[ext_resource type="Resource" uid="uid://bdrdo66qjsbvo" path="res://pq-obg/settings/default/group_login_logout.tres" id="5_pwdmx"]
+[ext_resource type="Resource" uid="uid://37j7qn76ufvv" path="res://pq-obg/settings/default/group_tutorial.tres" id="6_g4vl5"]
+
+[resource]
+script = ExtResource("2_xjtdf")
+groups = Array[ExtResource("1_p71rd")]([ExtResource("2_pv5ys"), ExtResource("2_oiumh"), ExtResource("4_05gon"), ExtResource("5_pwdmx"), ExtResource("6_g4vl5")])
+label = "ST_TAB_CORE"

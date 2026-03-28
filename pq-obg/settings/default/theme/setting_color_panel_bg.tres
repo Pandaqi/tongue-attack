@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://d157e5dgyw6mj"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_sqtxr"]
+
+[resource]
+script = ExtResource("1_sqtxr")
+type = 4
+key = "color_panel_bg"
+label = "ST_COLOR_PANEL_BG"
+needs_theme_refresh = true
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://c8xsi5y1f3ssu"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_f7hl4"]
+
+[resource]
+script = ExtResource("1_f7hl4")
+type = 4
+key = "color_focus_text"
+label = "ST_COLOR_FOCUS_TEXT"
+needs_theme_refresh = true
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

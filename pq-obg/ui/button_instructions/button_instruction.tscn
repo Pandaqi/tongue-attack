@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://bws1bg4b1iswl"]
+
+[ext_resource type="Script" uid="uid://cmkrmd41epeas" path="res://pq-obg/ui/button_instructions/button_instruction.gd" id="1_snp4d"]
+[ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="2_2hhwb"]
+[ext_resource type="PackedScene" uid="uid://bfclclol7g0ea" path="res://pq-obg/ui/button_visualizer/button_visualizer.tscn" id="2_a5py2"]
+[ext_resource type="Script" uid="uid://ddroof0ykn582" path="res://pq-obg/ui/button_visualizer/button_visualizer_container.gd" id="3_jtnm3"]
+[ext_resource type="Resource" uid="uid://bhlcvxr17vu2o" path="res://pq-obg/state/state_data.tres" id="3_ua162"]
+
+[node name="ButtonInstruction" type="PanelContainer" unique_id=2124584721 node_paths=PackedStringArray("button_visualizer", "button_container", "label")]
+offset_right = 180.0
+offset_bottom = 49.0
+size_flags_horizontal = 3
+theme = ExtResource("2_2hhwb")
+script = ExtResource("1_snp4d")
+button_visualizer = NodePath("HBoxContainer/ButtonContainer/ButtonVisualizer")
+button_container = NodePath("HBoxContainer/ButtonContainer")
+label = NodePath("HBoxContainer/LabelLogin")
+state_data = ExtResource("3_ua162")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1029211984]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="LabelLogin" type="Label" parent="HBoxContainer" unique_id=705547295]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("2_2hhwb")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.40784314)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 4
+text = "BUTTON_NEW_PLAYER"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ButtonContainer" type="Control" parent="HBoxContainer" unique_id=1235002553 node_paths=PackedStringArray("vis")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_vertical = 4
+script = ExtResource("3_jtnm3")
+vis = NodePath("ButtonVisualizer")
+
+[node name="ButtonVisualizer" parent="HBoxContainer/ButtonContainer" unique_id=1836091716 instance=ExtResource("2_a5py2")]
+position = Vector2(24, 24)
+scale = Vector2(0.096, 0.096)

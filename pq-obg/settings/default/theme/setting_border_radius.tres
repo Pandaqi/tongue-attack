@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://3057k5jfrm4d"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_uivg8"]
+
+[resource]
+script = ExtResource("1_uivg8")
+type = 2
+type_display = 1
+type_unit = 4
+key = "border_margin_panel"
+label = "ST_BORDER_MARGIN"
+min_value = 0.0
+max_value = 32.0
+needs_theme_refresh = true
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

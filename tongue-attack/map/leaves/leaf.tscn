@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://c33el7iy42nhv"]
+
+[ext_resource type="Script" uid="uid://ei0rlci33lup" path="res://tongue-attack/map/leaves/leaf.gd" id="1_pq7l1"]
+[ext_resource type="Texture2D" uid="uid://q45evd1vgrtm" path="res://tongue-attack/map/large-leaf.png" id="2_4b2rk"]
+
+[sub_resource type="Animation" id="Animation_pq7l1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_0o7c7"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.05235988]
+}
+
+[sub_resource type="Animation" id="Animation_4b2rk"]
+resource_name = "wiggle"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.2617993877991494, -0.20943951023931956, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0o7c7"]
+_data = {
+&"RESET": SubResource("Animation_pq7l1"),
+&"idle": SubResource("Animation_0o7c7"),
+&"wiggle": SubResource("Animation_4b2rk")
+}
+
+[node name="Leaf" type="Node2D" unique_id=1425851694 node_paths=PackedStringArray("anim_player")]
+script = ExtResource("1_pq7l1")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2143110838]
+position = Vector2(51, 63)
+texture = ExtResource("2_4b2rk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=803018865]
+libraries/ = SubResource("AnimationLibrary_0o7c7")
+autoplay = &"idle"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SettingGroup" load_steps=7 format=3 uid="uid://dr4bth2jfmbam"]
+
+[ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_jp6dc"]
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="2_pkt3q"]
+[ext_resource type="Resource" uid="uid://mq22585dvocv" path="res://pq-obg/settings/default/setting_input_keyboard.tres" id="3_srdrm"]
+[ext_resource type="Resource" uid="uid://mpno7712is50" path="res://pq-obg/settings/default/setting_input_mouse.tres" id="4_tc8xu"]
+[ext_resource type="Resource" uid="uid://girnoxww4y7g" path="res://pq-obg/settings/default/setting_input_gamepad.tres" id="5_uhhjl"]
+[ext_resource type="Resource" uid="uid://bna2qywx0kmqv" path="res://pq-obg/settings/default/setting_input_touch.tres" id="6_lo7o2"]
+
+[resource]
+script = ExtResource("1_jp6dc")
+settings = Array[ExtResource("2_pkt3q")]([ExtResource("3_srdrm"), ExtResource("4_tc8xu"), ExtResource("5_uhhjl"), ExtResource("6_lo7o2")])
+label = "ST_GROUP_ALLOW"

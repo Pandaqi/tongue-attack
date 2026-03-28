@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://c3mew7u5cevle"]
+
+[ext_resource type="Script" uid="uid://c51fddt4uf8oa" path="res://pq-obg/state/state.gd" id="1_t3kc4"]
+[ext_resource type="Resource" uid="uid://bhlcvxr17vu2o" path="res://pq-obg/state/state_data.tres" id="2_pnxkm"]
+[ext_resource type="Resource" uid="uid://cqn477x4eqflj" path="res://pq-obg/players/player_data.tres" id="3_q42ym"]
+[ext_resource type="PackedScene" uid="uid://ddcriby0xa2bw" path="res://pq-obg/game_loop/pause/pause_menu.tscn" id="4_mwql8"]
+[ext_resource type="Script" uid="uid://0cruceeytcjc" path="res://pq-obg/tutorial/tutorial.gd" id="5_ttvql"]
+[ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="7_q42ym"]
+[ext_resource type="Script" uid="uid://cua7u6fes6yxk" path="res://pq-obg/ui/touch/touch_areas.gd" id="8_ttvql"]
+
+[node name="State" type="CanvasLayer" unique_id=1145839826 node_paths=PackedStringArray("pause_menu", "tutorial", "touch_areas")]
+layer = 8
+script = ExtResource("1_t3kc4")
+state_data = ExtResource("2_pnxkm")
+player_data = ExtResource("3_q42ym")
+pause_menu = NodePath("PauseMenu")
+tutorial = NodePath("Tutorial")
+touch_areas = NodePath("TouchAreas")
+metadata/_custom_type_script = "uid://c51fddt4uf8oa"
+
+[node name="PauseMenu" parent="." unique_id=1738070768 instance=ExtResource("4_mwql8")]
+
+[node name="Tutorial" type="Control" parent="." unique_id=185661830 node_paths=PackedStringArray("container", "box_container")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_ttvql")
+container = NodePath(".")
+box_container = NodePath("BoxContainer")
+
+[node name="BoxContainer" type="BoxContainer" parent="Tutorial" unique_id=1115215729]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TouchAreas" type="Control" parent="." unique_id=2067382508 node_paths=PackedStringArray("area_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("7_q42ym")
+script = ExtResource("8_ttvql")
+area_container = NodePath(".")

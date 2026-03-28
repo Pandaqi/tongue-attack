@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://c1h0w2y25biqw"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_rpl7k"]
+
+[resource]
+script = ExtResource("1_rpl7k")
+type = 4
+key = "label_color"
+label = "ST_COLOR_TEXT"
+needs_theme_refresh = true
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

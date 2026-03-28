@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SettingGroup" load_steps=8 format=3 uid="uid://dhplkvf2bdtyn"]
+
+[ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_rii6o"]
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="2_bwcyg"]
+[ext_resource type="Resource" uid="uid://db1tb57262rm" path="res://pq-obg/settings/default/theme/setting_button_visualizer_size.tres" id="3_8rjah"]
+[ext_resource type="Resource" uid="uid://dshjnqpy1pq0g" path="res://pq-obg/settings/default/theme/setting_button_instructions_icon_size.tres" id="4_a3lcb"]
+[ext_resource type="Resource" uid="uid://cwxiet7cnu60p" path="res://pq-obg/settings/default/theme/setting_button_instructions_font_size.tres" id="5_b5o4g"]
+[ext_resource type="Resource" uid="uid://3057k5jfrm4d" path="res://pq-obg/settings/default/theme/setting_border_radius.tres" id="6_xkybc"]
+[ext_resource type="Resource" uid="uid://832337qt22jf" path="res://pq-obg/settings/default/theme/setting_border_margin.tres" id="7_ooovt"]
+
+[resource]
+script = ExtResource("1_rii6o")
+settings = Array[ExtResource("2_bwcyg")]([ExtResource("3_8rjah"), ExtResource("4_a3lcb"), ExtResource("5_b5o4g"), ExtResource("6_xkybc"), ExtResource("7_ooovt")])
+label = "ST_GROUP_UI"
+metadata/_custom_type_script = "uid://c7uqyg8sqnc02"

@@ -1,0 +1,126 @@
+[gd_scene load_steps=11 format=3 uid="uid://ddcriby0xa2bw"]
+
+[ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="1_bbfh5"]
+[ext_resource type="Script" uid="uid://6v4if0eefs5c" path="res://pq-obg/game_loop/pause/pause_menu.gd" id="1_uv1md"]
+[ext_resource type="PackedScene" uid="uid://dgfewhemw8ofh" path="res://pq-obg/game_loop/pause/pause_overlay.tscn" id="2_r0jos"]
+[ext_resource type="Texture2D" uid="uid://b3xoiwk76ch5f" path="res://pq-obg/ui/textures/icon_quit.tres" id="3_r0jos"]
+[ext_resource type="Texture2D" uid="uid://cnhdo76ej2u1l" path="res://pq-obg/ui/textures/pause/pause_hint_keyboard.tres" id="4_dqkp1"]
+[ext_resource type="Texture2D" uid="uid://bv0u6gn17u7m1" path="res://pq-obg/ui/textures/pause/pause_hint_icon.tres" id="4_gh4qb"]
+[ext_resource type="Texture2D" uid="uid://cikhqhc0hfaxm" path="res://pq-obg/ui/textures/icon_play.tres" id="4_xq5ji"]
+[ext_resource type="Texture2D" uid="uid://dw5n7fpy0tqpt" path="res://pq-obg/ui/textures/pause/pause_hint_gamepad.tres" id="6_qjsc2"]
+[ext_resource type="Texture2D" uid="uid://cbue28i4wsoti" path="res://pq-obg/ui/textures/icon_reset.tres" id="6_xq5ji"]
+[ext_resource type="Texture2D" uid="uid://5g0h004wrpg7" path="res://pq-obg/ui/textures/pause/pause_hint_touch.tres" id="7_tuv37"]
+
+[node name="PauseMenu" type="Control" unique_id=1738070768 node_paths=PackedStringArray("pause_menu_container", "overlay", "heading", "backward_btn", "restart_btn", "forward_btn")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_bbfh5")
+script = ExtResource("1_uv1md")
+pause_menu_container = NodePath("CenterContainer")
+overlay = NodePath("Overlay")
+heading = NodePath("CenterContainer/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Heading")
+backward_btn = NodePath("CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Backward")
+restart_btn = NodePath("CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Restart")
+forward_btn = NodePath("CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Forward")
+
+[node name="Overlay" parent="." unique_id=790026089 instance=ExtResource("2_r0jos")]
+layout_mode = 1
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=210268845]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -155.5
+offset_right = 155.5
+offset_bottom = 201.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer" unique_id=764114137]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer" unique_id=442149747]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=2117264079]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer/PanelContainer" unique_id=1223472333]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+
+[node name="Heading" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=445842411]
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "PAUSED_HEADER"
+horizontal_alignment = 1
+
+[node name="Explanation" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1216426754]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+text = "PAUSED_TEXT"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="PauseKeyHints" type="HBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=1988813967]
+custom_minimum_size = Vector2(96, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/MarginContainer/VBoxContainer/PauseKeyHints" unique_id=1932372458]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_gh4qb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Keyboard" type="TextureRect" parent="CenterContainer/MarginContainer/VBoxContainer/PauseKeyHints" unique_id=1889776295]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_dqkp1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Gamepad" type="TextureRect" parent="CenterContainer/MarginContainer/VBoxContainer/PauseKeyHints" unique_id=1675980799]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("6_qjsc2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Touch" type="TextureRect" parent="CenterContainer/MarginContainer/VBoxContainer/PauseKeyHints" unique_id=1967612179]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("7_tuv37")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=1723074134]
+layout_mode = 2
+alignment = 1
+
+[node name="Backward" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=689196749]
+layout_mode = 2
+icon = ExtResource("3_r0jos")
+
+[node name="Restart" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=670589592]
+layout_mode = 2
+icon = ExtResource("6_xq5ji")
+
+[node name="Forward" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=613390938]
+layout_mode = 2
+icon = ExtResource("4_xq5ji")
+
+[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Backward" to="." method="_on_backward_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Forward" to="." method="_on_forward_pressed"]

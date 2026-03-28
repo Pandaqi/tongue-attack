@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://b04xku6hqtr6u"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_54enx"]
+
+[resource]
+script = ExtResource("1_54enx")
+key = "color_scheme_auto_generate"
+label = "ST_COLOR_AUTO_GENERATE"
+needs_theme_refresh = true
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

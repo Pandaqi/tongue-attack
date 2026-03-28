@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://dl4sswc3b420v"]
+
+[ext_resource type="Script" uid="uid://bqpvvjypclbw6" path="res://tongue-attack/frogs/frog.gd" id="1_txcmq"]
+[ext_resource type="Script" uid="uid://dg5k38hspgcjh" path="res://tongue-attack/frogs/module_tongue_visuals.gd" id="2_450eg"]
+[ext_resource type="Script" uid="uid://coj1t2jtsyi1s" path="res://tongue-attack/frogs/module_collect.gd" id="4_4nyue"]
+[ext_resource type="Texture2D" uid="uid://dn41p7alep7wg" path="res://tongue-attack/frogs/frog-spritesheet.png" id="4_fvq8w"]
+[ext_resource type="Script" uid="uid://buopv25mdegj2" path="res://tongue-attack/tools/squasher_stretcher.gd" id="4_i0if5"]
+[ext_resource type="Script" uid="uid://dr61gyla5ahq" path="res://tongue-attack/frogs/module_visuals.gd" id="4_xdhee"]
+[ext_resource type="Shader" uid="uid://h6fnqlhsm5yx" path="res://tongue-attack/frogs/frog_tongue_line.gdshader" id="5_3o6e8"]
+[ext_resource type="Script" uid="uid://xtbseim33sor" path="res://tongue-attack/frogs/module_tongue.gd" id="5_fvq8w"]
+[ext_resource type="Texture2D" uid="uid://bfi7132ouo36u" path="res://tongue-attack/frogs/tongue-spritesheet.png" id="5_xdhee"]
+[ext_resource type="Texture2D" uid="uid://yeyjqx3axvsj" path="res://tongue-attack/frogs/tongue-middle-texture.png" id="6_3o6e8"]
+[ext_resource type="Script" uid="uid://3lf727yjr2e6" path="res://tongue-attack/frogs/module_desires.gd" id="6_450eg"]
+[ext_resource type="PackedScene" uid="uid://b6lndpa28flit" path="res://tongue-attack/desires/desire_visualizer.tscn" id="7_2817n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i0if5"]
+shader = ExtResource("5_3o6e8")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nt2bq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rxutr"]
+
+[node name="Frog" type="Node2D" unique_id=916843078 node_paths=PackedStringArray("module_collect", "module_tongue", "module_tongue_visuals", "module_desires", "module_visuals")]
+script = ExtResource("1_txcmq")
+module_collect = NodePath("ModuleCollect")
+module_tongue = NodePath("ModuleTongue")
+module_tongue_visuals = NodePath("ModuleTongueVisuals")
+module_desires = NodePath("ModuleDesires")
+module_visuals = NodePath("ModuleVisuals")
+
+[node name="ModuleVisuals" type="Node2D" parent="." unique_id=243660828 node_paths=PackedStringArray("sprite")]
+script = ExtResource("4_xdhee")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="ModuleVisuals" unique_id=404382223]
+position = Vector2(0, -51)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_fvq8w")
+hframes = 2
+
+[node name="SquasherStretcher" type="Node2D" parent="ModuleVisuals" unique_id=548674610 node_paths=PackedStringArray("node")]
+script = ExtResource("4_i0if5")
+node = NodePath("..")
+max_offset = Vector2(0.02, 0.02)
+max_rot = 0.05
+randomization = 0.2
+metadata/_custom_type_script = "uid://buopv25mdegj2"
+
+[node name="ModuleTongueVisuals" type="Node2D" parent="." unique_id=131565978 node_paths=PackedStringArray("module_tongue", "line", "sprite_start", "sprite_end")]
+script = ExtResource("2_450eg")
+module_tongue = NodePath("../ModuleTongue")
+line = NodePath("Line2D")
+thickness = 16.0
+sprite_start = NodePath("SpriteStart")
+sprite_end = NodePath("SpriteEnd")
+
+[node name="Line2D" type="Line2D" parent="ModuleTongueVisuals" unique_id=914462494]
+material = SubResource("ShaderMaterial_i0if5")
+points = PackedVector2Array(0, 0, 200, 0)
+width = 16.0
+texture = ExtResource("6_3o6e8")
+texture_mode = 1
+
+[node name="SpriteStart" type="Node2D" parent="ModuleTongueVisuals" unique_id=1876346001]
+
+[node name="Sprite2D" type="Sprite2D" parent="ModuleTongueVisuals/SpriteStart" unique_id=7605276]
+position = Vector2(-37.25, -28.500002)
+scale = Vector2(0.29101563, 0.31640625)
+texture = ExtResource("5_xdhee")
+hframes = 3
+
+[node name="SpriteEnd" type="Node2D" parent="ModuleTongueVisuals" unique_id=1511419714]
+position = Vector2(200, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ModuleTongueVisuals/SpriteEnd" unique_id=89411002]
+position = Vector2(39.499996, -28.5)
+scale = Vector2(0.32421872, 0.31640625)
+texture = ExtResource("5_xdhee")
+hframes = 3
+frame = 2
+
+[node name="ModuleCollect" type="Node2D" parent="." unique_id=937267879 node_paths=PackedStringArray("area", "col_shape", "module_desires")]
+script = ExtResource("4_4nyue")
+area = NodePath("Area2D")
+col_shape = NodePath("Area2D/CollisionShape2D")
+module_desires = NodePath("../ModuleDesires")
+
+[node name="Area2D" type="Area2D" parent="ModuleCollect" unique_id=1187116116]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ModuleCollect/Area2D" unique_id=1682473645]
+shape = SubResource("RectangleShape2D_nt2bq")
+
+[node name="ModuleTongue" type="Node2D" parent="." unique_id=1659786197 node_paths=PackedStringArray("tongue_tip")]
+script = ExtResource("5_fvq8w")
+debug = true
+tongue_tip = NodePath("AreaTongueTip")
+
+[node name="AreaTongueTip" type="Area2D" parent="ModuleTongue" unique_id=1406102065]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ModuleTongue/AreaTongueTip" unique_id=1647342726]
+shape = SubResource("CircleShape2D_rxutr")
+
+[node name="ModuleDesires" type="Node2D" parent="." unique_id=820199802]
+script = ExtResource("6_450eg")
+visualizer_scene = ExtResource("7_2817n")
+element_size = 84.0

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DesireTypeShapes" format=3 uid="uid://d4e0xrd6gb6n3"]
+
+[ext_resource type="Script" uid="uid://d4mjg2cdrapl8" path="res://tongue-attack/desires/types/shapes/desire_type_shapes.gd" id="1_ec808"]
+
+[resource]
+script = ExtResource("1_ec808")
+key = "shapes"
+metadata/_custom_type_script = "uid://d4mjg2cdrapl8"

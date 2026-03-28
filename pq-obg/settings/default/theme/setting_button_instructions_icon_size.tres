@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://dshjnqpy1pq0g"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_6g2jh"]
+
+[resource]
+script = ExtResource("1_6g2jh")
+type = 2
+type_display = 1
+type_unit = 4
+key = "button_instructions_icon_size"
+label = "ST_BUTTON_INSTRUC_SIZE_ICON"
+min_value = 16.0
+max_value = 96.0
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

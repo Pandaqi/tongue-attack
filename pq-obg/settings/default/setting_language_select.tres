@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://df516e7kbkdtc"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_pfpaf"]
+
+[resource]
+script = ExtResource("1_pfpaf")
+type = 3
+type_display = 0
+key = "language_default"
+label = "ST_LANGUAGE_SELECT"
+tooltip = "ST_LANGUAGE_SELECT_TT"
+default = "en"
+callback = "TranslationServer.set_locale(v)"
+callback_init = "s.default = Global.config_system.language_default
+s.options = TranslationServer.get_loaded_locales()"
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

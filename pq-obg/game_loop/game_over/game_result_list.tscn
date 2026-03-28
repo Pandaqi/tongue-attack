@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://baafqvwvud3e0"]
+
+[ext_resource type="Script" uid="uid://crafj2a2675wu" path="res://pq-obg/game_loop/game_over/game_result_list.gd" id="1_no3c4"]
+[ext_resource type="PackedScene" uid="uid://e04dqucmsy15" path="res://pq-obg/game_loop/game_over/game_result.tscn" id="2_lgu1l"]
+
+[node name="GameResultList" type="VBoxContainer"]
+alignment = 1
+script = ExtResource("1_no3c4")
+game_result_scene = ExtResource("2_lgu1l")

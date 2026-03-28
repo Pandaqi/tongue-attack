@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://bs8gso6r0aoid"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_hoc5t"]
+
+[resource]
+script = ExtResource("1_hoc5t")
+type = 1
+type_display = 3
+type_unit = 1
+key = "volume_game"
+label = "ST_VOLUME_GAME"
+tooltip = "ST_VOLUME_GAME_TT"
+callback = "Global.audio.change_volume_of_bus(\"Game\", linear_to_db(v))"
+min_value = 0.0
+max_value = 1.0

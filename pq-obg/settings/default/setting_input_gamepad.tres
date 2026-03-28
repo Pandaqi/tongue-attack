@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://girnoxww4y7g"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_v4hub"]
+
+[resource]
+script = ExtResource("1_v4hub")
+type_display = 4
+key = "input_allow_gamepad"
+label = "ST_ALLOW_GAMEPAD"
+section = "shared"
+default = "true"
+needs_input_refresh = true

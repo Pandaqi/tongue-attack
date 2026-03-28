@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://h6y454w2ion7"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_do1cx"]
+
+[resource]
+script = ExtResource("1_do1cx")
+type = 2
+type_display = 1
+key = "input_max_players"
+label = "ST_MAX_PLAYERS"
+section = "shared"
+callback_init = "s.min_value = Global.config_system.input_min_players_bound
+s.max_value = Global.config_system.input_max_players_bound"

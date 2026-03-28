@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="GameOverDataSystem" format=3 uid="uid://corrbsxwq1fvv"]
+
+[ext_resource type="Script" uid="uid://fxrgya0vwoug" path="res://pq-obg/game_loop/game_over/game_over_data.gd" id="1_tlr7x"]
+
+[resource]
+script = ExtResource("1_tlr7x")
+metadata/_custom_type_script = "uid://fxrgya0vwoug"

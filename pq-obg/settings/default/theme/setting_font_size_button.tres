@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://drpx658axoo7d"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_nc20p"]
+
+[resource]
+script = ExtResource("1_nc20p")
+type = 2
+type_display = 1
+type_unit = 4
+key = "button_font_size"
+label = "ST_FONT_SIZE_BUTTON"
+min_value = 8.0
+max_value = 96.0
+needs_theme_refresh = true
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

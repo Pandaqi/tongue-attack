@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dw5n7fpy0tqpt"]
+
+[ext_resource type="Texture2D" uid="uid://dn7ro3rk5loim" path="res://pq-obg/ui/ui_theme_shared.webp" id="1_q57ej"]
+
+[resource]
+atlas = ExtResource("1_q57ej")
+region = Rect2(128, 128, 64, 64)

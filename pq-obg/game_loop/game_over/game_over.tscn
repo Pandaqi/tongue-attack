@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://crlr0i76ogpcr"]
+
+[ext_resource type="Script" uid="uid://dr5kxf2jfiiws" path="res://pq-obg/game_loop/game_over/game_over.gd" id="1_dn7vh"]
+[ext_resource type="Resource" uid="uid://bhlcvxr17vu2o" path="res://pq-obg/state/state_data.tres" id="2_qj0ql"]
+[ext_resource type="PackedScene" uid="uid://baafqvwvud3e0" path="res://pq-obg/game_loop/game_over/game_result_list.tscn" id="3_6oajk"]
+[ext_resource type="PackedScene" uid="uid://cg8edv702g8dd" path="res://pq-obg/ui/bg/bg.tscn" id="4_1kij0"]
+[ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="4_jwnmj"]
+[ext_resource type="Texture2D" uid="uid://b3xoiwk76ch5f" path="res://pq-obg/ui/textures/icon_quit.tres" id="6_wi734"]
+[ext_resource type="Texture2D" uid="uid://cikhqhc0hfaxm" path="res://pq-obg/ui/textures/icon_play.tres" id="7_wit5u"]
+
+[node name="GameOver" type="Node2D" unique_id=935190762]
+script = ExtResource("1_dn7vh")
+state_data = ExtResource("2_qj0ql")
+result_list_scene = ExtResource("3_6oajk")
+
+[node name="BG" parent="." unique_id=1882044302 instance=ExtResource("4_1kij0")]
+
+[node name="Rankings" type="CanvasLayer" parent="." unique_id=191107411]
+
+[node name="Container" type="Control" parent="Rankings" unique_id=1880322875]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_jwnmj")
+
+[node name="CenterContainer" type="CenterContainer" parent="Rankings/Container" unique_id=2001370212]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Rankings/Container/CenterContainer" unique_id=1120016263]
+layout_mode = 2
+alignment = 1
+
+[node name="TableHeading" type="Label" parent="Rankings/Container/CenterContainer/VBoxContainer" unique_id=958494231]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "GO_RESULTS_GAME"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Rankings/Container/CenterContainer/VBoxContainer" unique_id=1199223635]
+custom_minimum_size = Vector2(550, 450)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Rankings/Container/CenterContainer/VBoxContainer/ScrollContainer" unique_id=992697454]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Rankings/Container/CenterContainer/VBoxContainer" unique_id=619597516]
+layout_mode = 2
+alignment = 1
+
+[node name="Backward" type="Button" parent="Rankings/Container/CenterContainer/VBoxContainer/HBoxContainer" unique_id=1508077662]
+layout_mode = 2
+text = "GO_QUIT"
+icon = ExtResource("6_wi734")
+
+[node name="Forward" type="Button" parent="Rankings/Container/CenterContainer/VBoxContainer/HBoxContainer" unique_id=1470259745]
+layout_mode = 2
+text = "GO_CONTINUE"
+icon = ExtResource("7_wit5u")
+
+[connection signal="pressed" from="Rankings/Container/CenterContainer/VBoxContainer/HBoxContainer/Backward" to="." method="_on_backward_pressed"]
+[connection signal="pressed" from="Rankings/Container/CenterContainer/VBoxContainer/HBoxContainer/Forward" to="." method="_on_forward_pressed"]
