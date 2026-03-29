@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SettingGroup" format=3 uid="uid://ceilh37d3xo04"]
+
+[ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_l8mct"]
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="2_0qk2x"]
+[ext_resource type="Resource" uid="uid://c73bdiew4lc6j" path="res://tongue-attack/settings/setting_desire_colors.tres" id="3_dt5vc"]
+[ext_resource type="Resource" uid="uid://didh614kuhl3o" path="res://tongue-attack/settings/setting_desire_icons.tres" id="4_dneav"]
+[ext_resource type="Resource" uid="uid://clag2blir6wxv" path="res://tongue-attack/settings/setting_penalty_missed.tres" id="4_nejkb"]
+[ext_resource type="Resource" uid="uid://mw15n61w33og" path="res://tongue-attack/settings/setting_starting_lives.tres" id="5_vk2qk"]
+[ext_resource type="Resource" uid="uid://cywe00ymug0vk" path="res://tongue-attack/settings/setting_starting_score.tres" id="6_e2djq"]
+[ext_resource type="Resource" uid="uid://huyo8vmnqqun" path="res://tongue-attack/settings/setting_narrate.tres" id="7_5fwpu"]
+[ext_resource type="Resource" uid="uid://doj4xuhvfw2d8" path="res://tongue-attack/settings/setting_desires_identical.tres" id="8_d4qws"]
+
+[resource]
+script = ExtResource("1_l8mct")
+settings = Array[ExtResource("2_0qk2x")]([ExtResource("3_dt5vc"), ExtResource("4_dneav"), ExtResource("5_vk2qk"), ExtResource("6_e2djq"), ExtResource("7_5fwpu"), ExtResource("8_d4qws"), ExtResource("4_nejkb")])
+label = "Difficulty: Easy"
+metadata/_custom_type_script = "uid://c7uqyg8sqnc02"

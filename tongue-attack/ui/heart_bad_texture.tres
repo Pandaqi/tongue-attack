@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://ohcjfqy0wxoy"]
+
+[ext_resource type="Texture2D" uid="uid://p8onx5776qj0" path="res://tongue-attack/main/misc-spritesheet.png" id="1_i4bcr"]
+
+[resource]
+atlas = ExtResource("1_i4bcr")
+region = Rect2(768, 0, 256, 0)

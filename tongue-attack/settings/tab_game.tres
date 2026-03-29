@@ -1,11 +1,13 @@
 [gd_resource type="Resource" script_class="SettingTab" format=3 uid="uid://cublgidv5ltfp"]
 
 [ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_gybi2"]
-[ext_resource type="Resource" uid="uid://bu87t3p8hutff" path="res://tongue-attack/settings/group_desires.tres" id="2_0tf2h"]
 [ext_resource type="Script" uid="uid://bk8734ulnri1t" path="res://pq-obg/settings/setting_tab.gd" id="2_4o2k1"]
+[ext_resource type="Resource" uid="uid://ceilh37d3xo04" path="res://tongue-attack/settings/group_diff_easy.tres" id="2_joaxa"]
+[ext_resource type="Resource" uid="uid://bu87t3p8hutff" path="res://tongue-attack/settings/group_diff_medium.tres" id="3_oktjr"]
+[ext_resource type="Resource" uid="uid://bix06ybcgnbbl" path="res://tongue-attack/settings/group_diff_hard.tres" id="4_qjvec"]
 
 [resource]
 script = ExtResource("2_4o2k1")
-groups = Array[ExtResource("1_gybi2")]([ExtResource("2_0tf2h")])
+groups = Array[ExtResource("1_gybi2")]([ExtResource("2_joaxa"), ExtResource("3_oktjr"), ExtResource("4_qjvec")])
 label = "Game"
 metadata/_custom_type_script = "uid://bk8734ulnri1t"

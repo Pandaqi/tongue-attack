@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Setting" format=3 uid="uid://24pvkwp8bs8g"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_a4x26"]
+
+[resource]
+script = ExtResource("1_a4x26")
+key = "tongue_can_get_stuck"
+label = "Allow Tongue Getting Stuck"
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

@@ -21,6 +21,9 @@ static var type_to_num_vertices : Dictionary[DesireTypeShapes.Type, int] = {
 }
 
 static func create_polygon(num_vertices := 4, size := Vector2.ONE, make_wonky := false) -> PackedVector2Array:
+	# this just never looks good, so this is the easiest way to also make ellipses/circles safe
+	if num_vertices > 8: make_wonky = false
+	
 	var arr := []
 	
 	var starting_angle := 0.0
@@ -39,7 +42,7 @@ static func create_polygon(num_vertices := 4, size := Vector2.ONE, make_wonky :=
 func generate_points() -> PackedVector2Array:
 	var new_points : PackedVector2Array
 	if type == DesireTypeShapes.Type.RECTANGLE:
-		new_points = create_polygon(type_to_num_vertices[DesireTypeShapes.Type.SQUARE], Vector2(1.25,0.65)*base_size, false)
+		new_points = create_polygon(type_to_num_vertices[DesireTypeShapes.Type.SQUARE], Vector2(1.25,0.65)*base_size, wonky)
 	elif type == DesireTypeShapes.Type.ELLIPSE:
 		new_points = create_polygon(type_to_num_vertices[DesireTypeShapes.Type.CIRCLE], Vector2(1.25, 0.65)*base_size, false)
 	else:

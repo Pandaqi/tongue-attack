@@ -18,6 +18,6 @@ func narrate(_d:Desire) -> AudioStream:
 	return null
 
 ## for custom ways in which types are the same (or not) that aren't handled by default comparison
-## d1 is our own desire (the one this type is part of), d2 is the other one we're checking against
+## this is checked both ways (matches(d1,d2) or matches(d2,d1)) as we have no guarantees about which is which
 func matches_custom(_d1:Desire, _d2:Desire) -> bool:
 	return false

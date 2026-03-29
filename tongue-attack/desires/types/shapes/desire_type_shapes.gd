@@ -1,6 +1,7 @@
 extends DesireType
 class_name DesireTypeShapes
 
+@export var value_debug : Type
 enum Type
 {
 	TRIANGLE,

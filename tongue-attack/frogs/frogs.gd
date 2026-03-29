@@ -21,7 +21,6 @@ var positions_per_frog_count : Array = [
 
 func _ready() -> void:
 	desires.generate_all_possible()
-	
 	spawn_debug_players()
 
 func count() -> int:
@@ -46,11 +45,12 @@ func _on_player_spawn_requested(_btn:InputButton) -> PlayerSystem:
 func spawn() -> Frog:
 	var f : Frog = frog_scene.instantiate()
 	var num_desires := randi_range(num_desires_bounds.x, num_desires_bounds.y)
+	if Global.config.all_players_have_same_desires: num_desires = 3
 	f.module_desires.set_all(desires.get_next_desires(num_desires))
 	f.place_on_leaf(map.get_next_leaf())
 	f.killed.connect(_on_frog_killed)
 	f.scored.connect(_on_frog_scored)
-	f.lives_lost.connect(_on_frog_lives_lost)
+	f.lives_changed.connect(_on_frog_lives_changed)
 	f.request_leaf_reposition.connect(_on_leaf_reposition_requested)
 	frogs.append(f)
 	add_child(f)
@@ -59,15 +59,14 @@ func spawn() -> Frog:
 func _on_frog_scored(s:float) -> void:
 	progression.change_score(s)
 
-func _on_frog_lives_lost(dl:int) -> void:
+func _on_frog_lives_changed(dl:int) -> void:
 	progression.change_lives(dl)
 
-func _on_leaf_reposition_requested(f:Frog) -> void:
-	print("LEAF REPOSITION REQUESTED")
-	var new_leaf := map.get_leaf_opposite(f.leaf)
-	print(new_leaf)
+func _on_leaf_reposition_requested(f:Frog, dy:int) -> void:
+	var new_leaf := map.get_leaf_in_direction(f.leaf, dy)
 	if not map.is_leaf_available(new_leaf): return
 	map.give_back_leaf(f.leaf)
+	map.take_leaf(new_leaf)
 	f.place_on_leaf(new_leaf)
 
 func _on_frog_killed(f:Frog) -> void:

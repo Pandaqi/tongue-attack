@@ -17,6 +17,7 @@ func _enter_tree() -> void:
 	player_data.reset(Global.config_system.player_colors)
 
 func _ready() -> void:
+	# signals
 	Global.input.button_added.connect(_on_button_added)
 	Global.input.button_removed.connect(_on_button_removed)
 	Global.input.buttons_changed.connect(_on_buttons_changed)
@@ -27,7 +28,7 @@ func _ready() -> void:
 	for btn in btns_already_in_play:
 		place_player(btn)
 	
-	# @NOTE: delay because if we call now other objects' _ready() might not have triggered yet
+	# @NOTE: delay because if we call now, other objects' _ready() might not have triggered yet
 	await get_tree().process_frame
 	Global.input.buttons_changed.emit()
 
@@ -50,7 +51,7 @@ func place_player(btn:InputButton) -> void:
 		p = player_creation_node.call(player_creation_function, btn)
 	
 	if not p:
-		print("PlayerSpawner | Error | No valid player object created.")
+		print("[PlayerSpawner] Error: No valid player object created.")
 		return
 	
 	player_data.add_player(p)
@@ -62,6 +63,7 @@ func place_player(btn:InputButton) -> void:
 	p.revived.emit()
 
 func remove_player(btn:InputButton) -> void:
+	get_viewport().set_input_as_handled()
 	player_remove_requested.emit(btn)
 	
 	var connected_player := get_player_with_button(btn)

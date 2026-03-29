@@ -1,6 +1,8 @@
 extends DesireType
 class_name DesireTypeNumbers
 
+@export var value_debug : Type
+
 enum Type
 {
 	TWO,

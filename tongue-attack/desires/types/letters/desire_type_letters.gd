@@ -1,6 +1,8 @@
 extends DesireType
 class_name DesireTypeLetters
 
+@export var value_debug : Type
+
 enum Type
 {
 	A, B, C, D, E, F, G, H, I, 
@@ -53,13 +55,13 @@ func visualize(d:Desire, dv:DesireVisualizer) -> void:
 	
 	# if this is not final, we just display the LETTER we want
 	if not dv.is_final():
-		d.value_visualized = letter_needed
+		d.value_visualized = letter_needed.to_lower()
 		dv.set_text(letter_needed)
 		return
 	
 	# otherwise we display a full word that contains it
 	var rand_word := get_random_word_containing_letter(letter_needed)
-	d.value_visualized = rand_word
+	d.value_visualized = rand_word.to_lower()
 	dv.set_text("[wave]" + rand_word + "[/wave]")
 
 func narrate(d:Desire) -> AudioStream:
@@ -69,4 +71,5 @@ func narrate(d:Desire) -> AudioStream:
 func matches_custom(d1:Desire, d2:Desire) -> bool:
 	if not (d1.type is DesireTypeLetters): return false
 	if not (d2.type is DesireTypeLetters): return false
-	return d1.value_visualized.contains(d2.value_visualized) or d2.value_visualized.contains(d1.value_visualized)
+	print("LETTER MATCH CUSTOM | " + d1.value_visualized + " | " + d2.value_visualized)
+	return (d1.value_visualized as String).contains(d2.value_visualized) or (d2.value_visualized as String).contains(d1.value_visualized)

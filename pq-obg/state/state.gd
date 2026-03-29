@@ -13,7 +13,7 @@ enum GameState
 @export var start_game_immediately := false
 
 @export var game_over_goes_to_new_scene := false
-@export var game_over_data : GameOverDataSystem
+@export var game_over_data_default : GameOverDataSystem
 @export var game_over_menu : GameOverMenu
 
 @export var pause_menu : PauseMenu
@@ -84,14 +84,14 @@ func _on_objective_registered() -> void:
 	print("[State] All players finished; should go to game over")
 	goto_game_over()
 
-func goto_game_over() -> void:
+func goto_game_over(go := game_over_data_default) -> void:
 	change_state(GameState.POSTGAME)
 	
 	if game_over_goes_to_new_scene:
 		get_tree().change_scene_to_file("res://pq-obg/game_loop/game_over/game_over.tscn")
 		return
 	
-	game_over_menu.activate(game_over_data)
+	game_over_menu.activate(go)
 
 func goto_main_menu() -> void:
 	get_tree().change_scene_to_file("res://pq-obg/game_loop/menu/menu.tscn")

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Setting" format=3 uid="uid://clag2blir6wxv"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_6mxcc"]
+
+[resource]
+script = ExtResource("1_6mxcc")
+key = "penalty_missed_collectibles"
+label = "Missed Collectibles Give Penalty"
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

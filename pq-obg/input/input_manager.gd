@@ -9,7 +9,7 @@ enum ButtonRemovalType
 
 var keyboard_buttons := []
 const mouse_buttons := [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT, MOUSE_BUTTON_MIDDLE]
-const gamepad_buttons := [JOY_BUTTON_A, JOY_BUTTON_B, JOY_BUTTON_Y, JOY_BUTTON_X]
+const gamepad_buttons := [JOY_BUTTON_A, JOY_BUTTON_B, JOY_BUTTON_X, JOY_BUTTON_Y]
 
 var buttons : Array[InputButton] = []
 var buttons_available_all : Array[InputButton] = []
@@ -73,6 +73,13 @@ func add_shared_buttons() -> void:
 	InputMap.add_action("ui_forward")
 	InputMap.action_add_event("ui_forward", ev_keyboard)
 	InputMap.action_add_event("ui_forward", ev_gamepad)
+	
+	# for some reason, Godot does not map the A controller key to ui_accept by default anymore; so add it ourselves!
+	var ev_gamepad_accept := InputEventJoypadButton.new()
+	ev_gamepad.button_index = JOY_BUTTON_A
+	ev_gamepad.device = 0
+	
+	InputMap.action_add_event("ui_accept", ev_gamepad_accept)
 
 func generate_all_buttons() -> void:
 	# KEYBOARD
@@ -104,6 +111,7 @@ func register_button(btn:InputButton) -> void:
 	btn.add_to_input_map()
 	buttons.append(btn)
 
+# @NOTE: There's basically never a reason to turn shuffle off. It only lead to bugs/confusion in the past. Take this argument away?
 func refresh_button_selection(shuffle = true) -> void:
 	buttons_available = {}
 	
@@ -129,10 +137,14 @@ func refresh_button_selection(shuffle = true) -> void:
 		var unconnected_gamepad := btn.type == InputButton.InputType.GAMEPAD and btn.device >= num_connected_gamepads
 		if unconnected_gamepad: continue
 		
+		var is_gamepad_accept_button := (btn.type == InputButton.InputType.GAMEPAD and btn.device == 0 and btn.key == JOY_BUTTON_A)
+		var gamepad_accept_bad : bool = is_gamepad_accept_button and (not Global.config_system.input_allow_gamepad_accept_button)
+		if gamepad_accept_bad: continue
+		
 		var touch_impossible := btn.type == InputButton.InputType.TOUCH and not has_touch_capability
 		if touch_impossible: continue
 		
-		var left_mouse_bad : bool = btn.key == MOUSE_BUTTON_LEFT and (not Global.config_system.input_allow_left_mouse_button)
+		var left_mouse_bad : bool = btn.type == InputButton.InputType.MOUSE and btn.key == MOUSE_BUTTON_LEFT and (not Global.config_system.input_allow_left_mouse_button)
 		if left_mouse_bad: continue
 		
 		if not (btn.type in buttons_available): buttons_available[tp] = []
@@ -150,14 +162,18 @@ func refresh_button_selection(shuffle = true) -> void:
 		for elem in buttons_available[key]:
 			buttons_available_all.append(elem)
 	
+	# finally, forget whatever state we had before and open them all to be used
+	for btn in buttons_available_all:
+		btn.unlock()
+	
 	_on_buttons_changed()
 
 func _on_buttons_changed() -> void:
 	await get_tree().process_frame
 	buttons_changed.emit()
 
-func _on_gamepad_change() -> void:
-	refresh_button_selection(false)
+func _on_gamepad_change(_device:int, _connected:bool) -> void:
+	refresh_button_selection()
 
 func get_removal_time() -> float:
 	return Global.config_system.input_logout_hold_duration
@@ -195,6 +211,7 @@ func give_back_button(btn:InputButton) -> void:
 	var btn_already_given_back := is_button_grabbable(btn)
 	if btn_already_given_back: return
 	
+	btn.lock()
 	buttons_used.erase(btn)
 	buttons_available[btn.type].append(btn)
 	_on_buttons_changed()
@@ -222,14 +239,21 @@ func check_new_login(ev:InputEvent) -> void:
 	if not Global.config_system.input_login_while_playing and not pause_mode: return
 	
 	# check for logging in
+	var login_on_release : bool = Global.config_system.input_check_login_on_released
 	for type in get_all_input_types():
 		var next_button := get_next_button(type)
 		if not next_button: continue
 		if type == InputButton.InputType.TOUCH: continue
 		
 		var relevant_key := next_button.get_input_map_key()
-		var should_trigger := ev.is_action_released(relevant_key) if  Global.config_system.input_check_login_on_released else ev.is_action_pressed(relevant_key)
+		var should_trigger := ev.is_action_released(relevant_key) if login_on_release else ev.is_action_pressed(relevant_key)
 		if not should_trigger: continue
+		
+		# we protect buttons after logging out to prevent instantly logging in with the same button again
+		# such that NEXT TIME you press it, we DO continue and log you in
+		if login_on_release and next_button.is_locked():
+			next_button.unlock()
+			continue
 		
 		request_login(next_button)
 

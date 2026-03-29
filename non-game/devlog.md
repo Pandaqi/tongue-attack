@@ -1,283 +1,202 @@
-# Shape Sweepers (Devlog)
+# Tongue Attack (Devlog)
 
-Welcome to the devlog (or "developer's diary") for my game called [Shape Sweepers](@TODO:Link). It was the first truly educational _One Button Game_ I made for the online store. (Earlier One Button Games were _themed_, e.g. about Christmas, and mostly used to test the idea and refine it.)
+Welcome to the devlog (or "developer's diary") for my game called [Tongue Attack](@TODO:Link). It was one of the first educational _One Button Games_ I made for the online store. It ended up being the first one I actually finished, simply because it was "simpler" and "smaller" than the other ideas. 
 
-I had a list of ideas for games and had to make a decision. In such cases, I always rank them by how small and risk-free they are, so that I can start with the "easiest" (or "most certain") of the ideas.
-
-Usually, that doesn't mean the idea is simple to make, it just means my other ideas were even harder ;)
-
-In any case, my goal with these games is to make _fun games_ where the educational part is simply integral to the experience. I am not interested in making "educational games" that are just homework exercises but on a screen---not games at all, really. It should a _fun game_ first and foremost, something you can play with the whole family, something kids _want_ to play, and they'll learn because that's simply required to play _well_.
-
-So ... how do we do that?
+That doesn't mean it wasn't without its problems, though. A lot of them, in fact, and I'll try to explain what they are and how I solved them in clear language!
 
 ## What's the idea?
 
-When teaching _shapes_ to kids, there are a few goals to consider.
+I wanted a general purpose "matching" game. Colors, shapes, letters, numbers, the basics. What's the easiest way to turn this into a game? One with a clear approachable theme, where each player really only needs a single button?
 
-* Teach them the _basic shapes_ and their general name/look.
-* Teach them to _generalize_ this: even if a triangle is a bit wonky, or upside-down, it's still a triangle.
-* Teach them _why they need to know_. Show them how it can be used for tasks or problem solving.
+> **Each player is a frog at the edge of the screen. Press your button to extend your tongue and grab flies moving past!**
 
-This thinking brought me to this game idea.
+It seemed like one of my simplest ideas. One for which I could find some clear visuals and which would work with all these different things to match.
 
-* The entire map **is** a basic shape. You're literally inside a circle/triangle/square.
-* You move around by jumping off the edges. 
-  * You simply fly in a straight line from there until you hit the opposite edge.
-  * There, you can re-aim again and shoot off.
-  * This is ONE BUTTON: "jump off"!
-* All players are "cleaners" (or brooms or whatever). You erase the entire path you take each time.
-  * Your goal is to **erase the entire map/shape**! You can play alone, or together, it's cooperative.
+I had to finish my current project first, and in those few days the idea already became more specific.
 
-This felt like a strong way to really integrate shapes and what they into the entire gameplay from start to finish.
+* PRESS your button to extend your tongue.
+* PRESS it again (at any time) to make it go back again.
+* Each frog has its own "desires": grab those for points.
+* Any other things are "bad" for you: if you grab them, you lose a life.
 
-* You're constantly looking at that one shape and your movement is constrained by it.
-* You're erasing the shape, constantly considering its surface area and where you can clean up the most.
-* Moreover, I can easily extend this by adding "powerups" to grab along the way. 
-  * For example, maybe only powerups **with the same shape as the map** are "good"---the others are "bad".
-  * I can write code to make shapes a little wonky, so kids need to learn to actually recognize triangles instead of _memorizing_ the one look they have.
+You play until you're out of lives (loss) or you've reached the points goal (win).
 
-## How do we make that? (Technical)
+I envisioned tall tree trunks at the side of the screen, with frogs sitting on big leaves jutting out (either all the way to the left or to the right).
 
-This part contains all the technical details! Skip this if you're just interested in the high-level game design and educational considerations.
+With that "plan", I got started.
 
-### Generating Shapes
+## An Endless Tongue
 
-I wrote a simple system to _generate any shape_. I simply tell it "give me a square!", and it gives me the list of vertices that define the square. 
+This game had no real programming challenges, which is why I deemed it the "simplest" of my ideas. I don't mean that it was super easy or flawless to program, I just mean that there's no new algorithm or interesting idea to explain here. 
 
-The algorithm I've always used for creating such polygons is to grab equidistant points on a circle. Or, more specifically,
+The game is mostly a combination of typical code I've written a hundred times before.
 
-* Start with `angle = 0` and `list = []`
-* Loop as many times as the number of vertices. (_For a square that'd be 4._)
-  * Each time, add `2pi / num_vertices` to the angle.
-  * Now the next vertex of the polygon is `Vector2.from_angle(angle)`
-  * Add that to the list!
-* Once done, you'll have made a full circle and saved the exact number of vertices you need in a list.
+* Randomly spawn collectibles at the top. Make them fall down. Make them disappear when at the bottom.
+* Listen to the _One Button_ that each player has. If pressed, extend/retract tongue.
+* The collectibles have a "body". The tongue has an "area". When the area detects a body inside, it collects it!
 
-A _circle_ is just the same thing but with _loads_ of vertices. Enough that it starts to look like a circle instead of a polygon. (True circles don't exist on computers. It's all just polygons: a list of points to connect.)
+There are only two interesting parts that challenged me to problem solve.
 
-### Sticking to the shape
+One is the fact that I needed a clean way to support all these different things to "match" (colors, letters, etcetera). I did not want to write this super long list of `if-else` statements checking for each individual thing. That would be prone to bugs, errors, and headaches on my end. 
 
-My game engine has a handy function called `Geometry2D.is_point_in_polygon(point, shape)`. Each frame, I call this to figure out if a player is still inside the shape. 
+So, instead, I created a "template" (or blueprint) for each type (`DesireType`). A simple script that the game can call and which will _generate_ (before the game starts) all the options for that type (e.g. all possible SHAPES). I called these `Desire`s. These objects are all inserted into a big list from which it draws randomly. When checking if a frog grabs the right thing, now we just need to compare if the `Desire` saved on the collectible is also in the list of `Desire`s from the frog. 
 
-If so, great!
+This allows turning each type on/off at will, while keeping code quite clean and simple!
 
-If not, snap us back inside! Find the closest point on the polygon and put us there. 
+The second challenge was the **frog tongue**. It had to extend as far as needed, which means we can't just use a single image of a specific size. Instead, I used the following technique.
 
-More specifically,
+* The technique has three elements: `SpriteStart`, `Line2D`, and `SpriteEnd`
+* The "tip of your tongue" is just an empty node that I move back and forth when you press your button.
+  * The `Line2D` is just a line with two points: your frog's mouth (start) and your tongue tip (end).
+  * The `SpriteStart` is placed at the _start_, over the mouth of your frog, to pretend the tongue is coming out.
+  * As expected, the `SpriteEnd` is placed on the tongue tip, to curve the tongue and make its end look nice.
+* That line can be as long or short as we want now (the start/end sprites just stay the same size). To make its look match, though, we use a simple shader to "tile" the texture.
+  * In other words, instead of _stretching_ this texture over the whole line, keep its same size and just _repeat_ it as often as needed to cover the whole thing.
 
-* Loop through all line segments of the polygon (made in the previous step).
-* Call `Geometry2D.get_closest_point_to_segment(point, s1, s2)`. As the name implies, this gives us the closest point between where we are and the edge of our polygon.
-  * If this is the best we've found so far (the "closest of them all"), save it!
-  * Otherwise, ignore it, we've found a spot that's better
-* When done, we have the best point to snap towards.
+It's not perfect---it never is. But while playing, at speed, if your nose isn't pressed against the screen, it looks very crisp and good. 
 
-Snapping is not enough, though. We also need to always be oriented _inside_ the shape. When we press our one button, we need to jump off _into the shape_.
+## Fun Is Designed
 
-So, I also return the _line segment_ that our closest point was on. Because all our polygons are defined clockwise, we know we can _rotate_ that segment clockwise by 90 degrees (or `0.5 pi`). The result is the vector pointing _into_ the shape. 
+I recently heard another game developer say "fun is not inherent, it is designed". I kept thinking about this as I developed the game. Kept reminind myself of this whenever I was in doubt or wanted to throw the idea away.
 
-The "aiming" code animates an arrow bouncing around this vector. When you press your button, whatever direction the arrow aims at now is how you'll shoot off and move forward.
+Because the version I just described, that first prototype I made, was _not_ fun. It rarely is. Even the best ideas start out very raw and mediocre, and you have to _design_ it into something fun. 
 
-### Erasing your path (Method 1)
+What are the issues?
 
-At first, I coded a "naive, simple implementation" just to see how it looked and get started. I knew I had to replace it eventually, but only because my game had such specific requirements. That implementation might be fine for many games!
+* You are stuck on one side of the screen. As such, there might be a juicy butterfly at the opposite end ... but with three things you _don't_ need in the way! You have no way to grab that without grabbing all the wrong things too.
+* You can retract the tongue ... but while retracting, it can't extend again. So you have to wait until it's back at base, and waiting is rarely fun.
+* If I only spawn things _that people need_, then the game becomes extremely simple/easy, especially at 1 or 2 players. Just grab everything! 
+* If everyone wants _different things_, then with 3+ players you will _not_ have anything to grab most of the time. Because all things on screen belong to _other players_!
 
-* Create a `SubViewport`
-* Send its texture to a `Sprite2D` that you display in the same position as the big map shape.
-* Add a `Polygon2D` child. Set its `points` to the points list of the current big map shape.
-* Whenever a player moves through the shape, 
-  * Create a new `Line2D` for them.
-  * Keep adding its current position to it.
-  * And set its `material` to something with `render_mode` set to `subtract`. (This SUBTRACTS the line from whatever is behind it, in this case the polygon.)
+So, yes, I had a pretty screen with frogs sending out their tongues. I could've said "hey, educational game, kids can practice matching the right desires---we're done!" But the whole point of my online store (and _One Button Games_) is to prove eductional games should just be _good games_ that _anyone wants to play_.
 
-This worked fine. It gives very crisp lines, it erases as it should, and I saw no performance issues. (Although I expect them to appear if you actually played for 5 minutes, as those `Line2D`s are _never removed_! You just can't do that while playing, because then the entire system breaks.)
+So ... let's design the fun.
 
-It showed me that the idea was working. It was definitely possible to "clean" the dirty texture with this movement and it was quite fun too.
+### Step 1: Tongue Sticking
 
-I had too many reasons, though, for wanting something better.
+My first try implemented the idea of the tongue **getting stuck**.
 
-* I wanted to support **different shapes** for erasing. A player that looked like a square, for example, should erase with a _square shape_. It's a game about shapes after all!
-* I wanted to support **painting the texture again**. The current method only allows _subtraction_, but maybe some bad powerups or enemies would explode and _add back some paint_.
-* As stated, if games really go on for a while, that means thousands and thousands of `Line2D`s and it will certainly cause issues.
-* If I want some funky textures or patterns on this erasable texture, it's easier with a different method.
+* If you hit an object from the _side_, your tongue gets stuck to it.
+* This can be _good_---it doesn't retract, so you can grab lots of stuff for free.
+* Or this can be _bad_---if bad things are coming that you don't want to grab.
+* Furthermore, your tongue sticks if it reaches all the way to the opposite end of the screen.
 
-### Erasing your path (Method 2)
+To unstick, simply **hold** your button for ~0.5 seconds. 
 
-I implemented a second method that is simpler ... on the surface.
+{{% remark %}}
+This is the pattern for all One Button Games I've made or prototyped so far. The main gameplay is just PRESS your button. But more advanced tactics/actions can be put on HOLDING the button.
+{{% /remark %}}
 
-* I create an `Image.new()`
-* Whenever you erase stuff, I find the actual pixels you affect, and simply **update those raw pixels**.
-* When done, I call `ImageTexture.create_from_image(that_image)` and give that to the `Sprite2D` to display the new version.
+This worked fine, but I wasn't convinced yet. Let's implement a few more things before our playtest.
 
-In this method I'm manipulating an actual image file, in real time, constantly, setting individual pixels. As expected, this is even _worse_ for performance, at least for now.
+### Step 2: Better Desires
 
-But we can improve that!
+Then I tried out all my ideas for changing how the desires (or "collectibles") work.
 
-I don't need to make that `Image` the same as the screen resolution. I can make it a _much lower resolution_ (e.g. `(512,512)` instead of `(1280,720)`). When you erase, I convert your real position to the scaled-down one. When drawing the texture, I blow it back up to full size.
+* Everyone wants the **same** things! Easier, simpler.
+* If you stick to a desire, it **slowly fades away**. 
+  * This allows _removing_ things you don't match (though it takes more time and you get no reward for it).
+  * Which is nice because it provides a way to "save" everyone, even if you don't _match_ the thing that's about to fall to its death.
+* Spawn some things that nobody needs. (The more players you have, the lower the probability of this happening. With 5+ players, there's enough going on to not need this.)
+* Just **ignore** bad matches, don't get penalized for them.
+* You still **grab** bad matches, but simply get no reward for them.
+* **Don't** penalize players for missing things. (That is, something you SHOULD have grabbed with your tongue ends up falling off-screen at the bottom.)
+* **Balance** spawning. Keep track of how many of each collectible is already on screen, and purposely spawn things that are missing. This ensures no player is randomly without anything to match for 30 seconds.
 
-There are more improvements, but they're not necessary now. With a scaled-down version, performance is fine. And, notably, performance is "constant". No matter how long you've been playing, no matter what you're doing, the performance impact of this will stay the same.
+Again, all these changes were interesting things to add, but without more testing I couldn't be sure.
 
-### Have you won?
+### Step 3: Funky Frogs
 
-You win the game by cleaning the entire area. But ... how do we know? Also, it's incredibly annoying if you've cleaned 99.999% of it and just keep missing that final tiny pixel somewhere. We should be a bit more graceful about it.
+Finally, I tried out ways to play with how the frogs worked.
 
-I learned all these tricks when I made my game _Rolling in the Sheepe_. And in this case, the trick is the same as in the previous section!
+* Faster/slower tongue speed.
+* If you stick to the other side, you actually **move there**.
+* Similarly, if you **hold your button** (while idle), you will **hop down** to the next leaf.
+* Tongues can stick to each other too (if two frogs are opposite).
 
-* We maintain a small low-resolution grid. Just a long list of `true/false` statements about whether you have erased some general _area_ of the image. This grid can be as small as `(16,16)` or `(32,32)` for this to work fine.
-* When erasing, we convert the player position to the grid and mark those cells as `false` (they are empty now).
-* To know if we're done, we calculate **how many `true`s are still left in that grid**.
-* When we pass some threshold (say, only 2% of the grid is still not erased), we send a signal that it's all clean.
+The idea of the frogs moving around was really _fun_. It's just fun to hop around and reposition yourself, accidentally or not.
 
-This is both great for performance and very generous to players. You don't actually need to clean it all perfectly to win. Getting close enough is fine.
+Additionally, it was another attempt at solving those big issues with the first idea.
 
-### Everything else
+* If you can change sides, then you _can_ reach things that are blocked from your side.
+* Similarly, if you can hop down, you can still _save_ something that you missed earlier.
 
-Now the hardest part was done. 
+With aaaalll these possible rules behind settings toggles, I did my playtest.
 
-* Players are nicely snapped inside a map of any shape, moving around as they should.
-* As they do, they clean up the parts of the image that they're moving over.
-* And when they've done so well enough, the game knows it should end.
+## Playtest Results
 
-At this point, such game prototypes are just a nice "toy" really. Because actual gameplay isn't here yet.
+This was a playtest with 4 players. Some on keyboard, some on gamepad. These players were my family members, not kids in classrooms or anything.
 
-I knew I had to reward your for cleaning up efficiently. I knew I could spawn powerups inside the shape that you wanted to grab, or _not_ grab. (Such as the one that explodes and re-paints that parts of the texture!) Nothing about this is a technical challenge anymore---now we're left with game design challenges!
+My first page of notes is the usual "WHY DOES IT CRASH THERE!?" Situations in which the game never crashed on my own laptop, but it does on other computers. Not that interesting, mostly frustrating ;)
 
-### Performance Optimizations (for the die-hards)
+We played about 10 different rounds with different combinations of rules and settings.
 
-Here are a few more things to optimize this system for erasing textures. This is _heavy_ on computers. Even more so when the texture is basically _the entire screen_ because the entire game revolves around it. I have a crappy 15 year old laptop that was never meant for any graphics stuff, so I'm always looking for ways to improve performance.
+First, some surprising results.
 
-**Trick #1:** We don't need to run through the entire grid array and count how many cells are "empty/filled" each time. This is just a number we can count on the fly. So, every time you paint, I simply check "did this cell change?" and then update the number. 
+**Result #1:** I thought tongue speed should be _slower_ to make the game "easier". But it's actually easier and more satisfying if it's much _faster_. Why?
 
-* This isn't a big deal, sure.
-* But if that grid is say `(32,32)`, then it's still looping through 32x32 = 1024 elements each time. 
-* Now it's just looking up a single number we already have.
+Because a slow tongue means you have to predict a few seconds ahead! You need to know "I need to press the button NOW, so I grab the thing that will probably be THERE in a second". With a much snappier tongue, you can react more quickly and also get away more quickly from bad things.
 
-**Trick #2:** I tried calling the `draw()` function less often (30 times or 15 times a second). But this created the old issue of lines not being smooth continous anymore. If the system only "erases" the part around you once in a while, then there will be _gaps_ in your erasing. And the faster you move, the bigger those gaps.
+**Result #2:** Similarly, gravity speed should be _faster_ too. Or, rather, there should be less _variance_. When playtesting, the gravity could be between `25.0` and `80.0` (px/s). That means some collectibles went almost 4x as fast as others. That divide is what confused players and created moments in which the game was _overwhelming_ (far too fast suddenly!) and other periods when it was _boring_ (they barely fall down!).
 
-* So I made your drawing update speed **depend on your speed**. The faster you go, the more quickly it refreshes.
-* This saves a lot of performance without getting those gaps. Because slower players only need to update ~10 times a second for a smooth line!
-* On top of that, I simply changed the game design to never make players move that quickly. Lower the overall speed, set maximum bounds, etc.
+I reduced the variance such that the fastest collectible is only twice as fast as the slowest. I also raised the average gravity slightly, as testing simply showed players liked that more and it gave the game a better "flow".
 
-**Trick #3:** Similarly, I only actually `draw()` stuff if you've moved sufficiently far from your previous position. With a gap of ~5 pixels, this is not noticeable, while it saves hundreds of drawing operations per movement from side to side. (As expected, it already did not draw anything when you're _not moving_---just stuck to the side of the map shape and aiming.)
+**Result #3:** Hopping around _is_ fun ... but it's really an advanced strategy. When you first start the game, you don't understand why you'd use it, while it confuses the heck out of you when you "suddenly" hop to a different leaf.
 
-**Trick #4**: I considered batching draw calls. That is, when you say `draw()`, the texture merely _registers_ that you wanted to draw somewhere. Once in a while (a few times per second), it finally executes _all the commands it has registered_. This has the advantage of ...
+As such, by default (when you start the game for the first time), any _movement_ and _getting stuck_ is **turned off**.
 
-* Making it predictable---I control the one moment I do this expensive operation each time.
-* Making it much faster if I don't allow any duplicate draw calls. (No use if three players close to each other all want to erase the same cell.)
+**Result #4:** I purposely made the main button just a _press_, not a _hold_. Still, after saying "quick tap your button to extend your tongue" ... two players held it down all the time. This issue was alleviated when I turned off anything that required a hold (getting unstuck/hopping), because, well, then holding just does nothing and won't make you think it does.
 
-In the end, however, this created some issues with a noticeable delay, while not getting enough performance benefits because players are generally _not_ affecting the same parts of the map. So I scrapped this.
+In other words, I kept it a **press**. Any rules that require **holding** are turned off by default.
 
-The performance of the erasing (per player) is now on the same level as any other element in the game. This means it's negligible, not a concern anymore. When there's a big explosion (from that powerup), the cost of that one draw call is `~1.5ms`. This might cause lag if there are 5+ explosions going on at once, but I don't think that's a very common occurrence. (Even so, I could look into that later _if it is a problem_.)
+Then, some less surprising results, but you still need a practical playtest to show it. These are mostly a consequence of the three things I mentioned above.
 
-## Improving the Game Design (Non-Technical)
+Without _moving your frog_ or _tongue sticking_, there is only one way to solve the annoying part of grabbing the wrong things: don't penalize it. You simply **don't grab things that don't match**. They pass through your tongue. This turned out to be _simplest_ and _clearest_ (because you only get big feedback on _good matches_). 
 
-Alright. We have a shape, we have players moving around inside (using a single button), and the map is erased by your movement until you win.
+* You simply want to **grab the right things**. That's your sole focus (in your first games): "grab things that match".
+* You only lose lives if you **miss the right things** (they fall off the bottom).
+* The game also tracks **time**: you can try to improve your _time_ in this "easy mode".
 
-This is ... fine, but not really a game yet. You'll always win if you just keep trying hard enough. There's not much (varied) challenge beyond just vaguely aiming where most of the "dirt" is left.
+It always takes some iterations to find the simplest, most fun core of a game. Without getting stuck, and without hopping confusing new players, and without bad stuff happening if your tongue doesn't leave soon enough, we get that fun core to shine through. Find the matches, time it right, and get a satisfying pling and bounce when you snatch it from the air!
 
-How does it become a proper game?
+All the other ideas _need_ that core. They only make sense when added _on top_, for players who are comfortable with the game.
 
-### Add a way to lose
+## The Final Product
 
-I considered a **time limit** and **losing all your lives**. 
+As such, I decided to subdivide the settings into three groups: EASY, MEDIUM, HARD. Turning on settings in the "Hard" group, as expected, modulates the game difficulty to be harder. Things like moving around will be here.
 
-In the end, time just does not mean much to kids yet (they can't read clocks, they can't count yet, their brains are literally too in the moment, etcetera). It's also hard to balance this when you can play with any number of players, and they can even drop in/out. 
+The core game looks great, is very easy to teach and play, and focuses completely on matching the right things.
 
-I chose to give players **lives**.
+I purposely focused a lot more on the _visuals_ this time. It's always the thing that gets lowest priority, which is a shame, because good visuals is the first thing players see and makes them interested. I could focus on visuals now because the game itself was relatively simple, not ground-breaking at all. Unsurprisingly, spending a day on visuals only makes a game look _much_ better, who would've thought!? 
 
-* A bunch of big hearts on the screen are easy to understand and work with.
-* I can simply _add one/remove one_ for _more/fewer players_.
-* It feels less stressful, even though it's just as hard.
+{{% remark %}}
+It also helps that I had a really strong vision for this game in my head. That just happens sometimes---about 1/3 of the time. You get a picture in your head of the final game, and if you can just approximate that, then you can quickly get a nice unified final look. You might look at this the other way around: pick game ideas for which you have a strong vision, it makes your life easier.
+{{% /remark %}}
 
-### Add reasons to pick different paths
+On top of this, of course, I added lots of polish and tweaks. Things that slowly move or sway in the wind (in the background). Little animations and feedback on all actions. Some more messing with numbers to get them just right. (Most of the time, this means making them _higher_. As I explained with the "tongue speed" example, making things slower usually doesn't necessarily make things easier, and it never makes them more fun.)
 
-As I said, now there's no reason to pick one path over another. Any path that cleans up some stuff is _fine_!
+I had to concede a few things too. I just wasn't able to localize the words/letters and narration aspect in the game too (that's all English). I don't have the funds and resources (at all).
 
-How do we change that?
+I also had the idea of allowing you to **change** your desires.
 
-By adding **powerups** on the map. Now you have a reason to pick a path because you want _that powerup_. They do obvious, simple things:
+* Grabbing bad stuff would have a chance of randomly _shuffling_ them again.
+* Holding your button (when idle) would shift colors along the color wheel, or shift shapes in terms of corners (square -> pentagon)
 
-* Increase/decrease your brush size
-* Increase/decrease your speed
-* Explode (this can be good---erase in a big circle---or bad---paint the texture again in a big circle)
-* Add/remove hearts
+But, alas, the game went in a different direction and these were now too unlike the rest of the game. Too hard to incorporate, program, and explain. So I moved them to another future game, maybe.
 
-As explained in the technical part, I know what points are _inside_ the map shape. Powerups are only placed there, of course, otherwise players could never reach it.
+I also considered a **competitive mode**. It might work---just track which individual frog got the most points and lost the fewest lives---but the project isn't set up for it and it doesn't match the general collaborative, friendly vibe this game goes for. So I wrote it down as a possible future improvement, but left it at that.
 
-An important part of why I like "powerup"-type elements in my games is that they are _not overwhelming_. You can completely ignore them if you want. You can just stay out of their way. Or you can bump into one and just ... see what happens. There are no rules to learn, nothing you _must_ understand first, so they add variety without learning complexity. (And it's rather easy to just add a toggle in the settings to turn the entire system off ...)
+The game also helped improve my _One Button Games_ framework further. For example, I had somehow screwed up the order of gamepad buttons, so the image for which one to press was just wrong on two of them. Those kinds of things are fixed now, as well as cleaner code behind the scenes.
 
-I did end up adding _moving_ powerups too. They simply start off-screen and then move in a straight line to their point, so they'll always _pass through_ the map. You always have a _chance_ to grab it if you want. 
+I'll now take that framework and drop it into the _next_ educational OBG, probably still about colors and shapes.
 
-As I played with this system more, I realized just how powerful my idea of "the map is a basic shape; players are locked inside" is! By constricting the play area in this way, moving powerups suddenly become very interesting because you only have a brief window to grab them. I'll probably make some more games with this kind of map in the future ...
+Until the next devlog,
 
-### Add progression (and invididuality)
+Pandaqi
 
-The second reason games feel stale is when there is no progression. When after playing for 2 minutes you mostly feel like you were in the same state as before, with the same options.
 
-Sure, the _cleaning_ provides clear visual progression, but, well, people are addicted to progression and you can never have enough!
 
-And so,
 
-* You start **very small and slow**
-* The more you **erase**, the **bigger and faster you get**.
 
-This is individual. By playing, soon enough, different players will be different sizes and speeds. It's a way for players to still progress _individually_, instead of only working on the group goal of cleaning. A way to always have a goal and feel valued in a match. 
 
-Because now, for example, if you play with 4 players and one was able to get quite large, you can start assigning tasks and collaborating. The big player goes off to that faraway chunk to clean up a lot at once!
 
-Another way to have individual worth is to focus on **each player being a different shape**.
-
-* Your shape determines how you erase stuff, which can make a difference, but not _that_ much or the game breaks.
-* Instead, powerups _have a shape too_. Which gave me several different rules to try:
-  * Any powerup with _your shape_ is GOOD for you.
-  * OR: only _you_ can grab good powerups with your shape.
-  * OR: only _you_ can grab powerups with your shape, good or bad.
-
-In the end, rule XX was the most fun (@TODO: Test and write result) and easiest to understand.
-
-Now different players are the _only_ ones who can grab specific powerups, who can do specific actions, and it gives this nice balance between cooperative and individual play.
-
-I also want to remark how important this _cooperation_ is. Social skills and collaborative skills are much too undervalued in education. But _talking_ while playing this game _requires_ naming shapes. It requires calling out the right names such that others know what to do. ("There's a square powerup! You must grab it, Sarah!") This is much much more effective for teaching this and reinforcing it until kids will never forget ... and they're just having fun playing this game.
-
-### Add interaction
-
-The final reason games don't feel like games is because they forget about the most important advantage: _interaction_. Not just with systems in the game and elements like powerups, but also _other players_ of course.
-
-So ...
-
-> When players **bump into each other**, it causes a **paint explosion**! 
-
-This is _bad_, of course. So communicate where you're going; you can't change directory while moving/erasing.
-
-I did consider letting your button do ... something while you're moving. It seemed a waste to not do that, but it also didn't seem necessary?
-
-So I added an _optional_ feature if you think your players are ready.
-
-> While moving, you can _hold_ your button to **change your shape**. (From triangle -> square -> pentagon -> etcetera.)
-
-
-
-
-### Theme & Visuals
-
-Sometimes theme and visuals come first; I'll have a mockup of what the final game _should look like_ before even testing if my idea functions.
-
-This time, as the devlog illustrates, it was all about code and smart algorithms first. As such, I basically had a working game using gray squares and blobs ... and had to find a theme now. Something that appeals to kids. Something that makes it "make sense" that you're cleaning.
-
-This is especially important in educational games. Because the theme is basically your second chance at adding educational value. Something _else_ from the real world to show kids, such as ...
-
-> Cleaning up waste! (Plastic ocean kind of thing.)
-
-I added a blue background to the texture. So, as you erase, the clear water comes through more and more. 
-
-* The bad powerups are all "waste".
-* The good powerups are all nature, plants, fishes, etcetera => they _only appear in parts you've cleaned up_!
-
-This was like a final piece of the puzzle I had to figure out. Something felt off about good and bad powerups randomly spawning, right from the start until the end. It makes much more thematic sense to only "allow" good powerups when you've cleaned the water and life can thrive there again.
-
-
-
-
-
-
-
-@TODO

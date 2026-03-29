@@ -64,8 +64,8 @@ func set_button(btn:InputButton) -> void:
 	
 	var GAMEPAD_BUTTONS_TO_NODES : Dictionary[int,Node2D] = {
 		JOY_BUTTON_Y: gamepad_top,
-		JOY_BUTTON_A: gamepad_right,
-		JOY_BUTTON_B: gamepad_bottom,
+		JOY_BUTTON_A: gamepad_bottom,
+		JOY_BUTTON_B: gamepad_right,
 		JOY_BUTTON_X: gamepad_left
 	}
 	

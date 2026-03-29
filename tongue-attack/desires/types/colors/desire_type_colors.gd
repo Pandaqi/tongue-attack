@@ -1,6 +1,10 @@
 extends DesireType
 class_name DesireTypeColors
 
+
+## for debugging a specific value of this thing
+@export var value_debug : Type
+
 enum Type
 {
 	RED,
@@ -26,7 +30,7 @@ static var type_to_color : Dictionary[Type, Color] = {
 	Type.ORANGE: Color.ORANGE,
 	Type.PURPLE: Color.PURPLE,
 	Type.BROWN: Color.BROWN,
-	Type.BLACK: Color.BLACK,
+	Type.BLACK: Color(0.2, 0.2, 0.2),
 	Type.WHITE: Color.WHITE,
 }
 

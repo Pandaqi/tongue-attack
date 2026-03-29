@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SettingGroup" format=3 uid="uid://bix06ybcgnbbl"]
+
+[ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_a7oie"]
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="2_3x2hx"]
+[ext_resource type="Resource" uid="uid://cbgpuolrbgrth" path="res://tongue-attack/settings/setting_desire_letters.tres" id="3_6batl"]
+[ext_resource type="Resource" uid="uid://bmmy0msyugk6c" path="res://tongue-attack/settings/setting_frog_hopping.tres" id="4_ok3kk"]
+[ext_resource type="Resource" uid="uid://bqjurvrkfae58" path="res://tongue-attack/settings/setting_penalty_wrong.tres" id="5_qt4u1"]
+[ext_resource type="Resource" uid="uid://37pd60dvve8m" path="res://tongue-attack/settings/setting_spawn_stones.tres" id="6_vg88a"]
+
+[resource]
+script = ExtResource("1_a7oie")
+settings = Array[ExtResource("2_3x2hx")]([ExtResource("3_6batl"), ExtResource("4_ok3kk"), ExtResource("5_qt4u1"), ExtResource("6_vg88a")])
+label = "Difficulty: Hard"
+metadata/_custom_type_script = "uid://c7uqyg8sqnc02"

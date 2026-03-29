@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Setting" format=3 uid="uid://cywe00ymug0vk"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_wexle"]
+
+[resource]
+script = ExtResource("1_wexle")
+type = 2
+key = "num_starting_score"
+label = "Starting Score"
+min_value = 0.0
+max_value = 300.0
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

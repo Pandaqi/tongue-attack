@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Setting" format=3 uid="uid://bmmy0msyugk6c"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_p7b4r"]
+
+[resource]
+script = ExtResource("1_p7b4r")
+key = "allow_frog_hopping"
+label = "Allow Frogs Changing Position"
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

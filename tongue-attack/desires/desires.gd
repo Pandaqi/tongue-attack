@@ -10,6 +10,9 @@ var desires_in_play : Array[Desire] = []
 ## the possible desire templates
 @export var desire_types : Array[DesireType] = []
 
+## for insta-debugging specific desires
+@export var desires_debug : Array[DesireType] = []
+
 func has_none_available() -> bool:
 	return desires_available.size() <= 0
 
@@ -18,16 +21,29 @@ func is_desire_type_enabled(key:String) -> bool:
 
 func generate_all_possible() -> void:
 	var arr : Array[Desire] = []
-	for desire_type in desire_types:
-		if not is_desire_type_enabled(desire_type.key): continue
-		for type_value in desire_type.get_all_types():
-			arr.append(Desire.new(desire_type, type_value))
+	
+	if desires_debug.size() > 0:
+		for elem in desires_debug:
+			arr.append(Desire.new(elem, elem.value_debug))
+	
+	else:
+		for desire_type in desire_types:
+			if not is_desire_type_enabled(desire_type.key): continue
+			for type_value in desire_type.get_all_types():
+				arr.append(Desire.new(desire_type, type_value))
+	
 	desires_available = arr
 	desires_available.shuffle()
 
 func get_random_not_in_play() -> Desire:
 	if desires_available.size() <= 0: return null
 	return desires_available.pick_random()
+
+func get_all_in_play() -> Array[Desire]:
+	return desires_in_play.duplicate(false)
+
+func count_in_play() -> int:
+	return desires_in_play.size()
 
 func get_random_in_play() -> Desire:
 	if desires_in_play.size() <= 0: return null
@@ -40,8 +56,12 @@ func get_next_desire() -> Desire:
 	return d
 
 func get_next_desires(num:int) -> Array[Desire]:
+	if Global.config.all_players_have_same_desires and desires_in_play.size() > 0:
+		return desires_in_play.duplicate(false)
+	
 	var arr : Array[Desire] = []
 	for i in range(num):
+		if has_none_available(): break
 		arr.append(get_next_desire())
 	return arr
 

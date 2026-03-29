@@ -12,11 +12,22 @@ enum InputType
 var key : int
 var type : InputType
 var device : int
+var protected : bool # can't use it to log in right now, for whatever reason
 
 func _init(tp:InputType, k:int, d:int = 0):
 	type = tp
 	key = k
 	device = d
+	protected = false
+
+func lock() -> void:
+	protected = true
+
+func unlock() -> void:
+	protected = false
+
+func is_locked() -> bool:
+	return protected
 
 func is_none() -> bool:
 	return type == InputType.NONE
@@ -52,6 +63,7 @@ func add_to_input_map() -> void:
 	
 	if type == InputType.GAMEPAD:
 		ev = InputEventJoypadButton.new()
+		ev.device = device
 		ev.button_index = key
 	
 	if not InputMap.has_action(map_key): InputMap.add_action(map_key)

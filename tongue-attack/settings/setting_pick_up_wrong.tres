@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Setting" format=3 uid="uid://c2u8vbayutg3h"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_c4w5q"]
+
+[resource]
+script = ExtResource("1_c4w5q")
+key = "pick_up_wrong_collectibles"
+label = "Pick Up Wrong Collectibles"
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

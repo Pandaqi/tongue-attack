@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Setting" format=3 uid="uid://doj4xuhvfw2d8"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_8lsm5"]
+
+[resource]
+script = ExtResource("1_8lsm5")
+key = "all_players_have_same_desires"
+label = "All Players Have Same Desires"
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

@@ -32,6 +32,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func activate(new_button:InputButton) -> void:
+	# if we already had a button, give it back to start afresh
 	if button: Global.input.give_back_button(button)
 	
 	# if we're placing existing players, then we already grabbed their button 

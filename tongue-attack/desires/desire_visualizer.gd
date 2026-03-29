@@ -56,7 +56,7 @@ func on_killed() -> void:
 
 func pop_up() -> void:
 	if tween_active:
-		Global.tween.force_completion(tween_active)
+		TweenManager.force_completion(tween_active)
 		tween_active = null
 	
-	tween_active = Global.tween.play_popup_tween(self)
+	tween_active = TweenManager.play_popup_tween(self)

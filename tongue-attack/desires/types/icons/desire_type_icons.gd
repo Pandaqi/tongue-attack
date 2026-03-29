@@ -1,6 +1,8 @@
 extends DesireType
 class_name DesireTypeIcons
 
+@export var value_debug : Type
+
 enum Type
 {
 	WORM,
@@ -24,7 +26,6 @@ static var type_to_frame : Dictionary[Type, int] = {
 
 static var types_with_animation := [Type.BUTTERFLY, Type.BEE, Type.FIREFLY]
 
-# @TODO: Actually add this audio
 static var type_to_audio : Dictionary[Type, String] = {
 	Type.WORM: "worm",
 	Type.SNAIL: "snail",
@@ -60,7 +61,6 @@ func visualize(d:Desire, dv:DesireVisualizer) -> void:
 	var frm := type_to_frame[d.value]
 	dv.sprite.set_frame(frm)
 	
-	# @TODO: fix infinite loop / remove tween when killed
 	if dv.is_final() and types_with_animation.has(d.value):
 		var tw := dv.sprite.get_tree().create_tween()
 		var rand_dur := randf_range(0.065, 0.12)
@@ -73,6 +73,7 @@ func narrate(d:Desire) -> AudioStream:
 	return load(convert_type_to_audio(d.value))
 
 func matches_custom(d1:Desire, d2:Desire) -> bool:
+	if not (d1.type is DesireTypeIcons): return false
 	if not (d2.type is DesireTypeNumbers): return false
 	if d2.value_visualized == null: return false
 	return d1.value == d2.value_visualized

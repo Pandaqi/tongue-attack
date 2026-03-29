@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfclclol7g0ea"]
+[gd_scene format=3 uid="uid://bfclclol7g0ea"]
 
 [ext_resource type="Script" uid="uid://quo44l2qmpmc" path="res://pq-obg/ui/button_visualizer/button_visualizer.gd" id="1_nkctm"]
 [ext_resource type="PackedScene" uid="uid://dch28bffyv2mx" path="res://pq-obg/ui/sprite_ui.tscn" id="2_gs34i"]

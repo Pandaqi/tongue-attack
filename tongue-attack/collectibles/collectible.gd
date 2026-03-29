@@ -23,7 +23,8 @@ var removal_duration := 0.0 # how much time has been spend stuck to a tongue and
 signal killed(c:Collectible)
 
 func _ready() -> void:
-	gravity_speed = randf_range(Global.config.gravity_bounds.x, Global.config.gravity_bounds.y)
+	gravity_speed = randf_range(Global.config.gravity_bounds.x, Global.config.gravity_bounds.y) * Global.config.gravity_speed_factor
+	
 	sprite_stone.hide()
 	timer_move_pattern.wait_time = Global.config.flying_collectibles_pattern_timer_duration
 	timer_move_pattern.timeout.connect(_on_timer_move_pattern_timeout)
@@ -37,7 +38,7 @@ func set_type(d:Desire) -> void:
 	visualizer.set_data(desire)
 	
 	col_shape.shape = CircleShape2D.new()
-	col_shape.shape.radius = 0.5 * visualizer.size
+	col_shape.shape.radius = 0.675 * 0.5 * visualizer.size
 	
 	timer_move_pattern.stop()
 	var has_move_pattern := (desire.type is DesireTypeIcons) and DesireTypeIcons.types_with_animation.has(desire.value)
@@ -55,7 +56,7 @@ func make_stone() -> void:
 	var size_stone := Global.config.size_stone 
 	sprite_stone.show()
 	sprite_stone.set_scale(size_stone / stone_base_scale * Vector2.ONE)
-	gravity_speed = randf_range(Global.config.gravity_bounds_stone.x, Global.config.gravity_bounds_stone.y)
+	gravity_speed = randf_range(Global.config.gravity_bounds_stone.x, Global.config.gravity_bounds_stone.y) * Global.config.gravity_speed_factor
 	
 	col_shape.shape = RectangleShape2D.new()
 	col_shape.shape.size = Vector2(0.25*size_stone, size_stone)
@@ -68,7 +69,7 @@ func make_uncollectible() -> void:
 	collectible = false
 
 func can_be_collected() -> bool:
-	return collectible and (not frozen)
+	return collectible and (not frozen) and (not collected)
 
 func _physics_process(dt: float) -> void:
 	fall()
@@ -82,8 +83,14 @@ func remove_if_stuck(dt:float) -> void:
 	removal_duration += dt
 	var removal_factor := clampf(removal_duration / Global.config.collectibles_remove_if_stuck_duration, 0.0, 1.0)
 	modulate.a = lerp(1.0, Global.config.collectibles_remove_alpha_min, removal_factor)
-	if removal_factor >= 1.0:
-		kill(true)
+	
+	if removal_factor < 1.0: return
+		
+	var give_back_heart := (randf() <= Global.config.sticking_revive_prob) and frozen_to
+	if give_back_heart:
+		frozen_to.entity.change_lives(+1, self)
+		
+	kill(true)
 
 func fall() -> void:
 	velocity = Vector2.DOWN * gravity_speed

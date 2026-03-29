@@ -40,11 +40,13 @@ func _ready() -> void:
 
 func _on_lives_changed(l:int) -> void:
 	lives_label.set_text("Lives: " + str(l))
+	TweenManager.play_flash_tween(lives_container)
 	for i in range(lives_icons.size()):
 		lives_icons[i].set_visible(i < l)
 
 func _on_score_changed(s:int) -> void:
 	score_label.set_text("Score: " + str(s))
+	TweenManager.play_flash_tween(score_container)
 	var score_discrete := roundi( (s / float(Global.config.max_score)) * score_icons.size() )
 	for i in range(score_icons.size()):
 		score_icons[i].set_visible(i < score_discrete)

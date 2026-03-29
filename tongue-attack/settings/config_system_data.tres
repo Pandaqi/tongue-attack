@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="ConfigSystemData" format=3 uid="uid://wgr72ivhhbm2"]
 
+[ext_resource type="AudioStream" uid="uid://c78cod80iedgx" path="res://tongue-attack/main/bg_theme.mp3" id="1_cmnra"]
 [ext_resource type="AudioStream" uid="uid://cfe2jylsp4enn" path="res://pq-obg/audio/sfx/ui_click.mp3" id="1_v2gpx"]
 [ext_resource type="PackedScene" uid="uid://bfclclol7g0ea" path="res://pq-obg/ui/button_visualizer/button_visualizer.tscn" id="2_lx2qc"]
 [ext_resource type="FontFile" uid="uid://c05kog6grk4c" path="res://tongue-attack/ui/fonts/LilitaOne-Regular.ttf" id="3_lx2qc"]
@@ -21,6 +22,7 @@ game_id = "tongue-attack"
 game_version = "1.2.4"
 game_scene = "tongue-attack/main/main.tscn"
 settings = Array[ExtResource("8_vnqxd")]([ExtResource("9_weu0k"), ExtResource("10_wtk8d"), ExtResource("12_pifwl")])
+audio_bg = Array[AudioStream]([ExtResource("1_cmnra")])
 bg_scene = "tongue-attack/map/map.tscn"
 font_body_regular = ExtResource("3_lx2qc")
 font_body_italic = ExtResource("3_lx2qc")

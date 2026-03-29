@@ -82,7 +82,7 @@ func refresh_size(factor:float) -> void:
 
 func appear() -> void:
 	show()
-	Global.tween.play_fadein_tween(self, 0.66)
+	TweenManager.play_fadein_tween(self, 0.66)
 	
 	timer.stop()
 	timer.wait_time = Global.config_system.tutorial_delay_remove
@@ -91,6 +91,6 @@ func appear() -> void:
 		timer.start()
 
 func _on_timer_timeout() -> void:
-	var tw := Global.tween.play_fadeout_tween(self, 0.66)
+	var tw := TweenManager.play_fadeout_tween(self, 0.66)
 	await tw.finished
 	hide()

@@ -2,6 +2,7 @@ extends Node2D
 class_name Progression
 
 @export var state : StateSystem
+@export var game_over_data : GameOverData
 
 var time_start := 0.0
 var lives := 0
@@ -12,9 +13,11 @@ signal lives_depleted()
 signal score_changed(s:int)
 
 func _ready() -> void:
-	time_start = Time.get_ticks_msec()
 	lives_depleted.connect(_on_lives_depleted)
-	await get_tree().process_frame
+	state.game_started.connect(_on_game_started)
+
+func _on_game_started() -> void:
+	time_start = Time.get_ticks_msec()
 	change_score(Global.config.num_starting_score)
 	change_lives(Global.config.num_starting_lives)
 
@@ -34,8 +37,21 @@ func change_lives(dl:int) -> void:
 		lives_depleted.emit()
 
 func _on_lives_depleted() -> void:
-	state.goto_game_over()
+	goto_game_over(false)
 
 func change_score(ds:float) -> void:
 	score = clampi(roundi(score + ds), 0, Global.config.max_score)
 	score_changed.emit(score)
+	if score >= Global.config.max_score:
+		_on_score_maximized()
+
+func _on_score_maximized() -> void:
+	goto_game_over(true)
+
+func goto_game_over(we_won := false) -> void:
+	game_over_data.we_won = we_won
+	game_over_data.lives_left = lives
+	game_over_data.score = score
+	game_over_data.time_spent = roundi(get_time_elapsed())
+	
+	state.goto_game_over(game_over_data)

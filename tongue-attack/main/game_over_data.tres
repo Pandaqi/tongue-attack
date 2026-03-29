@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="GameOverDataSystem" format=3 uid="uid://corrbsxwq1fvv"]
+[gd_resource type="Resource" script_class="GameOverData" format=3 uid="uid://c5jvh4sp3aif4"]
 
-[ext_resource type="Script" uid="uid://fxrgya0vwoug" path="res://pq-obg/game_loop/game_over/game_over_data.gd" id="1_tlr7x"]
+[ext_resource type="Script" uid="uid://chmw4fkr3gsaw" path="res://tongue-attack/main/game_over_data.gd" id="1_iftxr"]
 
 [resource]
-script = ExtResource("1_tlr7x")
-metadata/_custom_type_script = "uid://fxrgya0vwoug"
+script = ExtResource("1_iftxr")
+metadata/_custom_type_script = "uid://chmw4fkr3gsaw"

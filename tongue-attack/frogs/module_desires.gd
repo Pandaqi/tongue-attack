@@ -10,7 +10,7 @@ var visualizers : Array[DesireVisualizer] = []
 # @TODO: Could be some cleaner functions about getting INDEX and converting and stuff
 func get_matching_desire_visualizer(d:Desire) -> DesireVisualizer:
 	for i in range(desires.size()):
-		if d.matches(desires[i]): return visualizers[i]
+		if desires[i].matches(d): return visualizers[i]
 	return null
 
 func matches(d:Desire) -> bool:
@@ -60,7 +60,7 @@ func _on_collected(c:Collectible, good:bool) -> void:
 	if not good: return # @TODO: play some angry wiggle tween?
 	
 	var node_matched := get_matching_desire_visualizer(c.desire)
-	node_matched.pop_up()
-	
-	if Global.config.narrate_desires_matched:
-		node_matched.narrate()
+	if node_matched:
+		node_matched.pop_up()
+		if Global.config.narrate_desires_matched:
+			node_matched.narrate()

@@ -30,6 +30,33 @@ func place_leaves() -> void:
 	if Global.config.randomize_leaf_positions:
 		leaves_available.shuffle()
 
+func get_leaf_in_direction(leaf:Leaf, dy := +1) -> Leaf:
+	# if no Y difference, then find the same one on the opposite side
+	if dy == 0: return get_leaf_opposite(leaf)
+	
+	# otherwise, find the best leaf in the Y-direction chosen
+	var y_pos := leaf.global_position.y
+	
+	var leaves_same_side := leaves.filter(func(l:Leaf): return l.on_right == leaf.on_right and l != leaf)
+	
+	# this is shorthand for ...
+	# if dy > 0 and other_leaf.global_position.y < y_pos: continue
+	# if dy < 0 and other_leaf.global_position.y > y_pos: continue
+	var leaves_in_direction := leaves_same_side.filter(func(l:Leaf): return dy*l.global_position.y > dy*y_pos)
+	var no_leaves_there := leaves_in_direction.size() <= 0
+	if no_leaves_there: leaves_in_direction = leaves_same_side
+	
+	var best_dist := 0.0 if no_leaves_there else INF
+	var best_leaf : Leaf
+	for other_leaf in leaves_in_direction:
+		var dist := absf(other_leaf.global_position.y - y_pos)
+		if no_leaves_there and dist <= best_dist: continue # if no leaves, we actually want the one FURTHEST AWAY (wrapping to other side)
+		if (not no_leaves_there) and dist >= best_dist: continue
+		best_dist = dist
+		best_leaf = other_leaf
+	
+	return best_leaf
+
 func get_leaf_opposite(leaf:Leaf) -> Leaf:
 	var on_right_target := not leaf.on_right
 	var y_pos_target := leaf.global_position.y
@@ -45,6 +72,9 @@ func get_leaf_opposite(leaf:Leaf) -> Leaf:
 
 func get_next_leaf() -> Leaf:
 	return leaves_available.pop_back()
+
+func take_leaf(leaf:Leaf) -> void:
+	leaves_available.erase(leaf)
 
 func give_back_leaf(leaf:Leaf) -> void:
 	leaves_available.append(leaf)

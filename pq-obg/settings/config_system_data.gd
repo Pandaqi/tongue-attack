@@ -94,6 +94,7 @@ class_name ConfigSystemData
 @export var input_max_gamepads := 4
 @export var input_max_touch := 4
 @export var input_allow_left_mouse_button := false
+@export var input_allow_gamepad_accept_button := false
 
 @export_subgroup("Touch")
 @export var touch_area_size := Vector2(192.0, 192.0)
