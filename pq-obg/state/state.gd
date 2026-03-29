@@ -52,6 +52,7 @@ func set_paused(val:bool) -> void:
 	if no_change_needed: return
 	
 	paused = val
+	show()
 	pause_menu.set_enabled(paused)
 	tutorial.set_active(paused)
 	get_tree().paused = paused

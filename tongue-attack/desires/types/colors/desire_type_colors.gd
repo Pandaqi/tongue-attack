@@ -64,7 +64,7 @@ static func convert_type_to_color(tp:Type) -> Color:
 	return type_to_color[tp]
 
 static func convert_type_to_audio(tp:Type) -> String:
-	return "res://tongue-attack/desires/types/colors/" + type_to_audio[tp]
+	return "res://tongue-attack/desires/types/colors/" + type_to_audio[tp] + ".ogg"
 
 func visualize(d:Desire, dv:DesireVisualizer) -> void:
 	dv.sprite.show()

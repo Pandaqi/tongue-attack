@@ -28,6 +28,7 @@ class_name ConfigSystemData
 @export_subgroup("Background")
 @export var bg_color := Color.WHITE
 @export var bg_image : Texture2D
+@export var bg_scene := ""
 
 @export_subgroup("Fonts")
 @export var use_system_fonts := false

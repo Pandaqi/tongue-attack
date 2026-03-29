@@ -6,8 +6,13 @@ extends CanvasLayer
 
 func _ready() -> void:
 	color_rect.color = Global.config_system.bg_color
+	
 	if Global.config_system.bg_image:
 		bg_image.texture = Global.config_system.bg_image
+	
+	if Global.config_system.bg_scene:
+		var file_path := "res://" + Global.config_system.bg_scene
+		add_child(load(file_path).instantiate())
 	
 	get_tree().get_root().size_changed.connect(refresh)
 	refresh()

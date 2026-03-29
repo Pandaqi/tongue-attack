@@ -10,13 +10,15 @@ class_name Collectible
 
 var stone_base_scale := 512.0
 
-var frozen := false
+var moving := true # this responds to animations and movement patterns; built-in/self
+var frozen := false # this is what outside forces can use to stop the collectible; e.g. tongue stuck
+var frozen_to : ModuleTongue
 var desire : Desire
-var collected := false
-var collectible := true
+var collected := false # has been succesfully collected
+var collectible := true # CAN be collected
 var out_of_play := false # not a type that any player wants right now
+var removal_duration := 0.0 # how much time has been spend stuck to a tongue and being removed
 
-var moving := true
 
 signal killed(c:Collectible)
 
@@ -68,9 +70,20 @@ func make_uncollectible() -> void:
 func can_be_collected() -> bool:
 	return collectible and (not frozen)
 
-func _physics_process(_dt: float) -> void:
+func _physics_process(dt: float) -> void:
 	fall()
 	check_if_off_screen()
+	remove_if_stuck(dt)
+
+func remove_if_stuck(dt:float) -> void:
+	if not frozen: return
+	if not Global.config.collectibles_remove_over_time_if_stuck: return
+	
+	removal_duration += dt
+	var removal_factor := clampf(removal_duration / Global.config.collectibles_remove_if_stuck_duration, 0.0, 1.0)
+	modulate.a = lerp(1.0, Global.config.collectibles_remove_alpha_min, removal_factor)
+	if removal_factor >= 1.0:
+		kill(true)
 
 func fall() -> void:
 	velocity = Vector2.DOWN * gravity_speed
@@ -84,14 +97,17 @@ func check_if_off_screen() -> void:
 	if not is_off_screen(): return
 	kill()
 
-func freeze() -> void:
+func freeze(mt:ModuleTongue) -> void:
 	frozen = true
+	frozen_to = mt
 
 func unfreeze() -> void:
 	frozen = false
+	frozen_to = null
 
 func kill(was_collected := false) -> void:
 	collected = was_collected
-	visualizer.on_killed()
+	if visualizer: visualizer.on_killed()
 	killed.emit(self)
+	if frozen_to: frozen_to.get_unstuck()
 	queue_free()

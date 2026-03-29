@@ -75,7 +75,10 @@ theme_override_constants/margin_bottom = 8
 [node name="LabelCredits" type="Label" parent="Main/MarginContainer" unique_id=89014253]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.81960785)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 4
+theme_override_font_sizes/font_size = 20
 text = "Lalalalalal"
 
 [node name="Settings" type="CanvasLayer" parent="." unique_id=1838816528 node_paths=PackedStringArray("reset_btn", "close_btn")]

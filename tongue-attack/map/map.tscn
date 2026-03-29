@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://dlwasslclyudr"]
+
+[ext_resource type="Script" uid="uid://d0t0tswoun55g" path="res://tongue-attack/map/map.gd" id="1_bw22v"]
+[ext_resource type="PackedScene" uid="uid://c33el7iy42nhv" path="res://tongue-attack/map/leaves/leaf.tscn" id="2_8oddp"]
+[ext_resource type="Texture2D" uid="uid://drurevgq5bixp" path="res://tongue-attack/map/map-bg.png" id="3_as67k"]
+[ext_resource type="Texture2D" uid="uid://cmotftmtk3i1a" path="res://tongue-attack/map/map-edge-trunk.png" id="4_nkbwb"]
+[ext_resource type="Shader" uid="uid://cqmypgjmfdp1k" path="res://tongue-attack/map/wind_sway.gdshader" id="5_rusts"]
+[ext_resource type="Texture2D" uid="uid://calsj30l1q0vq" path="res://tongue-attack/map/map-bottom-reeds.png" id="6_faora"]
+[ext_resource type="PackedScene" uid="uid://b108a8fkk35mn" path="res://tongue-attack/map/background_lily.tscn" id="7_8oddp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wkasx"]
+shader = ExtResource("5_rusts")
+shader_parameter/speed = 1.5
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.0150000007125
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[node name="Map" type="Node2D" unique_id=1524784184 node_paths=PackedStringArray("leaf_positions_container")]
+script = ExtResource("1_bw22v")
+leaf_positions_container = NodePath("LeafPositions")
+leaf_scene = ExtResource("2_8oddp")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=244836809]
+texture = ExtResource("3_as67k")
+centered = false
+
+[node name="StalkLeft" type="Sprite2D" parent="." unique_id=1151836253]
+position = Vector2(-69, 0)
+texture = ExtResource("4_nkbwb")
+centered = false
+
+[node name="StalkRight" type="Sprite2D" parent="." unique_id=2082622292]
+position = Vector2(1728, 0)
+texture = ExtResource("4_nkbwb")
+centered = false
+flip_h = true
+
+[node name="BottomReeds" type="Sprite2D" parent="." unique_id=673411447]
+modulate = Color(1, 1, 1, 0.4)
+material = SubResource("ShaderMaterial_wkasx")
+position = Vector2(956, 1055)
+texture = ExtResource("6_faora")
+
+[node name="LeafPositions" type="Node2D" parent="." unique_id=832369430]
+
+[node name="Pos1" type="Node2D" parent="LeafPositions" unique_id=412513617]
+position = Vector2(63, 952)
+
+[node name="Pos2" type="Node2D" parent="LeafPositions" unique_id=1536335529]
+position = Vector2(1855, 738)
+
+[node name="Pos3" type="Node2D" parent="LeafPositions" unique_id=1561545708]
+position = Vector2(56, 508)
+
+[node name="Pos4" type="Node2D" parent="LeafPositions" unique_id=1677770857]
+position = Vector2(1865, 271)
+
+[node name="Pos5" type="Node2D" parent="LeafPositions" unique_id=538296497]
+position = Vector2(54, 738)
+
+[node name="Pos6" type="Node2D" parent="LeafPositions" unique_id=1485452513]
+position = Vector2(1853, 506)
+
+[node name="Pos7" type="Node2D" parent="LeafPositions" unique_id=1093117490]
+position = Vector2(1865, 954)
+
+[node name="Pos8" type="Node2D" parent="LeafPositions" unique_id=1660913591]
+position = Vector2(56, 257)
+
+[node name="Lilies" type="Node2D" parent="." unique_id=1698077544]
+modulate = Color(1, 1, 1, 0.5019608)
+
+[node name="BackgroundLily" parent="Lilies" unique_id=695368754 instance=ExtResource("7_8oddp")]
+position = Vector2(570, 909)
+
+[node name="BackgroundLily2" parent="Lilies" unique_id=1407675328 instance=ExtResource("7_8oddp")]
+position = Vector2(456, 882)
+
+[node name="BackgroundLily3" parent="Lilies" unique_id=1895140957 instance=ExtResource("7_8oddp")]
+position = Vector2(825, 885)
+
+[node name="BackgroundLily4" parent="Lilies" unique_id=1035595330 instance=ExtResource("7_8oddp")]
+position = Vector2(1060, 924)
+
+[node name="BackgroundLily5" parent="Lilies" unique_id=1262724267 instance=ExtResource("7_8oddp")]
+position = Vector2(1230, 894)
+
+[node name="BackgroundLily6" parent="Lilies" unique_id=697504658 instance=ExtResource("7_8oddp")]
+position = Vector2(1420, 928)

@@ -15,7 +15,7 @@ func _ready() -> void:
 	time_start = Time.get_ticks_msec()
 	lives_depleted.connect(_on_lives_depleted)
 	await get_tree().process_frame
-	change_score(0.0)
+	change_score(Global.config.num_starting_score)
 	change_lives(Global.config.num_starting_lives)
 
 func get_time_elapsed() -> float:
@@ -28,7 +28,7 @@ func get_factor() -> float:
 	return lerpf(Global.config.progression_factor_bounds.x, Global.config.progression_factor_bounds.y, get_ratio())
 
 func change_lives(dl:int) -> void:
-	lives = clampi(lives + dl, 0, 19)
+	lives = clampi(lives + dl, 0, Global.config.max_lives)
 	lives_changed.emit(lives)
 	if lives <= 0:
 		lives_depleted.emit()
@@ -37,5 +37,5 @@ func _on_lives_depleted() -> void:
 	state.goto_game_over()
 
 func change_score(ds:float) -> void:
-	score = clampi(roundi(score + ds), 0, 9999)
+	score = clampi(roundi(score + ds), 0, Global.config.max_score)
 	score_changed.emit(score)

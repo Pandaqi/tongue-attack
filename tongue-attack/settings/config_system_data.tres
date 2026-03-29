@@ -21,6 +21,7 @@ game_id = "tongue-attack"
 game_version = "1.2.4"
 game_scene = "tongue-attack/main/main.tscn"
 settings = Array[ExtResource("8_vnqxd")]([ExtResource("9_weu0k"), ExtResource("10_wtk8d"), ExtResource("12_pifwl")])
+bg_scene = "tongue-attack/map/map.tscn"
 font_body_regular = ExtResource("3_lx2qc")
 font_body_italic = ExtResource("3_lx2qc")
 font_body_bold = ExtResource("3_lx2qc")

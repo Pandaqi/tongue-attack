@@ -2,97 +2,40 @@
 
 [ext_resource type="Script" uid="uid://2tfbqjg01h25" path="res://tongue-attack/frogs/frogs.gd" id="1_a4rk2"]
 [ext_resource type="PackedScene" uid="uid://c3mew7u5cevle" path="res://pq-obg/state/state.tscn" id="1_v60l5"]
-[ext_resource type="PackedScene" uid="uid://c33el7iy42nhv" path="res://tongue-attack/map/leaves/leaf.tscn" id="2_hsvgq"]
 [ext_resource type="PackedScene" uid="uid://dl4sswc3b420v" path="res://tongue-attack/frogs/frog.tscn" id="2_nt2bq"]
+[ext_resource type="PackedScene" uid="uid://dlwasslclyudr" path="res://tongue-attack/map/map.tscn" id="3_3yws6"]
 [ext_resource type="Script" uid="uid://xy76lcns6yo0" path="res://tongue-attack/desires/desires.gd" id="5_fdo5l"]
-[ext_resource type="Shader" uid="uid://cqmypgjmfdp1k" path="res://tongue-attack/map/wind_sway.gdshader" id="5_w6bci"]
 [ext_resource type="Script" uid="uid://b8pgmj4lgft70" path="res://tongue-attack/collectibles/spawner_collectibles.gd" id="6_bdbmt"]
 [ext_resource type="Script" uid="uid://deb8ip12u5m44" path="res://tongue-attack/desires/types/desire_type.gd" id="6_dwf6n"]
 [ext_resource type="Resource" uid="uid://ccnqjvpma3c1q" path="res://tongue-attack/desires/types/colors/desire_type_colors.tres" id="7_a4rk2"]
 [ext_resource type="PackedScene" uid="uid://bg8kg3w7d2yxv" path="res://tongue-attack/collectibles/collectible.tscn" id="7_dwf6n"]
-[ext_resource type="Script" uid="uid://d0t0tswoun55g" path="res://tongue-attack/map/map.gd" id="8_21rsn"]
-[ext_resource type="Texture2D" uid="uid://drurevgq5bixp" path="res://tongue-attack/map/map-bg.png" id="8_a4rk2"]
-[ext_resource type="Texture2D" uid="uid://cmotftmtk3i1a" path="res://tongue-attack/map/map-edge-trunk.png" id="9_sam7m"]
-[ext_resource type="Texture2D" uid="uid://calsj30l1q0vq" path="res://tongue-attack/map/map-bottom-reeds.png" id="10_21rsn"]
 [ext_resource type="PackedScene" uid="uid://bh45dk7j8ubl3" path="res://pq-obg/players/player_spawner.tscn" id="10_vhrtn"]
 [ext_resource type="Resource" uid="uid://c0xgmmy8qfoke" path="res://tongue-attack/desires/types/icons/desire_type_icons.tres" id="13_iw2sv"]
 [ext_resource type="Resource" uid="uid://procykfff0d0" path="res://tongue-attack/desires/types/numbers/desire_type_numbers.tres" id="14_5ewix"]
 [ext_resource type="Resource" uid="uid://4wd7qi6i72p5" path="res://tongue-attack/desires/types/letters/desire_type_letters.tres" id="16_wkasx"]
 [ext_resource type="Resource" uid="uid://d4e0xrd6gb6n3" path="res://tongue-attack/desires/types/shapes/desire_type_shapes.tres" id="17_0hk8q"]
 [ext_resource type="Script" uid="uid://38cikfog6cso" path="res://tongue-attack/map/progression/progression.gd" id="18_1ejfv"]
+[ext_resource type="Texture2D" uid="uid://p8onx5776qj0" path="res://tongue-attack/main/misc-spritesheet.png" id="18_2d2qx"]
 [ext_resource type="Script" uid="uid://bofxmcqjmhu7c" path="res://tongue-attack/ui/ui.gd" id="19_3yws6"]
 [ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="20_2d2qx"]
 [ext_resource type="Resource" uid="uid://corrbsxwq1fvv" path="res://tongue-attack/main/game_over_data.tres" id="20_gy4br"]
 [ext_resource type="PackedScene" uid="uid://nk31em7vq05f" path="res://pq-obg/ui/button_instructions/button_instructions.tscn" id="22_bkdw6"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wkasx"]
-shader = ExtResource("5_w6bci")
-shader_parameter/speed = 1.5
-shader_parameter/minStrength = 0.05
-shader_parameter/maxStrength = 0.0150000007125
-shader_parameter/strengthScale = 100.0
-shader_parameter/interval = 3.5
-shader_parameter/detail = 1.0
-shader_parameter/distortion = 0.0
-shader_parameter/heightOffset = 0.0
-shader_parameter/offset = 0.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_2d2qx"]
+atlas = ExtResource("18_2d2qx")
+region = Rect2(512, 0, 256, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xo15n"]
+atlas = ExtResource("18_2d2qx")
+region = Rect2(256, 0, 256, 0)
 
 [node name="Main" type="Node2D" unique_id=496180010]
 
 [node name="State" parent="." unique_id=1145839826 instance=ExtResource("1_v60l5")]
+visible = false
 game_over_data = ExtResource("20_gy4br")
 
-[node name="Map" type="Node2D" parent="." unique_id=1435184435 node_paths=PackedStringArray("leaf_positions_container")]
-script = ExtResource("8_21rsn")
-leaf_positions_container = NodePath("LeafPositions")
-leaf_scene = ExtResource("2_hsvgq")
-
-[node name="Background" type="Sprite2D" parent="Map" unique_id=1576323742]
-texture = ExtResource("8_a4rk2")
-centered = false
-
-[node name="StalkLeft" type="Sprite2D" parent="Map" unique_id=1924842788]
-position = Vector2(-69, 0)
-texture = ExtResource("9_sam7m")
-centered = false
-
-[node name="StalkRight" type="Sprite2D" parent="Map" unique_id=1193209120]
-position = Vector2(1728, 0)
-texture = ExtResource("9_sam7m")
-centered = false
-flip_h = true
-
-[node name="BottomReeds" type="Sprite2D" parent="Map" unique_id=1782696506]
-modulate = Color(1, 1, 1, 0.4)
-material = SubResource("ShaderMaterial_wkasx")
-position = Vector2(956, 1055)
-texture = ExtResource("10_21rsn")
-
-[node name="LeafPositions" type="Node2D" parent="Map" unique_id=1205950286]
-
-[node name="Node2D1" type="Node2D" parent="Map/LeafPositions" unique_id=1933027534]
-position = Vector2(56, 257)
-
-[node name="Node2D2" type="Node2D" parent="Map/LeafPositions" unique_id=1029630401]
-position = Vector2(1853, 506)
-
-[node name="Node2D3" type="Node2D" parent="Map/LeafPositions" unique_id=1370344490]
-position = Vector2(54, 738)
-
-[node name="Node2D4" type="Node2D" parent="Map/LeafPositions" unique_id=469042300]
-position = Vector2(1865, 954)
-
-[node name="Node2D5" type="Node2D" parent="Map/LeafPositions" unique_id=943413650]
-position = Vector2(1865, 271)
-
-[node name="Node2D6" type="Node2D" parent="Map/LeafPositions" unique_id=621130694]
-position = Vector2(56, 508)
-
-[node name="Node2D7" type="Node2D" parent="Map/LeafPositions" unique_id=330646245]
-position = Vector2(1855, 738)
-
-[node name="Node2D8" type="Node2D" parent="Map/LeafPositions" unique_id=680415136]
-position = Vector2(63, 952)
+[node name="Map" parent="." unique_id=1524784184 instance=ExtResource("3_3yws6")]
 
 [node name="Frogs" type="Node2D" parent="." unique_id=2085306291 node_paths=PackedStringArray("desires", "map", "progression")]
 script = ExtResource("1_a4rk2")
@@ -125,32 +68,58 @@ desire_types = Array[ExtResource("6_dwf6n")]([ExtResource("7_a4rk2"), ExtResourc
 script = ExtResource("18_1ejfv")
 state = NodePath("../State")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=871161378 node_paths=PackedStringArray("progression", "lives_label", "score_label")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=871161378 node_paths=PackedStringArray("progression", "lives_container", "lives_icon", "lives_label", "score_container", "score_icon", "score_label")]
 script = ExtResource("19_3yws6")
 progression = NodePath("../Progression")
+lives_container = NodePath("MarginContainer/HBoxContainer/ContainerLives")
+lives_icon = NodePath("MarginContainer/HBoxContainer/ContainerLives/IconLives")
 lives_label = NodePath("MarginContainer/HBoxContainer/LivesLabel")
+score_container = NodePath("MarginContainer/HBoxContainer/ContainerMoney")
+score_icon = NodePath("MarginContainer/HBoxContainer/ContainerMoney/IconMoney")
 score_label = NodePath("MarginContainer/HBoxContainer/ScoreLabel")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=197359047]
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
+offset_top = -96.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_bottom = 32
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer" unique_id=1291605688]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
+
+[node name="ContainerLives" type="HBoxContainer" parent="UI/MarginContainer/HBoxContainer" unique_id=1286551255]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="IconLives" type="TextureRect" parent="UI/MarginContainer/HBoxContainer/ContainerLives" unique_id=807681561]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = SubResource("AtlasTexture_2d2qx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ContainerMoney" type="HBoxContainer" parent="UI/MarginContainer/HBoxContainer" unique_id=983431426]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="IconMoney" type="TextureRect" parent="UI/MarginContainer/HBoxContainer/ContainerMoney" unique_id=1270598581]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = SubResource("AtlasTexture_xo15n")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="LivesLabel" type="Label" parent="UI/MarginContainer/HBoxContainer" unique_id=1391817371]
 layout_mode = 2

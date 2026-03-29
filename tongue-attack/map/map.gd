@@ -12,7 +12,9 @@ func _ready() -> void:
 
 func place_leaves() -> void:
 	leaf_positions = []
-	for child in leaf_positions_container.get_children():
+	var children := leaf_positions_container.get_children()
+	children.reverse() # why the fuck does it gather children in reverse order?
+	for child in children:
 		leaf_positions.append(child.global_position)
 	
 	for pos in leaf_positions:
@@ -24,10 +26,28 @@ func place_leaves() -> void:
 		leaves.append(l)
 	
 	leaves_available = leaves.duplicate(false)
-	leaves_available.shuffle()
 	
+	if Global.config.randomize_leaf_positions:
+		leaves_available.shuffle()
+
+func get_leaf_opposite(leaf:Leaf) -> Leaf:
+	var on_right_target := not leaf.on_right
+	var y_pos_target := leaf.global_position.y
+	var best_dist := INF
+	var best_leaf : Leaf
+	for other_leaf in leaves:
+		if other_leaf.on_right != on_right_target: continue
+		var dist := absf(other_leaf.global_position.y - y_pos_target)
+		if dist >= best_dist: continue
+		best_dist = dist
+		best_leaf = other_leaf
+	return best_leaf
+
 func get_next_leaf() -> Leaf:
 	return leaves_available.pop_back()
 
 func give_back_leaf(leaf:Leaf) -> void:
 	leaves_available.append(leaf)
+
+func is_leaf_available(leaf:Leaf) -> bool:
+	return leaves_available.has(leaf)

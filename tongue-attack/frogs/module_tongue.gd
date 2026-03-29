@@ -36,6 +36,8 @@ enum State
 }
 
 signal state_changed(s:State)
+signal fully_retracted()
+signal fully_extended()
 signal tongue_changed(p1:Vector2, p2:Vector2)
 
 func _ready() -> void:
@@ -75,9 +77,16 @@ func change_position(pos:Vector2) -> void:
 
 func reset_to_start() -> void:
 	change_position(start_pos)
+	fully_retracted.emit()
 
 func reset_to_end() -> void:
 	change_position(start_pos + direction * max_distance)
+	fully_extended.emit()
+
+# @TODO: is this enough??
+func on_leaf_reposition() -> void:
+	reset_to_start()
+	set_state(State.IDLE)
 
 func calculate_max_distance() -> void:
 	var total_map_width := Global.config.map_size.x
@@ -104,16 +113,16 @@ func move(dt:float) -> void:
 
 	var at_end := get_tongue_length() >= max_distance
 	if at_end:
-		reset_to_end()
 		if gets_stuck_at_max_extension: get_stuck()
 		else: set_state(State.RETRACTING)
+		reset_to_end()
 		return
 	
 	# if dot prod < 0, the tongue is "behind" starting position now
 	var back_at_start := (new_pos - start_pos).normalized().dot(direction) < 0
 	if back_at_start:
-		reset_to_start()
 		set_state(State.IDLE)
+		reset_to_start()
 		return
 
 func _on_body_entered(body:Node) -> void:
@@ -140,6 +149,9 @@ func _input(ev:InputEvent) -> void:
 	if ev.is_action_released("ui_cancel"):
 		get_unstuck()
 
+func _on_input_released(_time_held:float) -> void:
+	progress_unstuck_container.hide()
+
 func _on_input_quick_pressed() -> void:
 	toggle()
 
@@ -158,7 +170,7 @@ func get_stuck(body:Collectible = null) -> void:
 	if state == State.STUCK: return
 	
 	object_stuck_to = body
-	if object_stuck_to: body.freeze()
+	if object_stuck_to: body.freeze(self)
 	set_state(State.STUCK)
 
 func get_unstuck() -> void:

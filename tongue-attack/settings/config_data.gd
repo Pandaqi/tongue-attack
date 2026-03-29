@@ -9,7 +9,7 @@ class_name ConfigData
 
 @export var num_desires_bounds_per_player := Vector2i(2,3)
 
-@export var gravity_bounds := Vector2(25.0, 100.0)
+@export var gravity_bounds := Vector2(25.0, 80.0)
 
 @export var progression_factor_bounds := Vector2(1.0, 5.0)
 @export var time_until_progression_at_max := 180 # ~seconds since start game
@@ -17,10 +17,20 @@ class_name ConfigData
 @export var score_per_correct_item := 10.0
 @export var score_lost_per_missed_collectible := -10.0
 @export var missed_collectible_lose_score_prob := 0.75
+
+@export var max_score := 999
+@export var max_score_icons := 10
+@export var num_starting_score := 50
+@export var max_lives := 10
 @export var num_starting_lives := 5
 
-@export var spawn_collectibles_not_in_play_prob := 0.5 # base prob at single player
+@export var randomize_leaf_positions := false
+@export var switch_leaves_if_fully_extended := true
 
+@export var spawn_collectibles_not_in_play_prob := 0.5 # base prob at single player
+@export var collectibles_remove_over_time_if_stuck := true
+@export var collectibles_remove_if_stuck_duration := 3.0 # takes X seconds total of being stuck to remove
+@export var collectibles_remove_alpha_min := 0.35 # lowest that an item's alpha can get before being removed
 
 @export var narrate_desires_matched := true
 

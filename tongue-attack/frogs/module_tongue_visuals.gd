@@ -9,9 +9,14 @@ class_name ModuleTongueVisuals
 @export var sprite_start : Node2D
 @export var sprite_end : Node2D
 
+@export var anim_player : AnimationPlayer
+
 func _ready() -> void:
 	module_tongue.state_changed.connect(update_state)
 	module_tongue.tongue_changed.connect(update)
+	
+	sprite_start.hide()
+	sprite_end.hide()
 	
 	line.width = thickness
 	line.points = []
@@ -25,6 +30,8 @@ func update(p1:Vector2, p2:Vector2) -> void:
 	# this makes the texture UVs correct; the line is obviously identical in reverse
 	if p2_local.x < p1_local.x:
 		line.points = [p2_local, p1_local]
+	
+	if module_tongue.state == ModuleTongue.State.IDLE: return
 	
 	if sprite_start: 
 		sprite_start.show()
@@ -41,6 +48,10 @@ func update_direction(s:Node2D) -> void:
 func update_state(state:ModuleTongue.State) -> void:
 	update_direction(sprite_start)
 	update_direction(sprite_end)
+	
+	anim_player.stop()
+	if state == ModuleTongue.State.STUCK:
+		anim_player.play("stuck_flash")
 	
 	if state == ModuleTongue.State.IDLE:
 		if sprite_start: sprite_start.hide()
