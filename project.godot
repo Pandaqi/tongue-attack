@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="tongue-attack"
+config/name="froggy-feast"
 run/main_scene="uid://cgdjav32fnyi8"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="uid://pwp1f5u25xsf"

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://bcrgaibeillhj"]
+[gd_resource type="Resource" script_class="Setting" format=3 uid="uid://bcrgaibeillhj"]
 
 [ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_e188c"]
 
@@ -7,5 +7,3 @@ script = ExtResource("1_e188c")
 type_display = 4
 key = "input_logout_while_playing"
 label = "ST_ALLOW_DYN_LOGOUT"
-section = "shared"
-default = "true"

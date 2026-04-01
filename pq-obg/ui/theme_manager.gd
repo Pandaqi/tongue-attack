@@ -218,6 +218,9 @@ func refresh():
 	th.set_color("font_pressed_color", "CheckButton", cfg.color_normal_text)
 	th.set_color("font_hover_pressed_color", "CheckButton", cfg.color_normal_text)
 	
+	th.set_icon("checked", "CheckButton", preload("res://pq-obg/ui/theme/checked.png"))
+	th.set_icon("unchecked", "CheckButton", preload("res://pq-obg/ui/theme/unchecked.png"))
+	
 	#
 	# Label
 	#
@@ -272,6 +275,9 @@ func refresh():
 	th.set_stylebox("grabber_area", "HSlider", sb_normal)
 	th.set_stylebox("grabber_area_highlight", "HSlider", sb_focus)
 	th.set_stylebox("slider", "HSlider", sb_hover)
+	th.set_icon("grabber", "HSlider", preload("res://pq-obg/ui/theme/grabber-normal.png"))
+	th.set_icon("grabber_disabled", "HSlider", preload("res://pq-obg/ui/theme/grabber-disabled.png"))
+	th.set_icon("grabber_highlight", "HSlider", preload("res://pq-obg/ui/theme/grabber-highlight.png"))
 	
 	#
 	# MarginContainer

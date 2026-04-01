@@ -37,7 +37,7 @@ class_name ConfigData
 @export var switch_leaves_vertically_on_hold := true
 @export var allow_frog_hopping := false
 
-@export var spawn_collectibles_not_in_play_prob := 0.25 # base prob at single player
+@export var spawn_collectibles_not_in_play_prob := 0.45 # base prob at single player
 
 @export var be_generous_with_wrong_collections := true
 

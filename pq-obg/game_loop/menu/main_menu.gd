@@ -37,10 +37,7 @@ func release_focus() -> void:
 		child.release_focus()
 
 func _on_play_pressed() -> void:
-	var game_scene := "res://" + Global.config_system.game_id + "/main.tscn"
-	if Global.config_system.game_scene:
-		game_scene = "res://" + Global.config_system.game_scene
-	get_tree().change_scene_to_file(game_scene)
+	Global.goto_game()
 
 func _on_settings_pressed() -> void:
 	set_visible(false)

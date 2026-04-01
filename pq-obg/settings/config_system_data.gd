@@ -8,7 +8,7 @@ class_name ConfigSystemData
 @export var game_author : String = "Tiamo Pastoor"
 @export var language_default := "en"
 @export var game_scene : String
-@export var fullscreen := true
+@export var fullscreen := false
 
 @export_group("Settings")
 # resources for SettingTabs to display
@@ -148,6 +148,8 @@ class_name ConfigSystemData
 @export var tutorial_enabled := true
 @export var tutorials : Array[TutorialStage] = []
 @export var tutorials_debug : Array[TutorialStage] = []
+@export var tutorial_hide_after_x_reloads := 2
+@export var tutorial_hide_after_x_plays := 12
 @export var tutorial_delay := 6.0 # seconds before next tutorial appears
 @export var tutorial_delay_remove := 12.0 # seconds before that tutorial fades away again
 @export var tutorial_scale := 1.0
@@ -163,6 +165,8 @@ class_name ConfigSystemData
 @export_subgroup("Pause & GameOver Menu")
 @export var pause_menu_width := 512.0
 @export var pause_menu_anchor := ScreenAnchorTool.Anchor.BOTTOM
+@export var emoji_good := preload("res://pq-obg/ui/emojis/smiley-happy.png")
+@export var emoji_bad := preload("res://pq-obg/ui/emojis/smiley-sad.png")
 
 @export_subgroup("Button Instructions")
 @export var button_instructions_anchor := ScreenAnchorTool.Anchor.TOP

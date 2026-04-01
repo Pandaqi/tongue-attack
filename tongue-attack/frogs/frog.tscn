@@ -227,21 +227,30 @@ frame = 2
 root_node = NodePath("../../ModuleTongue")
 libraries/ = SubResource("AnimationLibrary_1os0u")
 
-[node name="ModuleCollect" type="Node2D" parent="." unique_id=937267879 node_paths=PackedStringArray("entity", "area", "col_shape", "module_desires", "module_tongue", "audio_collect", "audio_good", "audio_bad")]
+[node name="ModuleCollect" type="Node2D" parent="." unique_id=937267879 node_paths=PackedStringArray("entity", "area_good", "col_shape_good", "area_bad", "col_shape_bad", "module_desires", "module_tongue", "audio_collect", "audio_good", "audio_bad")]
 script = ExtResource("4_4nyue")
 entity = NodePath("..")
-area = NodePath("Area2D")
-col_shape = NodePath("Area2D/CollisionShape2D")
-thickness = 32.0
+area_good = NodePath("AreaGood")
+col_shape_good = NodePath("AreaGood/CollisionShape2D")
+area_bad = NodePath("AreaBad")
+col_shape_bad = NodePath("AreaBad/CollisionShape2D")
+thickness_good = 52.0
+thickness_bad = 8.0
+extra_length_bad = -128.0
 module_desires = NodePath("../ModuleDesires")
 module_tongue = NodePath("../ModuleTongue")
 audio_collect = NodePath("AudioCollect")
 audio_good = NodePath("AudioGood")
 audio_bad = NodePath("AudioBad")
 
-[node name="Area2D" type="Area2D" parent="ModuleCollect" unique_id=1187116116]
+[node name="AreaGood" type="Area2D" parent="ModuleCollect" unique_id=1187116116]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ModuleCollect/Area2D" unique_id=1682473645]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ModuleCollect/AreaGood" unique_id=1682473645]
+shape = SubResource("RectangleShape2D_nt2bq")
+
+[node name="AreaBad" type="Area2D" parent="ModuleCollect" unique_id=253628427]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ModuleCollect/AreaBad" unique_id=1864036905]
 shape = SubResource("RectangleShape2D_nt2bq")
 
 [node name="AudioGood" type="AudioStreamPlayer2D" parent="ModuleCollect" unique_id=1587474182]

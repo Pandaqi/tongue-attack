@@ -32,7 +32,7 @@ func _ready() -> void:
 	
 	module_input.visualizers_refreshed.connect(_on_visualizers_refreshed)
 	
-	module_tongue.tongue_changed.connect(module_collect.update_area)
+	module_tongue.tongue_changed.connect(module_collect.update_areas)
 	module_tongue.state_changed.connect(module_visuals.update_state)
 	module_tongue.fully_extended.connect(_on_tongue_fully_extended)
 	module_collect.collected.connect(module_desires._on_collected)

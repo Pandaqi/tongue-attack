@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://mpno7712is50"]
+[gd_resource type="Resource" script_class="Setting" format=3 uid="uid://mpno7712is50"]
 
 [ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_pgn3d"]
 
@@ -7,6 +7,4 @@ script = ExtResource("1_pgn3d")
 type_display = 4
 key = "input_allow_mouse"
 label = "ST_ALLOW_MOUSE"
-section = "shared"
-default = "true"
 needs_input_refresh = true

@@ -34,7 +34,7 @@ func read_default_value(s:Setting, val:Variant = FALLBACK) -> Variant:
 	if is_value_unset(val) and (s.key in Global.config_system):
 		val = Global.config_system[s.key]
 	
-	# if still nothing, use default
+	# if still nothing, use default manually saved inside setting resource
 	if is_value_unset(val):
 		val = s.get_default()
 	

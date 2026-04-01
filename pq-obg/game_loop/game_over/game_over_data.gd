@@ -17,3 +17,6 @@ func get_header() -> String:
 
 func get_message() -> String:
 	return message
+
+func has_specific_winning_player() -> bool:
+	return winning_player != null

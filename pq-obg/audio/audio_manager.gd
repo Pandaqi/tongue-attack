@@ -35,10 +35,23 @@ func ensure_buses_exist():
 		AudioServer.add_bus()
 		AudioServer.set_bus_name(AudioServer.bus_count-1, bus_name)
 
+static func fade_in(ap:AudioStreamPlayer, dur := 1.0) -> Tween:
+	ap.volume_db = linear_to_db(0.0001)
+	var tw := ap.get_tree().create_tween()
+	tw.tween_property(ap, "volume_db", linear_to_db(1.0), dur)
+	return tw
+
+static func fade_out(ap:AudioStreamPlayer, dur := 1.0) -> Tween:
+	ap.volume_db = linear_to_db(1.0)
+	var tw := ap.get_tree().create_tween()
+	tw.tween_property(ap, "volume_db", linear_to_db(0.0001), dur)
+	return tw
+
 func create_ui_audio() -> void:
 	ui_audio = AudioStreamPlayer.new()
 	ui_audio.bus = "UI"
 	add_child(ui_audio)
+	fade_in(ui_audio)
 
 	var stream = AudioStreamPolyphonic.new()
 	stream.polyphony = 32
@@ -86,6 +99,7 @@ func create_bg_music() -> void:
 	
 	bg_audio = node
 	add_child(node)
+	fade_in(bg_audio)
 	
 	pick_next_bg_music()
 

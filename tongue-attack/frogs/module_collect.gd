@@ -2,10 +2,17 @@ extends Node2D
 class_name ModuleCollect
 
 @export var entity : Frog
-@export var area : Area2D
-@export var col_shape : CollisionShape2D
-@export var thickness := 16.0
+@export var area_good : Area2D
+@export var col_shape_good : CollisionShape2D
+
+@export var area_bad : Area2D
+@export var col_shape_bad : CollisionShape2D
+
+@export var thickness_good := 32.0
+@export var thickness_bad := 12.0
 @export var offset_y := 16.0
+@export var extra_length_good := 64.0
+@export var extra_length_bad := -192.0
 
 @export var module_desires : ModuleDesires
 @export var module_tongue : ModuleTongue
@@ -19,7 +26,11 @@ var want_to_collect : Array[Collectible] = []
 signal collected(c:Collectible, good:bool)
 
 func _ready() -> void:
-	area.body_entered.connect(_on_body_entered)
+	col_shape_good.shape = RectangleShape2D.new()
+	col_shape_bad.shape = RectangleShape2D.new()
+	
+	area_good.body_entered.connect(_on_body_entered_good)
+	area_bad.body_entered.connect(_on_body_entered_bad)
 
 func _physics_process(_dt:float) -> void:
 	check_outstanding_collects()
@@ -32,17 +43,28 @@ func check_outstanding_collects() -> void:
 		try_collect(col)
 	want_to_collect = []
 
-func update_area(p1:Vector2, p2:Vector2) -> void:
-	var mid := 0.5 * (p1 + p2)
-	var rot := (p2 - p1).angle()
-	var size := p1.distance_to(p2)
+func update_areas(p1:Vector2, p2:Vector2) -> void:
+	var dir_vec := (p2 - p1)
 	
-	area.set_position(to_local(mid) + Vector2.UP * offset_y)
-	area.set_rotation(rot)
+	var p2_good := p2 + dir_vec.normalized() * extra_length_good
+	dir_vec = (p2_good - p1)
 	
-	var shape := RectangleShape2D.new()
-	shape.size = Vector2(size, thickness)
-	col_shape.shape = shape
+	var mid := 0.5 * (p1 + p2_good)
+	var rot := dir_vec.angle()
+	var size := dir_vec.length()
+	
+	area_good.set_position(to_local(mid) + Vector2.UP * offset_y)
+	area_good.set_rotation(rot)
+	col_shape_good.shape.size = Vector2(size, thickness_good)
+
+	var p2_bad := p2 + dir_vec.normalized() * extra_length_bad
+	if size <= absf(extra_length_bad): p2_bad = p1
+	var mid_bad := 0.5 * (p1 + p2_bad)
+	var size_bad := p1.distance_to(p2_bad)
+	
+	area_bad.set_position(to_local(mid_bad) + Vector2.UP * offset_y)
+	area_bad.set_rotation(rot)
+	col_shape_bad.shape.size = Vector2(size_bad, thickness_bad)
 
 func can_collect(body:Collectible) -> bool:
 	if not body.can_be_collected(): return false
@@ -51,24 +73,19 @@ func can_collect(body:Collectible) -> bool:
 func get_collection_result(body:Collectible) -> bool:
 	return module_desires.matches(body.desire)
 
-func _on_body_entered(body:Node) -> void:
+func _on_body_entered_good(body:Node) -> void:
 	if not (body is Collectible): return
 	var is_good := get_collection_result(body)
+	if not is_good: return
+	want_to_collect.append(body)
+
+func _on_body_entered_bad(body:Node) -> void:
+	if not (body is Collectible): return
+	var is_good := get_collection_result(body)
+	if is_good: return
 	
-	# lots of helpers to "narrowly miss" collecting bad ones
-	# @TODO: REPLACE WITH JUST A SMALLER "BAD COLLECTIBLES AREA"
-	if Global.config.be_generous_with_wrong_collections and (not is_good):
-		# if it's already below our area's Y position, ignore it
-		if body.global_position.y > area.global_position.y: return
-		
-		# we use a smaller area
-		var tongue_tip_pos := module_tongue.get_tip_position()
-		var dist_y := absf(body.global_position.y - tongue_tip_pos.y)
-		if dist_y < 0.5 * thickness: return
-		
-		# if we're near the end of the the tongue, we might as well have missed it
-		var dist_to_tip : float = body.global_position.distance_to()
-		if dist_to_tip <= 128.0 and module_tongue.state == ModuleTongue.State.RETRACTING: return
+	if Global.config.be_generous_with_wrong_collections:
+		if body.global_position.y >= (area_bad.global_position.y + 2.0*thickness_bad): return
 	
 	want_to_collect.append(body)
 

@@ -15,7 +15,8 @@ var current_stage := -1
 var num_times_shown := 0 # this means WITHIN THE SAME GAME (so when players pause/resume several times)
 
 func _ready() -> void:
-	enabled = Global.config_system.tutorial_enabled
+	enabled = Global.config_system.tutorial_enabled and Global.num_reloads < Global.config_system.tutorial_hide_after_x_reloads and Global.num_plays < Global.config_system.tutorial_hide_after_x_plays
+	
 	if not enabled: hide()
 	timer.timeout.connect(_on_timer_timeout)
 	prepare_sprites()

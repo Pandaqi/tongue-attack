@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b25ccsfw7vw2c" path="res://pq-obg/game_loop/game_over/game_over_menu/game_over_menu.gd" id="1_ravx0"]
 [ext_resource type="PackedScene" uid="uid://dgfewhemw8ofh" path="res://pq-obg/game_loop/pause/pause_overlay.tscn" id="3_6j8hq"]
+[ext_resource type="Texture2D" uid="uid://denhjxnkoyllf" path="res://pq-obg/ui/emojis/smiley-happy.png" id="3_g07cm"]
 [ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="4_1sfma"]
 [ext_resource type="Texture2D" uid="uid://b3xoiwk76ch5f" path="res://pq-obg/ui/textures/icon_quit.tres" id="6_7opj1"]
 [ext_resource type="Texture2D" uid="uid://cikhqhc0hfaxm" path="res://pq-obg/ui/textures/icon_play.tres" id="7_ln71r"]
@@ -42,7 +43,7 @@ _data = {
 &"go_fade": SubResource("Animation_xng78")
 }
 
-[node name="GameOverMenu" type="Control" unique_id=721452580 node_paths=PackedStringArray("sub_container", "label_header", "label_explanation", "forward_btn", "anim_player", "overlay", "audio_player")]
+[node name="GameOverMenu" type="Control" unique_id=721452580 node_paths=PackedStringArray("sub_container", "label_header", "label_explanation", "forward_btn", "anim_player", "overlay", "texture_emoji", "audio_player")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,6 +60,7 @@ label_explanation = NodePath("CenterContainer/MarginContainer/VBoxContainer/Pane
 forward_btn = NodePath("CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Forward")
 anim_player = NodePath("AnimationPlayer")
 overlay = NodePath("Overlay")
+texture_emoji = NodePath("CenterContainer/MarginContainer/VBoxContainer/TextureEmoji")
 audio_player = NodePath("AudioStreamPlayer")
 
 [node name="Overlay" parent="." unique_id=790026089 instance=ExtResource("3_6j8hq")]
@@ -83,8 +85,16 @@ theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer" unique_id=1644897548]
+custom_minimum_size = Vector2(34, 0)
 layout_mode = 2
 mouse_filter = 2
+
+[node name="TextureEmoji" type="TextureRect" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=86684791]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_g07cm")
+expand_mode = 4
+stretch_mode = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=366350373]
 layout_mode = 2

@@ -104,8 +104,11 @@ func reset() -> void:
 	_on_value_changed(get_default())
 	force_update_control()
 
+func get_label_sanitized() -> String:
+	return label.strip_edges(true, true)
+
 func get_tooltip_key() -> String:
-	var id := label + "_TT"
+	var id := get_label_sanitized() + "_TT"
 	var is_translatable := tr(id) != id
 	if is_translatable: return id
 	return ""
@@ -156,7 +159,7 @@ func visualize() -> HBoxContainer:
 		control_node = cb
 		
 		cb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		cb.set_text(label)
+		cb.set_text(get_label_sanitized())
 		cb.toggled.connect(_on_value_changed)
 	
 	if type == Type.RANGE or type == Type.RANGE_DISCRETE:
@@ -213,7 +216,7 @@ func create_value_node() -> Label:
 
 func create_label_node() -> Label:
 	label_node = Label.new()
-	label_node.set_text(label)
+	label_node.set_text(get_label_sanitized())
 	label_node.custom_minimum_size = Vector2(348, 0)
 	label_node.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	return label_node

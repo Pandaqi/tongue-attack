@@ -90,13 +90,10 @@ func goto_game_over(go := game_over_data_default) -> void:
 	change_state(GameState.POSTGAME)
 	
 	if game_over_goes_to_new_scene:
-		get_tree().change_scene_to_file("res://pq-obg/game_loop/game_over/game_over.tscn")
+		Global.goto_game_over()
 		return
 	
 	game_over_menu.activate(go)
-
-func goto_main_menu() -> void:
-	get_tree().change_scene_to_file("res://pq-obg/game_loop/menu/menu.tscn")
 
 func _unhandled_input(ev:InputEvent) -> void:
 	if not paused and ev.is_action_released("ui_backward"):
@@ -104,11 +101,11 @@ func _unhandled_input(ev:InputEvent) -> void:
 
 func _on_backward_pressed() -> void:
 	set_paused(false)
-	goto_main_menu()
+	Global.goto_menu()
 
 func _on_forward_pressed() -> void:
 	set_paused(false)
 
 func _on_restart_pressed() -> void:
 	set_paused(false)
-	get_tree().reload_current_scene()
+	Global.reload_game()

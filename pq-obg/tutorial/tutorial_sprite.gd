@@ -52,7 +52,7 @@ func set_stage(s:TutorialStage) -> void:
 	label_content.add_theme_font_size_override("font_size", Global.config_system.tutorial_content_font_size)
 	label_content.set_text("This is an empty tutorial screen.")
 	if stage.content:
-		label_content.set_text(stage.content)
+		label_content.set_text(get_content_sanitized())
 	
 	texture_background.texture = backgrounds[stage.type]
 	
@@ -63,6 +63,9 @@ func set_stage(s:TutorialStage) -> void:
 		texture_content.texture = stage.texture
 	
 	hide()
+
+func get_content_sanitized() -> String:
+	return stage.content.strip_edges(true, true)
 
 func refresh_size(factor:float) -> void:
 	custom_minimum_size = panel_size
