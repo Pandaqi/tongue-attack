@@ -6,7 +6,7 @@
 script = ExtResource("1_ko4va")
 type = 1
 key = "gravity_speed_factor"
-label = "Gravity Speed"
+label = "SETTING_GRAVITY"
 min_value = 0.2
 max_value = 3.0
 metadata/_custom_type_script = "uid://cu5ytdnryre03"

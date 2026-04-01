@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_1u0aw")
 key = "icons_enabled"
-label = "Icons"
+label = "SETTING_ICONS"
 metadata/_custom_type_script = "uid://cu5ytdnryre03"

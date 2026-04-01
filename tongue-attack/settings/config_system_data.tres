@@ -3,8 +3,10 @@
 [ext_resource type="AudioStream" uid="uid://c78cod80iedgx" path="res://tongue-attack/main/bg_theme.mp3" id="1_cmnra"]
 [ext_resource type="AudioStream" uid="uid://cfe2jylsp4enn" path="res://pq-obg/audio/sfx/ui_click.mp3" id="1_v2gpx"]
 [ext_resource type="PackedScene" uid="uid://bfclclol7g0ea" path="res://pq-obg/ui/button_visualizer/button_visualizer.tscn" id="2_lx2qc"]
+[ext_resource type="AudioStream" uid="uid://by7lfo16v2c0h" path="res://pq-obg/audio/sfx/game_over.ogg" id="2_wtk8d"]
 [ext_resource type="FontFile" uid="uid://c05kog6grk4c" path="res://tongue-attack/ui/fonts/LilitaOne-Regular.ttf" id="3_lx2qc"]
 [ext_resource type="Texture2D" uid="uid://cikhqhc0hfaxm" path="res://pq-obg/ui/textures/icon_play.tres" id="3_pifwl"]
+[ext_resource type="AudioStream" uid="uid://pwjcjxyyti5b" path="res://pq-obg/audio/sfx/game_win.ogg" id="3_wb8cy"]
 [ext_resource type="Texture2D" uid="uid://b3xoiwk76ch5f" path="res://pq-obg/ui/textures/icon_quit.tres" id="4_cmnra"]
 [ext_resource type="Texture2D" uid="uid://cbue28i4wsoti" path="res://pq-obg/ui/textures/icon_reset.tres" id="5_1uml1"]
 [ext_resource type="Texture2D" uid="uid://bex3uoa5xtsv8" path="res://pq-obg/ui/textures/icon_settings.tres" id="6_0llaj"]
@@ -15,10 +17,15 @@
 [ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="11_wb8cy"]
 [ext_resource type="Script" uid="uid://b8gcpdtp867fe" path="res://pq-obg/tutorial/tutorial_stage.gd" id="12_pddpq"]
 [ext_resource type="Resource" uid="uid://cublgidv5ltfp" path="res://tongue-attack/settings/tab_game.tres" id="12_pifwl"]
+[ext_resource type="Resource" uid="uid://3w1gss8hx058" path="res://tongue-attack/ui/tutorial/tut_objective.tres" id="16_0llaj"]
+[ext_resource type="Resource" uid="uid://d1ukh6htix8oy" path="res://tongue-attack/ui/tutorial/tut_button_press.tres" id="16_1uml1"]
+[ext_resource type="Resource" uid="uid://cdoyl22vmks4f" path="res://tongue-attack/ui/tutorial/tut_hold_unstuck.tres" id="18_vnqxd"]
+[ext_resource type="Resource" uid="uid://dy6qbtwr0yc5e" path="res://tongue-attack/ui/tutorial/tut_hold_hop.tres" id="19_vnqxd"]
 
 [resource]
 script = ExtResource("7_2mlfu")
 game_id = "tongue-attack"
+game_name = "Froggy Feast"
 game_version = "1.2.4"
 game_scene = "tongue-attack/main/main.tscn"
 settings = Array[ExtResource("8_vnqxd")]([ExtResource("9_weu0k"), ExtResource("10_wtk8d"), ExtResource("12_pifwl")])
@@ -31,4 +38,6 @@ font_body_bold_italic = ExtResource("3_lx2qc")
 font_heading = ExtResource("3_lx2qc")
 font_special = ExtResource("3_lx2qc")
 color_main = Color(0.10980392, 0.7294118, 0, 1)
+input_min_players_bound = 1
+tutorials = Array[ExtResource("12_pddpq")]([ExtResource("16_0llaj"), ExtResource("16_1uml1"), ExtResource("18_vnqxd"), ExtResource("19_vnqxd")])
 metadata/_custom_type_script = "uid://dui163ptds6sq"

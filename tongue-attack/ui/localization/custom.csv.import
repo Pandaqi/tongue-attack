@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://br8yq3igla7pb"
+
+[deps]
+
+files=["res://tongue-attack/ui/localization/custom.en.translation", "res://tongue-attack/ui/localization/custom.nl.translation", "res://tongue-attack/ui/localization/custom.es.translation", "res://tongue-attack/ui/localization/custom.fr.translation", "res://tongue-attack/ui/localization/custom.de.translation", "res://tongue-attack/ui/localization/custom.pt.translation", "res://tongue-attack/ui/localization/custom.it.translation"]
+
+source_file="res://tongue-attack/ui/localization/custom.csv"
+dest_files=["res://tongue-attack/ui/localization/custom.en.translation", "res://tongue-attack/ui/localization/custom.nl.translation", "res://tongue-attack/ui/localization/custom.es.translation", "res://tongue-attack/ui/localization/custom.fr.translation", "res://tongue-attack/ui/localization/custom.de.translation", "res://tongue-attack/ui/localization/custom.pt.translation", "res://tongue-attack/ui/localization/custom.it.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

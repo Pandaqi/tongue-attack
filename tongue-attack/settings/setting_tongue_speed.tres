@@ -6,7 +6,7 @@
 script = ExtResource("1_8fxc1")
 type = 1
 key = "tongue_speed_factor"
-label = "Tongue Speed"
+label = "SETTING_TONGUE_SPEED"
 min_value = 0.2
 max_value = 4.0
 metadata/_custom_type_script = "uid://cu5ytdnryre03"

@@ -21,7 +21,30 @@ static var word_library : Array[String] = [
 	"sun", "rain", "cloud", "snow", "wind", "hot", "cold", "tree", "flower", "grass",
 	"happy", "sad", "angry", "tired", "excited", "scared", "proud", "love",
 	"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
-	"fast", "slow", "clean", "dirty", "new", "old", "soft", "loud"
+	"fast", "slow", "clean", "dirty", "new", "old", "soft", "loud",
+	"orange", "grape", "melon", "pear", "peach", "plum", "berry", "kiwi",
+	"rice", "soup", "meat", "corn", "pizza", "pasta", "cookie", "sandwich",
+	"cup", "plate", "fork", "spoon", "knife", "bottle", "glass",
+	"bed", "pillow", "blanket", "clock", "window", "floor", "wall", "roof",
+	"school", "home", "park", "shop", "road", "street", "bridge",
+	"bus", "train", "bike", "truck", "plane", "boat",
+	"hat", "shirt", "pants", "dress", "shoes", "coat", "sock",
+	"hand", "foot", "head", "eye", "ear", "nose", "mouth",
+	"smile", "laugh", "cry", "think", "look", "listen",
+	"sit", "stand", "walk", "climb", "slide", "throw", "catch",
+	"open", "close", "push", "pull", "give", "take", "find", "hide",
+	"up", "down", "left", "right", "in", "out", "on", "off",
+	"near", "far", "over", "under", "before", "after",
+	"day", "night", "morning", "evening", "today", "tomorrow",
+	"spring", "summer", "autumn", "winter",
+	"star", "moon", "sky", "river", "lake", "sea", "sand", "rock",
+	"bug", "ant", "spider", "snail", "worm", "butterfly",
+	"cow", "sheep", "goat", "pig", "chicken", "deer", "monkey",
+	"zebra", "lion", "giraffe", "panda", "kangaroo",
+	"color", "shape", "line", "dot", "picture", "paint",
+	"music", "song", "dance", "game", "fun",
+	"yes", "no", "please", "thank you", "sorry",
+	"again", "more", "all", "none", "same", "different"
 ]
 
 static func get_random_type() -> Type:
@@ -71,5 +94,4 @@ func narrate(d:Desire) -> AudioStream:
 func matches_custom(d1:Desire, d2:Desire) -> bool:
 	if not (d1.type is DesireTypeLetters): return false
 	if not (d2.type is DesireTypeLetters): return false
-	print("LETTER MATCH CUSTOM | " + d1.value_visualized + " | " + d2.value_visualized)
 	return (d1.value_visualized as String).contains(d2.value_visualized) or (d2.value_visualized as String).contains(d1.value_visualized)

@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_yrf57")
 key = "narrate_desires_matched"
-label = "Audio Narration When Matching"
+label = "SETTING_NARRATE"
 metadata/_custom_type_script = "uid://cu5ytdnryre03"

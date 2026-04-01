@@ -12,7 +12,7 @@ var state : StateManager
 @warning_ignore("unused_signal")
 signal pause_mode_change()
 
-func _ready():
+func _enter_tree():
 	audio = AudioManager.new()
 	add_child(audio)
 	

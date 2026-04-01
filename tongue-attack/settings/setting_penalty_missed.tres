@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_6mxcc")
 key = "penalty_missed_collectibles"
-label = "Missed Collectibles Give Penalty"
+label = "SETTING_PENALTY_MISSED"
 metadata/_custom_type_script = "uid://cu5ytdnryre03"

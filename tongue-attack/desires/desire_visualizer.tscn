@@ -46,7 +46,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AudioNarrate" type="AudioStreamPlayer2D" parent="." unique_id=681247789]
-max_distance = 3000.0
+volume_db = 2.0
+max_distance = 4000.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1763138096]
 libraries/ = SubResource("AnimationLibrary_2aiyv")

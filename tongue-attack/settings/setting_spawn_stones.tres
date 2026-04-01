@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_t2r85")
 key = "spawn_stones"
-label = "Spawn Stones"
+label = "SETTING_STONES"
 metadata/_custom_type_script = "uid://cu5ytdnryre03"

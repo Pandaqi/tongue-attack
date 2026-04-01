@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_p7b4r")
 key = "allow_frog_hopping"
-label = "Allow Frogs Changing Position"
+label = "SETTING_FROG_HOP"
 metadata/_custom_type_script = "uid://cu5ytdnryre03"

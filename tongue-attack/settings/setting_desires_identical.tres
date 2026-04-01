@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_8lsm5")
 key = "all_players_have_same_desires"
-label = "All Players Have Same Desires"
+label = "SETTING_SAME_DESIRES"
 metadata/_custom_type_script = "uid://cu5ytdnryre03"

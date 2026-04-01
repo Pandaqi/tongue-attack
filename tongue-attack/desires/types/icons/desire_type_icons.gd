@@ -66,7 +66,7 @@ func visualize(d:Desire, dv:DesireVisualizer) -> void:
 		var rand_dur := randf_range(0.065, 0.12)
 		tw.tween_property(dv.sprite, "frame", frm, rand_dur)
 		tw.tween_property(dv.sprite, "frame", frm+1, rand_dur)
-		tw.set_loops(0)
+		tw.set_loops(1024)
 		dv.tween_active = tw
 
 func narrate(d:Desire) -> AudioStream:

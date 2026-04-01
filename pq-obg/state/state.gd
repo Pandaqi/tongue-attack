@@ -85,6 +85,8 @@ func _on_objective_registered() -> void:
 	goto_game_over()
 
 func goto_game_over(go := game_over_data_default) -> void:
+	if state != GameState.GAME: return
+	
 	change_state(GameState.POSTGAME)
 	
 	if game_over_goes_to_new_scene:

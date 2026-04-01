@@ -12,13 +12,81 @@
 [ext_resource type="Script" uid="uid://dr61gyla5ahq" path="res://tongue-attack/frogs/module_visuals.gd" id="4_xdhee"]
 [ext_resource type="Shader" uid="uid://h6fnqlhsm5yx" path="res://tongue-attack/frogs/frog_tongue_line.gdshader" id="5_3o6e8"]
 [ext_resource type="Script" uid="uid://xtbseim33sor" path="res://tongue-attack/frogs/module_tongue.gd" id="5_fvq8w"]
+[ext_resource type="Texture2D" uid="uid://dodlgbqcjnshy" path="res://tongue-attack/main/misc-money-bad.png" id="5_kt6xs"]
 [ext_resource type="Texture2D" uid="uid://bfi7132ouo36u" path="res://tongue-attack/frogs/tongue-spritesheet.png" id="5_xdhee"]
 [ext_resource type="Texture2D" uid="uid://yeyjqx3axvsj" path="res://tongue-attack/frogs/tongue-middle-texture.png" id="6_3o6e8"]
 [ext_resource type="Script" uid="uid://3lf727yjr2e6" path="res://tongue-attack/frogs/module_desires.gd" id="6_450eg"]
 [ext_resource type="PackedScene" uid="uid://b6lndpa28flit" path="res://tongue-attack/desires/desire_visualizer.tscn" id="7_2817n"]
+[ext_resource type="Texture2D" uid="uid://cmx02kxb6i8qd" path="res://tongue-attack/frogs/hats-spritesheet.png" id="8_fak2w"]
 [ext_resource type="Texture2D" uid="uid://cjjhiq63i8863" path="res://tongue-attack/frogs/unstuck-circle-under.png" id="12_jbar8"]
 [ext_resource type="Texture2D" uid="uid://15g57s0m7s46" path="res://tongue-attack/frogs/unstuck-circle-progress.png" id="13_1os0u"]
+[ext_resource type="AudioStream" uid="uid://dhs541vcd5b5x" path="res://tongue-attack/frogs/sounds/ping.ogg" id="15_s4a6k"]
 [ext_resource type="Script" uid="uid://5e4hhx6u1fcc" path="res://tongue-attack/frogs/module_hold.gd" id="16_1os0u"]
+[ext_resource type="AudioStream" uid="uid://ckwwh572ebv75" path="res://tongue-attack/frogs/sounds/slurp.ogg" id="16_kt6xs"]
+[ext_resource type="AudioStream" uid="uid://d26q8f8fa214k" path="res://tongue-attack/frogs/sounds/tongue-move.ogg" id="16_mjwq7"]
+[ext_resource type="AudioStream" uid="uid://bedt3rwnkexlh" path="res://tongue-attack/frogs/sounds/bad-collect.ogg" id="16_s4a6k"]
+[ext_resource type="AudioStream" uid="uid://cthg6ybollkuh" path="res://tongue-attack/frogs/sounds/stuck.ogg" id="17_aunqq"]
+
+[sub_resource type="Animation" id="Animation_fak2w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1.6962936, -42.120335)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteHat:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.35, 0.35)]
+}
+
+[sub_resource type="Animation" id="Animation_mjwq7"]
+resource_name = "hat_bob"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1.4331253, -46.205486), Vector2(-0.84829736, -42.00335)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteHat:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.35, 0.35), Vector2(0.33, 0.33)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aunqq"]
+_data = {
+&"RESET": SubResource("Animation_fak2w"),
+&"hat_bob": SubResource("Animation_mjwq7")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i0if5"]
 shader = ExtResource("5_3o6e8")
@@ -77,15 +145,19 @@ module_hold = NodePath("ModuleHold")
 heart_texture = ExtResource("2_t01t5")
 heart_bad_texture = ExtResource("3_fak2w")
 score_texture = ExtResource("3_vvybf")
+score_bad_texture = ExtResource("5_kt6xs")
 module_input = NodePath("ModuleInput")
 
 [node name="ModuleInput" type="Node" parent="." unique_id=1545906135]
 script = ExtResource("2_2khx3")
+hold_time = 150.0
 metadata/_custom_type_script = "uid://cbh8pskekcq4r"
 
-[node name="ModuleVisuals" type="Node2D" parent="." unique_id=243660828 node_paths=PackedStringArray("sprite", "squasher_stretcher")]
+[node name="ModuleVisuals" type="Node2D" parent="." unique_id=243660828 node_paths=PackedStringArray("sprite", "sprite_hat", "hat_container", "squasher_stretcher")]
 script = ExtResource("4_xdhee")
 sprite = NodePath("Sprite2D")
+sprite_hat = NodePath("HatContainer/SpriteHat")
+hat_container = NodePath("HatContainer")
 squasher_stretcher = NodePath("SquasherStretcher")
 
 [node name="Sprite2D" type="Sprite2D" parent="ModuleVisuals" unique_id=404382223]
@@ -93,6 +165,21 @@ position = Vector2(0, -51)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_fvq8w")
 hframes = 2
+
+[node name="HatContainer" type="Node2D" parent="ModuleVisuals" unique_id=2137958266]
+position = Vector2(-1.9073489e-06, -95.99999)
+rotation = -0.6471127
+
+[node name="SpriteHat" type="Sprite2D" parent="ModuleVisuals/HatContainer" unique_id=195410738]
+position = Vector2(-1.6962936, -42.120335)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("8_fak2w")
+hframes = 4
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ModuleVisuals/HatContainer" unique_id=1193573248]
+libraries/ = SubResource("AnimationLibrary_aunqq")
+autoplay = &"hat_bob"
 
 [node name="SquasherStretcher" type="Node2D" parent="ModuleVisuals" unique_id=548674610 node_paths=PackedStringArray("node")]
 script = ExtResource("4_i0if5")
@@ -140,25 +227,43 @@ frame = 2
 root_node = NodePath("../../ModuleTongue")
 libraries/ = SubResource("AnimationLibrary_1os0u")
 
-[node name="ModuleCollect" type="Node2D" parent="." unique_id=937267879 node_paths=PackedStringArray("area", "col_shape", "module_desires")]
+[node name="ModuleCollect" type="Node2D" parent="." unique_id=937267879 node_paths=PackedStringArray("entity", "area", "col_shape", "module_desires", "module_tongue", "audio_collect", "audio_good", "audio_bad")]
 script = ExtResource("4_4nyue")
+entity = NodePath("..")
 area = NodePath("Area2D")
 col_shape = NodePath("Area2D/CollisionShape2D")
 thickness = 32.0
 module_desires = NodePath("../ModuleDesires")
+module_tongue = NodePath("../ModuleTongue")
+audio_collect = NodePath("AudioCollect")
+audio_good = NodePath("AudioGood")
+audio_bad = NodePath("AudioBad")
 
 [node name="Area2D" type="Area2D" parent="ModuleCollect" unique_id=1187116116]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ModuleCollect/Area2D" unique_id=1682473645]
 shape = SubResource("RectangleShape2D_nt2bq")
 
-[node name="ModuleTongue" type="Node2D" parent="." unique_id=1659786197 node_paths=PackedStringArray("entity", "tongue_tip", "tongue_tip_area", "tongue_tip_col_shape", "module_collect")]
+[node name="AudioGood" type="AudioStreamPlayer2D" parent="ModuleCollect" unique_id=1587474182]
+stream = ExtResource("15_s4a6k")
+volume_db = -3.0
+
+[node name="AudioCollect" type="AudioStreamPlayer2D" parent="ModuleCollect" unique_id=255156880]
+stream = ExtResource("16_kt6xs")
+
+[node name="AudioBad" type="AudioStreamPlayer2D" parent="ModuleCollect" unique_id=1227559532]
+stream = ExtResource("16_s4a6k")
+volume_db = -3.0
+
+[node name="ModuleTongue" type="Node2D" parent="." unique_id=1659786197 node_paths=PackedStringArray("entity", "tongue_tip", "tongue_tip_area", "tongue_tip_col_shape", "module_collect", "audio_tongue", "audio_stuck")]
 script = ExtResource("5_fvq8w")
 entity = NodePath("..")
 tongue_tip = NodePath("TongueTip")
 tongue_tip_area = NodePath("AreaTongueTip")
 tongue_tip_col_shape = NodePath("AreaTongueTip/CollisionShape2D")
 module_collect = NodePath("../ModuleCollect")
+audio_tongue = NodePath("AudioTongue")
+audio_stuck = NodePath("AudioStuck")
 
 [node name="TongueTip" type="Node2D" parent="ModuleTongue" unique_id=231763694]
 
@@ -166,6 +271,12 @@ module_collect = NodePath("../ModuleCollect")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ModuleTongue/AreaTongueTip" unique_id=1647342726]
 shape = SubResource("CircleShape2D_rxutr")
+
+[node name="AudioTongue" type="AudioStreamPlayer2D" parent="ModuleTongue" unique_id=1999981263]
+stream = ExtResource("16_mjwq7")
+
+[node name="AudioStuck" type="AudioStreamPlayer2D" parent="ModuleTongue" unique_id=1867649253]
+stream = ExtResource("17_aunqq")
 
 [node name="ModuleDesires" type="Node2D" parent="." unique_id=820199802]
 script = ExtResource("6_450eg")

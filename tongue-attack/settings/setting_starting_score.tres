@@ -6,7 +6,7 @@
 script = ExtResource("1_wexle")
 type = 2
 key = "num_starting_score"
-label = "Starting Score"
+label = "SETTING_SCORE"
 min_value = 0.0
 max_value = 300.0
 metadata/_custom_type_script = "uid://cu5ytdnryre03"

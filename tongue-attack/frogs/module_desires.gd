@@ -57,10 +57,13 @@ func refresh() -> void:
 			vis.set_data(desires[i])
 
 func _on_collected(c:Collectible, good:bool) -> void:
-	if not good: return # @TODO: play some angry wiggle tween?
+	# @TODO: play some angry wiggle tween?
+	if not good: return 
 	
 	var node_matched := get_matching_desire_visualizer(c.desire)
 	if node_matched:
 		node_matched.pop_up()
 		if Global.config.narrate_desires_matched:
+			# to prevent overlap with main sound effects for collecting
+			await get_tree().create_timer(randf_range(0.2, 0.5)).timeout 
 			node_matched.narrate()

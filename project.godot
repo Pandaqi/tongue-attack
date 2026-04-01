@@ -37,7 +37,7 @@ pointing/emulate_touch_from_mouse=true
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://pq-obg/localization/obg.de.translation", "res://pq-obg/localization/obg.en.translation", "res://pq-obg/localization/obg.es.translation", "res://pq-obg/localization/obg.fr.translation", "res://pq-obg/localization/obg.it.translation", "res://pq-obg/localization/obg.nl.translation", "res://pq-obg/localization/obg.pt.translation")
+locale/translations=PackedStringArray("res://pq-obg/localization/obg.de.translation", "res://pq-obg/localization/obg.en.translation", "res://pq-obg/localization/obg.es.translation", "res://pq-obg/localization/obg.fr.translation", "res://pq-obg/localization/obg.it.translation", "res://pq-obg/localization/obg.nl.translation", "res://pq-obg/localization/obg.pt.translation", "res://tongue-attack/ui/localization/custom.de.translation", "res://tongue-attack/ui/localization/custom.en.translation", "res://tongue-attack/ui/localization/custom.es.translation", "res://tongue-attack/ui/localization/custom.fr.translation", "res://tongue-attack/ui/localization/custom.it.translation", "res://tongue-attack/ui/localization/custom.nl.translation", "res://tongue-attack/ui/localization/custom.pt.translation")
 
 [physics]
 

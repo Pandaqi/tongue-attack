@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_m327v")
 key = "numbers_enabled"
-label = "Numbers"
+label = "SETTING_NUMBERS"
 metadata/_custom_type_script = "uid://cu5ytdnryre03"

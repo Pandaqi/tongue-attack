@@ -17,6 +17,9 @@ signal restart_pressed()
 func _ready() -> void:
 	overlay.modulate.a = Global.config_system.ui_overlay_alpha
 	pause_menu_sub_container.custom_minimum_size.x = Global.config_system.pause_menu_width
+		
+	Global.input.buttons_changed.connect(_on_buttons_changed)
+	_on_buttons_changed()
 	
 	# read the right icons for basic UI stuff
 	set_icons()
@@ -32,6 +35,10 @@ func set_icons() -> void:
 
 func _on_backward_pressed() -> void:
 	backward_pressed.emit()
+
+func _on_buttons_changed() -> void:
+	# @TODO: Some feedback specifying you don't have enough players?
+	forward_btn.disabled = not Global.input.has_enough_players()
 
 func _on_forward_pressed() -> void:
 	forward_pressed.emit()

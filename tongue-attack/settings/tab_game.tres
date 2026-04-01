@@ -9,5 +9,5 @@
 [resource]
 script = ExtResource("2_4o2k1")
 groups = Array[ExtResource("1_gybi2")]([ExtResource("2_joaxa"), ExtResource("3_oktjr"), ExtResource("4_qjvec")])
-label = "Game"
+label = "ST_TAB_GAME"
 metadata/_custom_type_script = "uid://bk8734ulnri1t"

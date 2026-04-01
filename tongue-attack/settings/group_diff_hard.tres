@@ -10,5 +10,5 @@
 [resource]
 script = ExtResource("1_a7oie")
 settings = Array[ExtResource("2_3x2hx")]([ExtResource("3_6batl"), ExtResource("4_ok3kk"), ExtResource("5_qt4u1"), ExtResource("6_vg88a")])
-label = "Difficulty: Hard"
+label = "SETTING_GROUP_HARD"
 metadata/_custom_type_script = "uid://c7uqyg8sqnc02"

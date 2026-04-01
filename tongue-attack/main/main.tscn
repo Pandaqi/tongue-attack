@@ -9,14 +9,13 @@
 [ext_resource type="Script" uid="uid://deb8ip12u5m44" path="res://tongue-attack/desires/types/desire_type.gd" id="6_dwf6n"]
 [ext_resource type="Resource" uid="uid://ccnqjvpma3c1q" path="res://tongue-attack/desires/types/colors/desire_type_colors.tres" id="7_a4rk2"]
 [ext_resource type="PackedScene" uid="uid://bg8kg3w7d2yxv" path="res://tongue-attack/collectibles/collectible.tscn" id="7_dwf6n"]
+[ext_resource type="PackedScene" uid="uid://r8bxbg1036ov" path="res://tongue-attack/collectibles/particles_collect.tscn" id="8_vhrtn"]
+[ext_resource type="AudioStream" uid="uid://bedt3rwnkexlh" path="res://tongue-attack/frogs/sounds/bad-collect.ogg" id="9_opvpr"]
 [ext_resource type="PackedScene" uid="uid://bh45dk7j8ubl3" path="res://pq-obg/players/player_spawner.tscn" id="10_vhrtn"]
 [ext_resource type="Resource" uid="uid://c0xgmmy8qfoke" path="res://tongue-attack/desires/types/icons/desire_type_icons.tres" id="13_iw2sv"]
 [ext_resource type="Resource" uid="uid://procykfff0d0" path="res://tongue-attack/desires/types/numbers/desire_type_numbers.tres" id="14_5ewix"]
-[ext_resource type="Script" uid="uid://bgqbn0gk1nabm" path="res://tongue-attack/desires/types/numbers/desire_type_numbers.gd" id="15_bkdw6"]
-[ext_resource type="Script" uid="uid://ci0x2poq164oy" path="res://tongue-attack/desires/types/icons/desire_type_icons.gd" id="16_gy4br"]
 [ext_resource type="Resource" uid="uid://4wd7qi6i72p5" path="res://tongue-attack/desires/types/letters/desire_type_letters.tres" id="16_wkasx"]
 [ext_resource type="Resource" uid="uid://d4e0xrd6gb6n3" path="res://tongue-attack/desires/types/shapes/desire_type_shapes.tres" id="17_0hk8q"]
-[ext_resource type="Script" uid="uid://dpn6um7k2fiap" path="res://tongue-attack/desires/types/letters/desire_type_letters.gd" id="17_gy4br"]
 [ext_resource type="Script" uid="uid://38cikfog6cso" path="res://tongue-attack/map/progression/progression.gd" id="18_1ejfv"]
 [ext_resource type="Texture2D" uid="uid://bqkfv4xi55bmo" path="res://tongue-attack/ui/heart_texture.tres" id="18_xo15n"]
 [ext_resource type="Script" uid="uid://bofxmcqjmhu7c" path="res://tongue-attack/ui/ui.gd" id="19_3yws6"]
@@ -24,43 +23,6 @@
 [ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="20_2d2qx"]
 [ext_resource type="Resource" uid="uid://c5jvh4sp3aif4" path="res://tongue-attack/main/game_over_data.tres" id="20_gy4br"]
 [ext_resource type="PackedScene" uid="uid://nk31em7vq05f" path="res://pq-obg/ui/button_instructions/button_instructions.tscn" id="22_bkdw6"]
-
-[sub_resource type="Resource" id="Resource_vhrtn"]
-script = ExtResource("15_bkdw6")
-metadata/_custom_type_script = "uid://bgqbn0gk1nabm"
-
-[sub_resource type="Resource" id="Resource_opvpr"]
-script = ExtResource("16_gy4br")
-metadata/_custom_type_script = "uid://ci0x2poq164oy"
-
-[sub_resource type="Resource" id="Resource_bkdw6"]
-script = ExtResource("16_gy4br")
-value_debug = 1
-metadata/_custom_type_script = "uid://ci0x2poq164oy"
-
-[sub_resource type="Resource" id="Resource_gy4br"]
-script = ExtResource("16_gy4br")
-value_debug = 2
-metadata/_custom_type_script = "uid://ci0x2poq164oy"
-
-[sub_resource type="Resource" id="Resource_wfr2p"]
-script = ExtResource("16_gy4br")
-value_debug = 6
-metadata/_custom_type_script = "uid://ci0x2poq164oy"
-
-[sub_resource type="Resource" id="Resource_1pkog"]
-script = ExtResource("17_gy4br")
-metadata/_custom_type_script = "uid://dpn6um7k2fiap"
-
-[sub_resource type="Resource" id="Resource_kljyh"]
-script = ExtResource("17_gy4br")
-value_debug = 19
-metadata/_custom_type_script = "uid://dpn6um7k2fiap"
-
-[sub_resource type="Resource" id="Resource_cbgyw"]
-script = ExtResource("17_gy4br")
-value_debug = 4
-metadata/_custom_type_script = "uid://dpn6um7k2fiap"
 
 [node name="Main" type="Node2D" unique_id=496180010]
 
@@ -80,7 +42,7 @@ progression = NodePath("../Progression")
 [node name="PlayerSpawner" parent="." unique_id=940017025 node_paths=PackedStringArray("player_creation_node") instance=ExtResource("10_vhrtn")]
 player_creation_node = NodePath("../Frogs")
 
-[node name="SpawnerCollectibles" type="Node2D" parent="." unique_id=1354625474 node_paths=PackedStringArray("timer", "desires", "frogs", "progression", "state")]
+[node name="SpawnerCollectibles" type="Node2D" parent="." unique_id=1354625474 node_paths=PackedStringArray("timer", "desires", "frogs", "progression", "state", "audio_bad")]
 script = ExtResource("6_bdbmt")
 collectible_scene = ExtResource("7_dwf6n")
 timer = NodePath("Timer")
@@ -88,14 +50,19 @@ desires = NodePath("../Desires")
 frogs = NodePath("../Frogs")
 progression = NodePath("../Progression")
 state = NodePath("../State")
+particles_scene = ExtResource("8_vhrtn")
+audio_bad = NodePath("AudioBad")
 
 [node name="Timer" type="Timer" parent="SpawnerCollectibles" unique_id=1302423465]
 one_shot = true
 
+[node name="AudioBad" type="AudioStreamPlayer2D" parent="SpawnerCollectibles" unique_id=1463123455]
+stream = ExtResource("9_opvpr")
+volume_db = -3.0
+
 [node name="Desires" type="Node2D" parent="." unique_id=1188939489]
 script = ExtResource("5_fdo5l")
 desire_types = Array[ExtResource("6_dwf6n")]([ExtResource("7_a4rk2"), ExtResource("13_iw2sv"), ExtResource("14_5ewix"), ExtResource("16_wkasx"), ExtResource("17_0hk8q")])
-desires_debug = Array[ExtResource("6_dwf6n")]([SubResource("Resource_vhrtn"), SubResource("Resource_opvpr"), SubResource("Resource_bkdw6"), SubResource("Resource_gy4br"), SubResource("Resource_wfr2p"), SubResource("Resource_1pkog"), SubResource("Resource_kljyh"), SubResource("Resource_cbgyw")])
 
 [node name="Progression" type="Node2D" parent="." unique_id=1312876816 node_paths=PackedStringArray("state")]
 script = ExtResource("18_1ejfv")

@@ -8,6 +8,8 @@ class_name GameOverMenu
 @export var anim_player : AnimationPlayer
 @export var overlay : Control
 
+@export var audio_player : AudioStreamPlayer
+
 func _ready():
 	overlay.modulate.a = Global.config_system.ui_overlay_alpha
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -16,6 +18,9 @@ func _ready():
 
 func activate(data:GameOverDataSystem):
 	set_visible(true)
+	
+	audio_player.stream = Global.config_system.audio_game_win if data.we_won else Global.config_system.audio_game_loss
+	audio_player.play()
 	
 	label_header.add_theme_font_override("font", Global.theme.get_font(ThemeManager.FontType.HEADING))
 	

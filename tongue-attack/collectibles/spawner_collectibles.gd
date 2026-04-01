@@ -12,6 +12,9 @@ class_name SpawnerCollectibles
 @export var frogs : Frogs
 @export var progression : Progression
 @export var state : StateSystem
+@export var particles_scene : PackedScene
+
+@export var audio_bad : AudioStreamPlayer2D
 
 @export var spawn_position_grid_width := 92.0
 var positions_available : Array[int] = []
@@ -85,7 +88,7 @@ func refresh(force_spawn := false) -> void:
 # basically, with each player/more desires in the game, this probability drops until it's 0
 func get_probability_spawn_not_in_play() -> float:
 	var num_in_play := desires.count_in_play()
-	var subtraction_value := 0.3 * clampf(num_in_play / 3.0 - 1.0, 0.0, 1.0)
+	var subtraction_value := 0.2 * clampf(num_in_play / 3.0 - 1.0, 0.0, 10.0)
 	return Global.config.spawn_collectibles_not_in_play_prob - subtraction_value
 
 func get_desires_sorted_by_frequency() -> Array[Desire]:
@@ -138,10 +141,18 @@ func _on_collectible_killed(c:Collectible) -> void:
 	var shouldve_been_collected := c.collectible and (not c.out_of_play)
 	var should_give_penalty := (wasnt_collected and shouldve_been_collected) and Global.config.penalty_missed_collectibles
 	if should_give_penalty:
+		audio_bad.global_position = c.global_position
+		AudioManager.play_audio_nice(audio_bad)
 		var lose_points := randf() <= Global.config.missed_collectible_lose_score_prob
 		if lose_points: 
 			progression.change_score(Global.config.score_lost_per_missed_collectible)
 		else:
 			progression.change_lives(-1)
+	
+	var parts : CPUParticles2D = particles_scene.instantiate()
+	parts.global_position = c.global_position
+	parts.color = Color.RED if should_give_penalty else Color(255, 255, 255, 0.25)
+	if c.collected: parts.color = Color.WHITE
+	add_child(parts)
 	
 	call_deferred("refresh")

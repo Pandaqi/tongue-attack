@@ -4,7 +4,7 @@ class_name Progression
 @export var state : StateSystem
 @export var game_over_data : GameOverData
 
-var time_start := 0.0
+var time_start := -1.0
 var lives := 0
 var score := 0
 
@@ -22,6 +22,7 @@ func _on_game_started() -> void:
 	change_lives(Global.config.num_starting_lives)
 
 func get_time_elapsed() -> float:
+	if time_start < 0: return 0.0
 	return (Time.get_ticks_msec() - time_start) / 1000.0
 
 func get_ratio() -> float:

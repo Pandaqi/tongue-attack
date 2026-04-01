@@ -17,8 +17,8 @@ func _ready() -> void:
 	show_credits()
 
 func show_credits() -> void:
-	var string := "{game_id} · v{version} · {author}© · One Button Game".format({
-		"game_id": Global.config_system.game_id,
+	var string := "{game_name} · v{version} · {author}© · One Button Game".format({
+		"game_name": Global.config_system.game_name,
 		"version": Global.config_system.game_version,
 		"author": Global.config_system.game_author
 	})

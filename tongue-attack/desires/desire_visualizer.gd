@@ -52,7 +52,9 @@ func is_final() -> bool:
 	return final
 
 func on_killed() -> void:
-	if tween_active: tween_active.kill()
+	if tween_active: 
+		tween_active.kill()
+		tween_active = null
 
 func pop_up() -> void:
 	if tween_active:

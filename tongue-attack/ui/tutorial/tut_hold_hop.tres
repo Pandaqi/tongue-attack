@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TutorialStage" format=3 uid="uid://dy6qbtwr0yc5e"]
+
+[ext_resource type="AudioStream" uid="uid://b5tvhrc5nbgor" path="res://tongue-attack/ui/tutorial/tutorial-hold-hop.ogg" id="1_squk1"]
+[ext_resource type="Script" uid="uid://b8gcpdtp867fe" path="res://pq-obg/tutorial/tutorial_stage.gd" id="2_esta5"]
+
+[resource]
+script = ExtResource("2_esta5")
+type = 3
+audio = ExtResource("1_squk1")
+settings_required = Array[String](["allow_frog_hopping"])
+content = "TUT_HOLD_HOP"
+metadata/_custom_type_script = "uid://b8gcpdtp867fe"

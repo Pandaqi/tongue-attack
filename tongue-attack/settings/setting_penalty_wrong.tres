@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_yndsc")
 key = "penalty_wrong_collectibles"
-label = "Penalty For Wrong Collectibles"
+label = "SETTING_PENALTY_WRONG"
 metadata/_custom_type_script = "uid://cu5ytdnryre03"

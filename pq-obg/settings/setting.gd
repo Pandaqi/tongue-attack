@@ -164,6 +164,7 @@ func visualize() -> HBoxContainer:
 		control_node = slider
 		
 		slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		slider.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		if min_value != -INF: slider.min_value = min_value
 		if max_value != INF: slider.max_value = max_value
 		
@@ -237,6 +238,7 @@ func set_default(v:Variant) -> void:
 	default = convert_variant_value_to_string(v)
 
 func force_update_control() -> void:
+	control_node.set_meta("forced_update", true)
 	if (control_node is CheckBox) or (control_node is CheckButton):
 		control_node.button_pressed = value
 	if control_node is HSlider:
@@ -246,6 +248,7 @@ func force_update_control() -> void:
 		control_node.select(options.find(value))
 	if control_node is ColorPickerButton:
 		control_node.color = Color(value)
+	control_node.set_meta("forced_update", false)
 
 ## Returns true if the current setting's value is equal to its default
 func is_value_default() -> bool:

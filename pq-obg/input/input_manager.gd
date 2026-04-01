@@ -260,6 +260,9 @@ func check_new_login(ev:InputEvent) -> void:
 func is_full() -> bool:
 	return count() >= Global.config_system.input_max_players
 
+func has_enough_players() -> bool:
+	return count() >= Global.config_system.input_min_players_bound
+
 func count() -> int:
 	return buttons_used.size()
 

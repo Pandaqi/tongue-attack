@@ -4,11 +4,12 @@
 [ext_resource type="Script" uid="uid://buopv25mdegj2" path="res://tongue-attack/tools/squasher_stretcher.gd" id="3_5qyw4"]
 [ext_resource type="PackedScene" uid="uid://b6lndpa28flit" path="res://tongue-attack/desires/desire_visualizer.tscn" id="3_q6btd"]
 [ext_resource type="Texture2D" uid="uid://cpeydq7f7krf0" path="res://tongue-attack/collectibles/block-stone.png" id="4_5qyw4"]
+[ext_resource type="AudioStream" uid="uid://i6elxqsak0co" path="res://tongue-attack/frogs/sounds/good-collect.ogg" id="5_at24q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dwf6n"]
 radius = 35.128338
 
-[node name="Collectible" type="CharacterBody2D" unique_id=1381176248 node_paths=PackedStringArray("sprite_stone", "visualizer", "col_shape", "squasher_stretcher", "timer_move_pattern")]
+[node name="Collectible" type="CharacterBody2D" unique_id=1381176248 node_paths=PackedStringArray("sprite_stone", "visualizer", "col_shape", "squasher_stretcher", "timer_move_pattern", "audio_spawn")]
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_1mqwc")
@@ -17,6 +18,7 @@ visualizer = NodePath("DesireVisualizer")
 col_shape = NodePath("CollisionShape2D")
 squasher_stretcher = NodePath("SquasherStretcher")
 timer_move_pattern = NodePath("TimerMovePattern")
+audio_spawn = NodePath("AudioSpawn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2135049634]
 shape = SubResource("CircleShape2D_dwf6n")
@@ -33,3 +35,7 @@ node = NodePath("..")
 texture = ExtResource("4_5qyw4")
 
 [node name="TimerMovePattern" type="Timer" parent="." unique_id=103713001]
+
+[node name="AudioSpawn" type="AudioStreamPlayer2D" parent="." unique_id=1474513077]
+stream = ExtResource("5_at24q")
+volume_db = -3.0

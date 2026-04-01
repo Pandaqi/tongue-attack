@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_w6aee")
 key = "shapes_enabled"
-label = "Shapes"
+label = "SETTING_SHAPES"
 metadata/_custom_type_script = "uid://cu5ytdnryre03"

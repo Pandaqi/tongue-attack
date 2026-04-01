@@ -6,7 +6,7 @@
 script = ExtResource("1_0pwlv")
 type = 2
 key = "num_starting_lives"
-label = "Starting Lives"
+label = "SETTING_LIVES"
 min_value = 1.0
 max_value = 10.0
 step_value = 1

@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://r8bxbg1036ov"]
+
+[ext_resource type="Texture2D" uid="uid://bv7tvqhqvvye6" path="res://pq-obg/animation/particles/sparkle.png" id="1_tu2s2"]
+[ext_resource type="Script" uid="uid://eyjtx0ur6jdp" path="res://tongue-attack/collectibles/particles_collect.gd" id="2_buios"]
+
+[sub_resource type="Curve" id="Curve_6ap1x"]
+_data = [Vector2(0, 0.2553321), 0.0, 8.347172, 0, 0, Vector2(0.10540541, 1), 0.06303569, 0.06303569, 0, 0, Vector2(1, 0), -1.617227, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_buios"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="CPUParticles2D" type="CPUParticles2D" unique_id=1757194304]
+emitting = false
+amount = 25
+texture = ExtResource("1_tu2s2")
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.8
+emission_shape = 3
+emission_rect_extents = Vector2(42, 10)
+direction = Vector2(0, -1)
+spread = 10.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 160.0
+initial_velocity_max = 300.0
+scale_amount_min = 0.5
+scale_amount_max = 0.8
+scale_amount_curve = SubResource("Curve_6ap1x")
+hue_variation_curve = SubResource("Curve_buios")
+script = ExtResource("2_buios")

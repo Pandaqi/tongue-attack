@@ -11,6 +11,7 @@ class_name Frog
 @export var heart_texture : AtlasTexture
 @export var heart_bad_texture : AtlasTexture
 @export var score_texture : AtlasTexture
+@export var score_bad_texture : Texture2D
 
 var leaf : Leaf
 var offset_on_leaf := Vector2(64.0, 32.0)
@@ -20,6 +21,7 @@ signal lives_changed(val:int)
 signal request_leaf_reposition(f:Frog, dy:int)
 
 func _ready() -> void:
+	module_input.activated.connect(module_visuals._on_input_activated)
 	module_input.quick_pressed.connect(module_tongue._on_input_quick_pressed)
 	
 	module_input.held.connect(module_hold._on_input_held)
@@ -41,9 +43,7 @@ func _on_collected(c:Collectible, good:bool) -> void:
 	
 	# reward good collections!
 	if good: 
-		TweenManager.give_feedback(self, get_feedback_position(), "Yummy!")
-		TweenManager.give_feedback(self, to_local(c.global_position), "", score_texture)
-		scored.emit(Global.config.score_per_correct_item)
+		change_score(Global.config.score_per_correct_item, c)
 		return
 	
 	# it wasn't a good collection ... but we're not penalized for those!
@@ -53,9 +53,18 @@ func _on_collected(c:Collectible, good:bool) -> void:
 	# it was bad, and our config says it's bad, so deduct a life!
 	change_lives(-1, c)
 
+func change_score(ds:int, c:Collectible) -> void:
+	if ds < 0:
+		TweenManager.give_feedback(self, get_feedback_position(), tr("FB_OHNO"))
+		TweenManager.give_feedback(self, to_local(c.global_position), "", score_bad_texture)
+	if ds > 0:
+		TweenManager.give_feedback(self, get_feedback_position(), tr("FB_YUMMY"))
+		TweenManager.give_feedback(self, to_local(c.global_position), "", score_texture)
+	scored.emit(ds)
+
 func change_lives(dl:int, c:Collectible) -> void:
 	if dl < 0:
-		TweenManager.give_feedback(self, get_feedback_position(), "Oh no!")
+		TweenManager.give_feedback(self, get_feedback_position(), tr("FB_OHNO"))
 		TweenManager.give_feedback(self, to_local(c.global_position), "", heart_bad_texture)
 	if dl > 0:
 		TweenManager.give_feedback(self, to_local(c.global_position), "", heart_texture)
@@ -87,12 +96,12 @@ func place_on_leaf(lf:Leaf) -> void:
 	_on_visualizers_refreshed()
 	
 	if old_leaf:
-		TweenManager.give_feedback(self, get_feedback_position(), "Moved!")
+		TweenManager.give_feedback(self, get_feedback_position(), tr("FB_MOVED"))
 
 func _on_visualizers_refreshed() -> void:
 	var vis := module_input.get_button_visualizer()
 	if not vis: return
-	vis.set_position(global_position + Vector2.UP * 128.0)
+	vis.set_position(global_position + Vector2.UP * 164.0)
 
 func set_facing_direction(dir:Vector2) -> void:
 	module_tongue.set_facing_direction(dir)

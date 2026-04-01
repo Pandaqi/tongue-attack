@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TutorialStage" format=3 uid="uid://d1ukh6htix8oy"]
+
+[ext_resource type="AudioStream" uid="uid://bydlbw0e5nrgw" path="res://tongue-attack/ui/tutorial/tutorial-button-press.ogg" id="1_7en7v"]
+[ext_resource type="Script" uid="uid://b8gcpdtp867fe" path="res://pq-obg/tutorial/tutorial_stage.gd" id="1_vwv30"]
+
+[resource]
+script = ExtResource("1_vwv30")
+type = 2
+audio = ExtResource("1_7en7v")
+content = "TUT_PRESS"
+metadata/_custom_type_script = "uid://b8gcpdtp867fe"

@@ -1,23 +1,21 @@
 extends GameOverDataSystem
 class_name GameOverData
 
-var we_won := false
-var score := 0
 var lives_left := 0
 var time_spent := 0
 
 func get_header() -> String:
-	if we_won: return "Congratulations!"
-	return "Game Over!"
+	if we_won: return "GAME_OVER_HEADER_GOOD"
+	return "GAME_OVER_HEADER_BAD"
 
 func get_message() -> String:
-	var txt := "You're out of lives. You scored {score} froggy coins and survived {time} seconds.".format({
+	var txt := tr("GAME_OVER_MESSAGE_BAD").format({
 		"score": score,
 		"time": time_spent
 	})
 	
 	if we_won: 
-		txt = "You reached the maximum score with {lives} lives remaining! All frogs are happy. It only took you {time} seconds.".format({
+		txt = tr("GAME_OVER_MESSAGE_GOOD").format({
 		"lives": lives_left,
 		"time": time_spent
 	})

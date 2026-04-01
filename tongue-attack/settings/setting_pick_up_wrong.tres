@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_c4w5q")
 key = "pick_up_wrong_collectibles"
-label = "Pick Up Wrong Collectibles"
+label = "SETTING_PICK_UP_WRONG"
 metadata/_custom_type_script = "uid://cu5ytdnryre03"

@@ -18,7 +18,9 @@ var collected := false # has been succesfully collected
 var collectible := true # CAN be collected
 var out_of_play := false # not a type that any player wants right now
 var removal_duration := 0.0 # how much time has been spend stuck to a tongue and being removed
+var base_size := Vector2.ONE
 
+@export var audio_spawn : AudioStreamPlayer2D
 
 signal killed(c:Collectible)
 
@@ -28,6 +30,7 @@ func _ready() -> void:
 	sprite_stone.hide()
 	timer_move_pattern.wait_time = Global.config.flying_collectibles_pattern_timer_duration
 	timer_move_pattern.timeout.connect(_on_timer_move_pattern_timeout)
+	audio_spawn.play()
 
 func _on_timer_move_pattern_timeout() -> void:
 	moving = not moving
@@ -39,6 +42,7 @@ func set_type(d:Desire) -> void:
 	
 	col_shape.shape = CircleShape2D.new()
 	col_shape.shape.radius = 0.675 * 0.5 * visualizer.size
+	base_size = Vector2.ONE * col_shape.shape.radius * 2
 	
 	timer_move_pattern.stop()
 	var has_move_pattern := (desire.type is DesireTypeIcons) and DesireTypeIcons.types_with_animation.has(desire.value)
@@ -98,7 +102,7 @@ func fall() -> void:
 	move_and_slide()
 
 func is_off_screen() -> bool:
-	return get_global_transform_with_canvas().origin.y > get_viewport_rect().size.y
+	return get_global_transform_with_canvas().origin.y > get_viewport_rect().size.y + 0.5*base_size.y
 
 func check_if_off_screen() -> void:
 	if not is_off_screen(): return

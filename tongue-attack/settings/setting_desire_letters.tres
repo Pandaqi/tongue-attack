@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_qc1vh")
 key = "letters_enabled"
-label = "Letters"
+label = "SETTING_LETTERS"
 metadata/_custom_type_script = "uid://cu5ytdnryre03"

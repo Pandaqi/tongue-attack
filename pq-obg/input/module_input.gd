@@ -16,6 +16,8 @@ var touch_area : InputTouchArea
 @export var player_data : PlayerData = preload("res://pq-obg/players/player_data.tres")
 @export var num_button_visualizers := 1
 
+signal activated(mp:ModuleInput)
+
 signal pressed()
 signal released(time_held:float)
 signal quick_pressed()
@@ -67,6 +69,8 @@ func activate(new_button:InputButton) -> void:
 	holder_logout = InputHolder.new()
 	holder_logout.held.connect(_on_logout_button_held)
 	add_child(holder_logout)
+	
+	activated.emit(self)
 
 func deactivate() -> void:
 	Global.audio.play_player_change_sound()

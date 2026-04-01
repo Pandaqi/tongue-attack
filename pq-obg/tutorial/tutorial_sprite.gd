@@ -2,6 +2,7 @@ extends Control
 class_name TutorialSprite 
 
 var stage : TutorialStage
+var active := false
 
 @export var texture_background : TextureRect
 @export var texture_content : TextureRect
@@ -14,6 +15,9 @@ var stage : TutorialStage
 @export var margin_container : MarginContainer
 @export var margin_container_texture : MarginContainer
 
+@export var panel_size := Vector2(412, 412)
+
+@export var audio_player : AudioStreamPlayer
 @export var timer : Timer
 
 var backgrounds : Dictionary[TutorialStage.Type, AtlasTexture] = {
@@ -61,28 +65,18 @@ func set_stage(s:TutorialStage) -> void:
 	hide()
 
 func refresh_size(factor:float) -> void:
-	# @NOTE: the base size for all these values is 256,256---but that doesn't matter here now
-	label_heading_icon.custom_minimum_size.x = factor * 48.0
-	heading_hbox.add_theme_constant_override("separation", int(factor * 24.0))
-	heading_hbox.custom_minimum_size.y = factor * 42.0
-	
-	# the container that has the whole thing
-	var m : int = int(factor * 8.0)
-	margin_container.add_theme_constant_override("margin_left", m)
-	margin_container.add_theme_constant_override("margin_right", m)
-	margin_container.add_theme_constant_override("margin_top", m)
-	margin_container.add_theme_constant_override("margin_bottom", int((20/8.0) * m))
-	
-	# the container that has the tutorial texture
-	var mt : int = int(factor * 16.0)
-	margin_container_texture.add_theme_constant_override("margin_left", mt)
-	margin_container_texture.add_theme_constant_override("margin_right", mt)
-	margin_container_texture.add_theme_constant_override("margin_top", mt)
-	margin_container_texture.add_theme_constant_override("margin_bottom", mt)
+	custom_minimum_size = panel_size
+	pivot_offset_ratio = Vector2(0.5, 0.5)
+	scale = Vector2.ONE * factor
 
 func appear() -> void:
 	show()
+	active = true
 	TweenManager.play_fadein_tween(self, 0.66)
+	
+	if stage.audio:
+		audio_player.stream = stage.audio
+		audio_player.play()
 	
 	timer.stop()
 	timer.wait_time = Global.config_system.tutorial_delay_remove
@@ -90,7 +84,19 @@ func appear() -> void:
 	if should_remove:
 		timer.start()
 
+func disappear() -> void:
+	hide()
+	active = false
+	
+	if audio_player.is_playing(): audio_player.stop()
+	timer.stop()
+
+func is_active() -> bool:
+	return active
+
 func _on_timer_timeout() -> void:
+	if not is_active(): return
+	
 	var tw := TweenManager.play_fadeout_tween(self, 0.66)
 	await tw.finished
 	hide()

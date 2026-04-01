@@ -14,4 +14,12 @@ enum Type
 
 @export var texture : Texture
 @export var heading := "" # a custom heading that overrules the usual
+@export var audio : AudioStream
+@export var settings_required : Array[String] = [] # the tutorial only shows if these settings are true
 @export_multiline var content := "" # text to display (instead of image)
+
+func is_valid() -> bool:
+	for setting in settings_required:
+		if not (setting in Global.config): return false
+		if not Global.config[setting]: return false
+	return true

@@ -127,6 +127,14 @@ func refresh():
 	sb_normal.shadow_color = cfg.color_shadow
 	sb_normal.shadow_offset = cfg.shadow_offset
 	
+	var sb_disabled := StyleBoxFlat.new()
+	var disabled_color : Color = cfg.color_normal_bg.darkened(0.25)
+	disabled_color.a = 0.5
+	sb_disabled.bg_color = disabled_color 
+	sb_disabled.set_border_width_all(cfg.border_width)
+	sb_disabled.set_corner_radius_all(cfg.border_radius)
+	sb_disabled.set_content_margin_all(cfg.border_margin)
+	
 	var sb_focus := StyleBoxFlat.new()
 	sb_focus.bg_color = cfg.color_focus_bg
 	sb_focus.border_color = cfg.border_color_focus
@@ -175,6 +183,7 @@ func refresh():
 	th.set_stylebox("hover", "Button", sb_hover)
 	th.set_stylebox("pressed", "Button", sb_hover)
 	th.set_stylebox("normal", "Button", sb_normal)
+	th.set_stylebox("disabled", "Button", sb_disabled)
 	
 	th.set_color("font_color", "Button", cfg.color_normal_text)
 	th.set_color("font_focus_color", "Button", cfg.color_focus_text)

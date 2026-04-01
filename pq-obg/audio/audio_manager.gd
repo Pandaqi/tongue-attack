@@ -16,6 +16,7 @@ static func pitch_shift(node) -> void:
 
 static func play_audio_nice(node) -> void:
 	pitch_shift(node)
+	if node.bus == "Master": node.bus = "Game"
 	node.play()
 
 func _enter_tree() -> void:
@@ -46,11 +47,19 @@ func create_ui_audio() -> void:
 	ui_audio_stream = ui_audio.get_stream_playback()
 
 func _on_node_added(node:Node) -> void:
-	if node is Button:
-		node.mouse_entered.connect(_on_ui_change)
-		node.pressed.connect(_on_ui_change)
+	var is_button := (node is Button)
+	var is_slider := (node is Slider)
+	var needs_ui_sound := is_button or is_slider 
+	if needs_ui_sound:
+		node.mouse_entered.connect(func(): _on_ui_change(node))
+	
+	if is_button:
+		node.pressed.connect(func(): _on_ui_change(node))
+	
+	if is_slider:
+		node.value_changed.connect(func(_v:float): _on_ui_change(node))
 
-func _on_ui_change() -> void:
+func _on_ui_change(_node:Node) -> void:
 	var audio = Global.config_system.audio_ui
 	if not audio: return
 	ui_audio_stream.play_stream(audio, 0, 0, get_pitch_shift_semitones())

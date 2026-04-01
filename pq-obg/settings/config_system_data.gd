@@ -3,6 +3,7 @@ class_name ConfigSystemData
 
 @export_group("Game")
 @export var game_id : String = "game-id"
+@export var game_name : String = "Game Name"
 @export var game_version : String = "1.0.0"
 @export var game_author : String = "Tiamo Pastoor"
 @export var language_default := "en"
@@ -16,11 +17,13 @@ class_name ConfigSystemData
 
 @export_group("Audio")
 @export var volume_game := 1.0
-@export var volume_background := 0.6
-@export var volume_ui := 0.6
+@export var volume_background := 0.1
+@export var volume_ui := 0.25
 @export var audio_bg : Array[AudioStream] = []
 @export var audio_ui : AudioStream = preload("res://pq-obg/audio/sfx/ui_click.mp3")
 @export var audio_player_change : AudioStream = preload("res://pq-obg/audio/sfx/ui_click.mp3")
+@export var audio_game_win : AudioStream = preload("res://pq-obg/audio/sfx/game_win.ogg")
+@export var audio_game_loss : AudioStream = preload("res://pq-obg/audio/sfx/game_over.ogg")
 
 @export_group("Theme")
 @export var theme : Theme = preload("res://pq-obg/ui/default_theme.tres")
@@ -101,8 +104,8 @@ class_name ConfigSystemData
 @export var touch_area_alpha := 0.4
 
 @export_subgroup("Login & Logout")
-@export var input_login_while_playing := true
-@export var input_logout_while_playing := true
+@export var input_login_while_playing := false
+@export var input_logout_while_playing := false
 @export var input_logout_hold_duration := 2.0 # ~seconds
 @export var allow_login_by_clicking_instruction := true
 @export var input_removal_type := InputManager.ButtonRemovalType.HOLD_COND
@@ -148,8 +151,8 @@ class_name ConfigSystemData
 @export var tutorial_delay := 6.0 # seconds before next tutorial appears
 @export var tutorial_delay_remove := 12.0 # seconds before that tutorial fades away again
 @export var tutorial_scale := 1.0
-@export var tutorial_heading_font_size : int = 16
-@export var tutorial_content_font_size : int = 16
+@export var tutorial_heading_font_size : int = 32
+@export var tutorial_content_font_size : int = 32
 @export var tutorial_only_once := true # if so, doesn't repeat the tutorial any time you pause
 
 @export_group("UI")

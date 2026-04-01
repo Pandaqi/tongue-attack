@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TutorialStage" format=3 uid="uid://cdoyl22vmks4f"]
+
+[ext_resource type="AudioStream" uid="uid://coj22glujiju5" path="res://tongue-attack/ui/tutorial/tutorial-hold-unstuck.ogg" id="1_8fweu"]
+[ext_resource type="Script" uid="uid://b8gcpdtp867fe" path="res://pq-obg/tutorial/tutorial_stage.gd" id="2_nn2pf"]
+
+[resource]
+script = ExtResource("2_nn2pf")
+type = 3
+audio = ExtResource("1_8fweu")
+settings_required = Array[String](["tongue_can_get_stuck"])
+content = "TUT_HOLD_UNSTUCK"
+metadata/_custom_type_script = "uid://b8gcpdtp867fe"

@@ -22,7 +22,7 @@ metadata/_custom_type_script = "uid://c51fddt4uf8oa"
 
 [node name="PauseMenu" parent="." unique_id=1738070768 instance=ExtResource("4_mwql8")]
 
-[node name="Tutorial" type="Control" parent="." unique_id=185661830 node_paths=PackedStringArray("container", "box_container")]
+[node name="Tutorial" type="Control" parent="." unique_id=185661830 node_paths=PackedStringArray("container", "box_container", "timer")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 8
@@ -36,6 +36,10 @@ mouse_filter = 2
 script = ExtResource("5_ttvql")
 container = NodePath(".")
 box_container = NodePath("BoxContainer")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="Tutorial" unique_id=1429294532]
+one_shot = true
 
 [node name="BoxContainer" type="BoxContainer" parent="Tutorial" unique_id=1115215729]
 layout_mode = 1
@@ -64,3 +68,5 @@ script = ExtResource("8_ttvql")
 area_container = NodePath(".")
 
 [node name="GameOverMenu" parent="." unique_id=721452580 instance=ExtResource("8_q42ym")]
+
+[node name="Container" type="Node2D" parent="." unique_id=1127605152]

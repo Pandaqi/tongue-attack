@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_a4x26")
 key = "tongue_can_get_stuck"
-label = "Allow Tongue Getting Stuck"
+label = "SETTING_TONGUE_STUCK"
 metadata/_custom_type_script = "uid://cu5ytdnryre03"

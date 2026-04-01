@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://b5qpvfnmepd5k"]
+[gd_resource type="Resource" script_class="Setting" format=3 uid="uid://b5qpvfnmepd5k"]
 
 [ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_luyse"]
 
@@ -9,7 +9,6 @@ type_display = 3
 type_unit = 1
 key = "volume_background"
 label = "ST_VOLUME_BACKGROUND"
-tooltip = "ST_VOLUME_BACKGROUND_TT"
 callback = "Global.audio.change_volume_of_bus(\"Background\", linear_to_db(v))"
 min_value = 0.0
 max_value = 1.0

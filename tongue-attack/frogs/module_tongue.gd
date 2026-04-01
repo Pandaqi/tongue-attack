@@ -14,11 +14,14 @@ var can_stick_to_other_tongues := Global.config.tongue_can_stick_to_other_tongue
 @export var tongue_tip_col_shape : CollisionShape2D
 
 # @NOTE: never make the end 0 as then damping will never make it reach start/end pos
-@export var speed_bounds := Vector2(2600.0, 800.0)
+@export var speed_bounds := Vector2(3600.0, 1000.0)
 @export var direction := Vector2.RIGHT
 @export var offset := Vector2(41.0, -66.0)
 
 @export var module_collect : ModuleCollect
+
+@export var audio_tongue : AudioStreamPlayer2D
+@export var audio_stuck : AudioStreamPlayer2D
 
 var max_distance := 0.0
 var start_pos := Vector2.ZERO
@@ -161,7 +164,7 @@ func get_stuck(body:Collectible = null) -> void:
 	
 	object_stuck_to = body
 	if object_stuck_to: body.freeze(self)
-	TweenManager.give_feedback(self, get_tip_area_position(), "Stuck!")
+	TweenManager.give_feedback(self, get_tip_area_position(), tr("FB_STUCK"))
 	set_state(State.STUCK)
 
 func get_unstuck() -> void:
@@ -170,13 +173,18 @@ func get_unstuck() -> void:
 		object_stuck_to.unfreeze()
 		object_stuck_to = null
 	set_state(State.RETRACTING)
-	TweenManager.give_feedback(self, get_tip_area_position(), "Unstuck!")
+	TweenManager.give_feedback(self, get_tip_area_position(), tr("FB_UNSTUCK"))
 
 func set_state(s:State) -> void:
 	if state == s: return
 	
 	state = s
 	tongue_tip_col_shape.set_deferred("disabled", (s != State.EXTENDING))
+	
+	if is_moving():
+		AudioManager.play_audio_nice(audio_tongue)
+	if state == State.STUCK:
+		AudioManager.play_audio_nice(audio_stuck)
 
 	state_changed.emit(s)
 

@@ -13,5 +13,5 @@
 [resource]
 script = ExtResource("1_ielam")
 settings = Array[ExtResource("2_2lgyp")]([ExtResource("3_fg1rj"), ExtResource("4_no8sk"), ExtResource("5_2w2u3"), ExtResource("6_83fot"), ExtResource("9_wbad1"), ExtResource("7_v1jq7"), ExtResource("8_l1rjm")])
-label = "Difficulty: Medium"
+label = "SETTING_GROUP_MEDIUM"
 metadata/_custom_type_script = "uid://c7uqyg8sqnc02"
