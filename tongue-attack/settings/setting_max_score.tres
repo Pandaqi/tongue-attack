@@ -6,8 +6,8 @@
 script = ExtResource("1_271c8")
 type = 1
 type_display = 1
-key = "max_score"
+key = "target_score_added_per_player"
 label = "SETTING_MAX_SCORE"
-min_value = 50.0
-max_value = 1000.0
+min_value = 20.0
+max_value = 300.0
 metadata/_custom_type_script = "uid://cu5ytdnryre03"

@@ -26,9 +26,9 @@ class_name ConfigData
 @export var pick_up_wrong_collectibles := false # you can't pick up wrong collectibles at all (see also penalty below)
 @export var collectibles_wrong_score_penalty := -10 # when you ignore bad collectibles, you still get a score penalty for overlapping them
 
-@export var max_score := 400
+@export var target_score_added_per_player := 100
 @export var max_score_icons := 10
-@export var num_starting_score := 50
+@export var num_starting_score := 0
 @export var max_lives := 10
 @export var num_starting_lives := 6
 

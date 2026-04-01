@@ -1,8 +1,12 @@
-# Tongue Attack (Devlog)
+# Froggy Feast (Devlog)
 
-Welcome to the devlog (or "developer's diary") for my game called [Tongue Attack](@TODO:Link). It was one of the first educational _One Button Games_ I made for the online store. It ended up being the first one I actually finished, simply because it was "simpler" and "smaller" than the other ideas. 
+Welcome to the devlog (or "developer's diary") for my game called [Froggy Feast](/gamiverses/maths/froggy-feast/). It was one of the first educational _One Button Games_ I made for the online store. It ended up being the first one I actually finished, simply because it was "simpler" and "smaller" than the other ideas. 
 
 That doesn't mean it wasn't without its problems, though. A lot of them, in fact, and I'll try to explain what they are and how I solved them in clear language!
+
+{{% remark %}}
+The game had the working title Tongue Attack as I developed it. You might still see that name pop up here and there; it just refers to the same game in an early stage.
+{{% /remark %}}
 
 ## What's the idea?
 
@@ -165,9 +169,29 @@ All the other ideas _need_ that core. They only make sense when added _on top_, 
 
 As such, I decided to subdivide the settings into three groups: EASY, MEDIUM, HARD. Turning on settings in the "Hard" group, as expected, modulates the game difficulty to be harder. Things like moving around will be here.
 
-The core game looks great, is very easy to teach and play, and focuses completely on matching the right things.
+While testing the game at different player counts, I suddenly realized that having a single target score is ... silly. That target (say "100 coins") will take far too long to reach if you're playing alone, but be far too easy if you're playing with 6 players. It's one of those problems you'd never encounter in any other game, but which suddenly became apparent in my One Button Games due to its unique structure. Because it supports such a wide range of players, because players can drop in or leave at any point, I need to think about "objectives" or "score" a little differently!
 
-I purposely focused a lot more on the _visuals_ this time. It's always the thing that gets lowest priority, which is a shame, because good visuals is the first thing players see and makes them interested. I could focus on visuals now because the game itself was relatively simple, not ground-breaking at all. Unsurprisingly, spending a day on visuals only makes a game look _much_ better, who would've thought!? 
+In the end, I changed that target setting to "target added _per player_". Say the value is 50. Then your score target with 3 players is 3 x 50 = 150. With 6 players it's 6 x 50 = 300. If it ever happens that a player leaves and the target drops below _the score you already have_, then I just set your new target to your current score + a few more, to prevent just instantly winning at that point.
+
+From now on, I know this and will code scoring/objective the right way in future One Button Games.
+
+Finally, and I feel stupid for trying this _last_, I tried the age old trick of being very nice to the player by changing the size of hitboxes. In other words, I suddenly realized I could make the game feel much better to play (at all difficulties, always) by ...
+
+* Have **two areas** ("hitboxes") that check if your tongue is touching something.
+* One area is **big and generous**, and only collects _good_ collectibles. (The ones you want; the ones that score points.)
+* The other are is much **smaller and thinner**, and only collects _bad_ collectibles. (The ones you don't want and will make you lose lives/money.)
+
+This simple change, after some tweaking with the exact numbers, made me stop doubting the game I had made ;) Now you collect good things as long as you are "close enough", but you only collect bad things if your attempt was _really bad_ and you hit them dead-on. In most cases, if you time it right, you can now _miss_ the bad ones on purpose because that area is so small.
+
+More specifically, the "bad things area" is only `1/4` the thickness of the good one, and it misses about `120` pixels at the _end_ (the tip of the tongue). I made that second change because my playtest repeatedly showed players being surprised they grabbed a bad thing because they _believed_ the tip of their tongue never got that far. The tongue moves so fast---it's hard to see, and it's much better to be nice to players and just _not_ make the final bit of the tongue grab any bad stuff.
+
+I sped up the tongue, gravity, getting stuck/unstuck, and everything else _slightly_. I localized the game, added some more sound effects and particles, fixed some issues with my general _One Button Games_ framework (such that my next game could benefit from it), and then it was FINALLY done!
+
+## Conclusion
+
+The core game looks great, is very easy to teach and play, and focuses completely on matching the right things. Because of my final tweaks ("being very generous/nice to the player"), you are rewarded for skill in dodging the bad things, but not overly punished if you simply focus on good things only.
+
+I purposely focused a lot more on the _visuals_ this time. It's always the thing that gets lowest priority, which is a shame, because good visuals is the first thing players see and interests them. I could focus on visuals now because the game itself was relatively simple, not ground-breaking at all. Unsurprisingly, spending a day on visuals only makes a game look _much_ better, who would've thought!? 
 
 {{% remark %}}
 It also helps that I had a really strong vision for this game in my head. That just happens sometimes---about 1/3 of the time. You get a picture in your head of the final game, and if you can just approximate that, then you can quickly get a nice unified final look. You might look at this the other way around: pick game ideas for which you have a strong vision, it makes your life easier.
